@@ -1,10 +1,12 @@
 # Colab feasibility: verified 2026-10-24
 
-The dependency checks and the first hosted real-batch diagnostic have passed.
-The temporal feature audit and pipeline profile are the next hosted run;
-training, predictive quality, and end-to-end acceleration remain unmeasured.
-See [the detailed real-batch report](../reports/REAL_BATCH_STATUS.md) and
-[next-run instructions](NEXT_RUN.md).
+The dependency checks, hosted real-batch diagnostic, and notebook 03 pipeline
+profile have passed. The feature-policy metadata audit passed while historical
+availability and training readiness remain unresolved. Preliminary online
+pipeline timings now include sampling through logits on a resident graph;
+training, predictive quality, and final trained acceleration remain unmeasured.
+See [the pipeline profile report](../reports/PIPELINE_PROFILE_STATUS.md) and
+[remaining decisions](NEXT_RUN.md).
 
 ## Initial dependency and synthetic checks: 2026-10-23
 
@@ -63,7 +65,43 @@ total-VRAM savings. No repeated global IDs occurred in the measured batches.
 Timing covers the forward pass on identical already sampled/transferred batches.
 Neighbor sampling and gathering are recorded separately, and this is explicitly
 not a complete inference throughput result. Transfer and peak host RAM were
-unmeasured. Budget observations are still null. The next step is notebook 03's
-temporal feature audit and pipeline profile; those real-data milestones remain
-pending until their exported outputs are reviewed. Model training, useful
-predictive quality, and the final evaluation remain later work.
+unmeasured in this notebook 02 export, and its budget observations were null.
+The later notebook 03 run below adds the pipeline and memory measurements.
+
+## Hosted feature-policy audit and pipeline profile: completed 2026-10-23 UTC
+
+Notebook 03 passed in run `20261023T225501Z-efdf72`, at clean project revision
+`c3f5f6e5e64d13dc3fdfb57abdbfd704f0078ed7`. All eleven exported source files
+are preserved verbatim with [SHA-256 hashes](../reports/colab/20261023T225501Z-efdf72/PROVENANCE.json).
+All 36 tests passed on the Tesla T4, including CUDA and compiled sampler checks.
+The runtime also confirmed compatibility with pandas 2.2.3 and PyArrow 23.0.1.
+
+All three paired batches passed the sampler fingerprint, visibility, ownership,
+BFS prefix, logit and loss checks over ten trials each. The maximum block logit
+error remained `1.1920928955078125e-7`; HGAM matched exactly.
+
+| Batch | Reference ms | HGAM ms | Blocks ms | Blocks reduction vs HGAM |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 28.098 | 27.662 | 24.430 | 11.68% |
+| 2 | 26.904 | 27.712 | 24.661 | 11.01% |
+| 3 | 27.230 | 25.233 | 22.953 | 9.04% |
+
+These medians cover serial sampling, gathering, transfer, encoding, message
+passing and readout from an already built graph with a resident model. Setup,
+DataLoader scheduling and serialization are excluded. Graph construction took
+54.509 seconds. Peak process-lifetime host RSS was 2.0415 GiB; allocated CUDA
+peaks were 14.564–14.755 MiB, which are not total VRAM. Stage costs come from
+separate synchronized replays, not parts whose medians can be summed into the
+measured pipeline total. Raw outliers and precise boundaries are documented in
+[the detailed report](../reports/PIPELINE_PROFILE_STATUS.md).
+
+The feature-policy metadata audit passed, approving only constants and relative
+record time; `training_ready` remains `false`. All 24 queries share the timestamp
+`2020-10-01`, and all repeated-global-ID counts were zero across the 30 trials.
+These remain preliminary small-workload, untrained results. Historical feature
+and relationship semantics, the representative frozen workload, training and
+predictive evaluation remain pending.
+
+The observed rate was 1.07 Colab units/hour and the initial remaining balance
+was 198.78 units. The 50-unit reserve remains the plan. No ending balance or
+actual per-run cost was recorded.

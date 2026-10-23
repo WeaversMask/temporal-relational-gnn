@@ -4,11 +4,12 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** notebook 02 passed on the actual hosted database with three
-small relational batches and 26 passing tests on a Colab T4. Its model is
-untrained and uses constant features plus relative time. The next step is the
-temporal feature audit and pipeline profile in notebook 03; training and
-end-to-end evaluation remain pending. See the
+**Current stage:** notebook 03 passed on a Colab T4 with 36 passing tests,
+a passed feature-policy metadata audit, and paired resident-graph online
+pipeline measurements. The model remains untrained with constant features plus
+relative time. Historical feature/relationship availability, a representative
+frozen workload, training, and final trained evaluation remain pending. See the
+[pipeline profile results](reports/PIPELINE_PROFILE_STATUS.md),
 [real-batch results](reports/REAL_BATCH_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
 [next-run instructions](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
@@ -38,11 +39,11 @@ It uses temporary storage by default, streams its logs, and includes a ZIP expor
 cell. This avoids the Drive authorization problem encountered during initial setup.
 The real database download is substantially larger than the manifest-only check.
 
-Notebook 02 has now passed; its exported evidence is archived in this repository.
-Continue with [notebook 03: feature audit and pipeline profile](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/03_audit_profile.ipynb)
-using the [next-run instructions](docs/NEXT_RUN.md). It prepares the evidence
-needed to choose historical features and identify pipeline costs before training.
-Its hosted measurements are still pending.
+Notebooks 02 and 03 have now passed; their exported evidence is archived in this
+repository. [Notebook 03: feature audit and pipeline profile](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/03_audit_profile.ipynb)
+is available for deliberate reproduction. Review the
+[completed run and remaining decisions](docs/NEXT_RUN.md) before choosing
+historical features, a representative workload, or a training budget.
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Keep durable checkpoints, caches, configurations, and raw logs
@@ -86,7 +87,8 @@ The intended real task is `rel-stack/user-badge`: predict a future badge award
 using the historical relational graph. See [the plan](docs/PLAN.md) and
 [the execution contract](docs/EXECUTION.md). Source and dataset revisions are in
 `configs/upstream.json`; experiment settings remain provisional until the
-feature audit and pipeline profile support a representative workload.
+historical availability review and workload selection are complete. Notebook 03's
+metadata audit and small untrained profile do not freeze that workload.
 
 The standalone layers mirror the inspected RelBench GraphSAGE configuration;
 `trgnn.execution.run_layers` also accepts the existing model's `convs` and `norms`
@@ -113,6 +115,14 @@ sampled nodes. Extra CUDA allocation savings were 18.5–88 KiB. These measureme
 exclude sampling, gathering, and transfer and do not establish trained-model
 or complete inference acceleration. See the
 [real-batch report](reports/REAL_BATCH_STATUS.md) for raw evidence and limits.
+
+Notebook 03 separately measured serial sampling, gathering, transfer, encoders,
+message passing and readout from an already built resident graph. Blocks reduced
+median online pipeline latency by 9.04–11.68% versus HGAM across three tiny
+untrained batches. Setup was excluded; graph construction took 54.509 seconds.
+The observed Colab rate was 1.07 units/hour, but per-run cost is unmeasured.
+See the [pipeline profile report](reports/PIPELINE_PROFILE_STATUS.md) for paired
+raw evidence, memory definitions, timing noise, and remaining limitations.
 
 ## Attribution and scope
 

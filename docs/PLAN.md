@@ -6,24 +6,32 @@
 - [x] Implement synthetic reference, HGAM, and destination-restricted execution.
 - [x] Verify seed outputs, gradients, and an optimizer step on CPU fixtures.
 - [x] Create a private remote and a resumable Colab starting notebook.
-- [x] Run CUDA correctness checks on Colab T4 (26 tests passed in notebook 02).
-- [ ] Record actual Colab unit/hour consumption (exported budget fields are blank).
+- [x] Run CUDA correctness checks on Colab T4 (36 tests passed in notebook 03).
+- [x] Record the actual Colab unit/hour rate (1.07 observed in notebook 03).
+- [ ] Record ending balance and actual per-run compute-unit consumption.
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
 - [ ] Complete the temporal feature availability audit on real data.
+- [x] Run the conservative feature-policy schema/footer audit; additional raw attributes remain excluded.
 - [x] Download/project the required real data; build its historical graph.
 - [x] Run one real batch through the unchanged baseline and both alternative modes.
-- [ ] Measure sampled graph size, host/VRAM use, and pipeline stage proportions.
+- [x] Profile sampled graph sizes, host RSS, CUDA allocator peaks and separate pipeline stages for the current untrained resident-graph boundary.
+- [ ] Validate representative trained-workload costs and total device VRAM; stage medians alone do not establish pipeline proportions.
 
-Verified exports and hashes are under `reports/colab/`. Notebook 02 passed on
-the hosted database with three batches of eight queries; see
-[`reports/REAL_BATCH_STATUS.md`](../reports/REAL_BATCH_STATUS.md). Its model
-remains untrained and uses constant node features plus relative time. This is
-not the final predictor. Sample sizes and extra forward allocations were
-recorded, but peak host/total VRAM use and pipeline stage proportions are still
-pending. The next notebook is `notebooks/03_audit_profile.ipynb`, described in
-[`docs/NEXT_RUN.md`](NEXT_RUN.md). Preparing the audit/profile tools does not
-complete their real-data milestones; inspect the next hosted export first.
+Verified exports and hashes are under `reports/colab/`. Notebooks 02 and 03
+passed on the hosted database with three batches of eight queries; see
+[`reports/PIPELINE_PROFILE_STATUS.md`](../reports/PIPELINE_PROFILE_STATUS.md).
+Notebook 03 measured the online boundary from sampling through logits after
+graph/model setup. Blocks reduced its median latency by 9.04–11.68% versus
+HGAM. Host RSS and CUDA allocator peaks are measured; total device VRAM is not.
+Separate synchronized stage replays must not be summed into a pipeline total
+or assumed to give exact proportions.
+
+The model remains untrained with constants plus relative time; all queries
+share one timestamp and no repeated global IDs occurred in the 30 trials.
+The metadata audit passed with `training_ready: false`. Historical feature and
+relationship evidence and the representative frozen workload remain open.
+Review [`docs/NEXT_RUN.md`](NEXT_RUN.md) before deciding further experiments.
 
 Decide using representative evidence whether to continue block optimization.
 The 10% end-to-end latency reduction is a practical hypothesis, not a promised

@@ -1,19 +1,28 @@
-# Next Colab run: historical inputs and pipeline costs
+# Notebook 03 completed: evidence and remaining decisions
 
-Use `notebooks/03_audit_profile.ipynb` after notebook 02 passes its actual
-relational-batch checks. This next run audits which fields are safe to use and
-measures where inference time goes. It keeps the same untrained model with
-constant node features plus relative time. It does not start training, enable
-additional features, or expand the workload.
+Notebook 03 passed in hosted run `20261023T225501Z-efdf72`, with 36 passing
+tests on a T4, a passed feature-policy metadata audit, and three paired online
+pipeline batches. The eleven-file export and hashes are archived under
+[`reports/colab/20261023T225501Z-efdf72/`](../reports/colab/20261023T225501Z-efdf72/).
+Read [the measured results and limitations](../reports/PIPELINE_PROFILE_STATUS.md)
+before deciding further experiments.
 
-The new notebook and profiler require validation in the user's Colab GPU
-runtime. Local tests and synthetic CUDA evidence do not establish that this new
-hosted-data run passes. No timings for this next run have been measured yet.
+Blocks reduced median resident-graph online latency by 9.04–11.68% versus HGAM
+in this one untrained configuration. Setup is excluded. All queries share one
+timestamp and no repeated IDs occurred. The audit leaves raw attributes
+excluded and `training_ready: false`. Historical feature/relationship evidence,
+representative workload selection and freezing, the training budget, training,
+and predictive evaluation remain pending. No additional notebook or training run
+is prescribed by this result.
 
-## Run the notebook
+The observed rate was 1.07 units/hour, with an initial balance of 198.78 units.
+The export has no ending balance or measured per-run cost. Continue to preserve
+the 50-unit reserve and record ending balances in any future run.
+
+## Reproduce the completed diagnostic when needed
 
 1. Open [notebook 03 in Colab](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/03_audit_profile.ipynb)
-   after the new code is pushed. Save a copy to Drive; the runtime does not mount
+   for a deliberate reproduction. Save a copy to Drive; the runtime does not mount
    Drive. Enable this notebook's access to the existing read-only `GITHUB_TOKEN`.
 2. Select a T4 GPU and connect. For a CPU diagnostic, set `DEVICE = "cpu"` in the
    first code cell. Leave the other workload settings at their defaults.

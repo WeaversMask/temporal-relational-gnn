@@ -5,7 +5,16 @@ record time. No raw non-key attribute is approved for training. The audit is
 partial: it checks the feature policy and local file metadata, not historical
 reconstruction or training readiness.
 
-After Notebook 02 has downloaded the pinned files, run from the project folder:
+The hosted notebook 03 metadata audit passed in run
+`20261023T225501Z-efdf72`, with no errors, no fitted preprocessing and no
+approved raw attributes. Its embedded report is preserved in
+[`pipeline-profile.json`](../reports/colab/20261023T225501Z-efdf72/pipeline-profile.json).
+The same run passed sampled-batch visibility checks. `training_ready` remains
+`false`; the complete historical feature/relationship milestone stays pending.
+See [the run assessment](../reports/PIPELINE_PROFILE_STATUS.md).
+
+For deliberate reproduction after downloading the pinned files, run from the
+project folder:
 
 ```sh
 python -m trgnn.feature_audit --data-dir data/rel-stack --output results/feature-audit.json
