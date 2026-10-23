@@ -6,18 +6,24 @@
 - [x] Implement synthetic reference, HGAM, and destination-restricted execution.
 - [x] Verify seed outputs, gradients, and an optimizer step on CPU fixtures.
 - [x] Create a private remote and a resumable Colab starting notebook.
-- [x] Run CUDA correctness checks on Colab T4 (18 tests passed).
+- [x] Run CUDA correctness checks on Colab T4 (26 tests passed in notebook 02).
 - [ ] Record actual Colab unit/hour consumption (exported budget fields are blank).
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
 - [ ] Complete the temporal feature availability audit on real data.
-- [ ] Download/project the required real data; build its historical graph.
-- [ ] Run one real batch through the unchanged baseline and both alternative modes.
+- [x] Download/project the required real data; build its historical graph.
+- [x] Run one real batch through the unchanged baseline and both alternative modes.
 - [ ] Measure sampled graph size, host/VRAM use, and pipeline stage proportions.
 
-Verified exports and hashes are under `reports/colab/`. The next notebook is
-`notebooks/02_real_batch.ipynb`; its initial real-data model remains untrained and
-uses constant node features plus relative time. This is not the final predictor.
+Verified exports and hashes are under `reports/colab/`. Notebook 02 passed on
+the hosted database with three batches of eight queries; see
+[`reports/REAL_BATCH_STATUS.md`](../reports/REAL_BATCH_STATUS.md). Its model
+remains untrained and uses constant node features plus relative time. This is
+not the final predictor. Sample sizes and extra forward allocations were
+recorded, but peak host/total VRAM use and pipeline stage proportions are still
+pending. The next notebook is `notebooks/03_audit_profile.ipynb`, described in
+[`docs/NEXT_RUN.md`](NEXT_RUN.md). Preparing the audit/profile tools does not
+complete their real-data milestones; inspect the next hosted export first.
 
 Decide using representative evidence whether to continue block optimization.
 The 10% end-to-end latency reduction is a practical hypothesis, not a promised

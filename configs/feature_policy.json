@@ -1,0 +1,64 @@
+{
+  "policy_version": 1,
+  "database": "rel-stack",
+  "task": "user-badge",
+  "approved_input_features": ["constant", "query_time_minus_record_time"],
+  "raw_feature_columns": [],
+  "tables": {
+    "badges": {
+      "pending_event_fields": {
+        "Class": "Candidate award category. Verify that the export preserves its value at award time.",
+        "Name": "Candidate award name. Verify historical name changes and any target-derived leakage.",
+        "TagBased": "Candidate award category. Verify availability at award time."
+      }
+    },
+    "votes": {
+      "pending_event_fields": {
+        "VoteTypeId": "Candidate vote event category. Verify event availability and deletion/update treatment."
+      },
+      "excluded_snapshot_fields": ["BountyAmount"]
+    },
+    "users": {
+      "excluded_snapshot_fields": [
+        "AccountId", "DisplayName", "Location", "WebsiteUrl", "AboutMe", "Reputation",
+        "Views", "UpVotes", "DownVotes", "Age", "LastAccessDate", "ProfileImageUrl"
+      ]
+    },
+    "comments": {
+      "excluded_snapshot_fields": ["UserDisplayName", "ContentLicense", "Score"],
+      "excluded_text_fields": ["Text"]
+    },
+    "posts": {
+      "pending_event_fields": {
+        "PostTypeId": "Candidate creation-event category. Verify whether type conversions can alter the export."
+      },
+      "excluded_snapshot_fields": [
+        "OwnerDisplayName", "Title", "Tags", "ContentLicense", "AcceptedAnswerId", "Score",
+        "ViewCount", "AnswerCount", "CommentCount", "FavoriteCount", "LastEditorUserId",
+        "LastEditorDisplayName", "LastEditDate", "LastActivityDate", "ClosedDate",
+        "CommunityOwnedDate", "DeletionDate"
+      ],
+      "excluded_text_fields": ["Body"]
+    },
+    "postLinks": {
+      "pending_event_fields": {
+        "LinkTypeId": "Candidate link creation category. Verify whether subsequent link edits or removals affect the export."
+      }
+    },
+    "postHistory": {
+      "pending_event_fields": {
+        "PostHistoryTypeId": "Candidate history event category. Verify value semantics and historical export coverage."
+      },
+      "excluded_snapshot_fields": ["UserDisplayName", "ContentLicense"],
+      "excluded_text_fields": ["Text", "Comment", "RevisionGUID"]
+    }
+  },
+  "limitations": [
+    "Schema/footer inspection cannot establish that exported values were available at the record timestamp.",
+    "Only constants and relative record time are approved; every candidate raw attribute remains excluded.",
+    "Historical foreign-key updates, entity merges, record deletions, and export survivorship have not been reconstructed.",
+    "Record-time visibility and per-query occurrence ownership must still pass the actual sampled-batch audit.",
+    "No preprocessing is fitted here. Any future learned preprocessing must be fitted on training-period data only.",
+    "This policy does not establish training readiness or predictive quality."
+  ]
+}

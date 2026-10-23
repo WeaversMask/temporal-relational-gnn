@@ -4,10 +4,14 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** synthetic CPU/CUDA correctness and the tiny temporal sampler
-have passed in Colab. The next real-batch diagnostic is prepared; execution on
-the actual hosted database, model training, and end-to-end results remain pending.
-See [verified Colab status](docs/COLAB_STATUS.md) and raw exported runs in `reports/colab/`.
+**Current stage:** notebook 02 passed on the actual hosted database with three
+small relational batches and 26 passing tests on a Colab T4. Its model is
+untrained and uses constant features plus relative time. The next step is the
+temporal feature audit and pipeline profile in notebook 03; training and
+end-to-end evaluation remain pending. See the
+[real-batch results](reports/REAL_BATCH_STATUS.md),
+[verified Colab status](docs/COLAB_STATUS.md), and
+[next-run instructions](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
 
 ## Start in Colab
 
@@ -33,6 +37,12 @@ After those checks pass, open
 It uses temporary storage by default, streams its logs, and includes a ZIP export
 cell. This avoids the Drive authorization problem encountered during initial setup.
 The real database download is substantially larger than the manifest-only check.
+
+Notebook 02 has now passed; its exported evidence is archived in this repository.
+Continue with [notebook 03: feature audit and pipeline profile](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/03_audit_profile.ipynb)
+using the [next-run instructions](docs/NEXT_RUN.md). It prepares the evidence
+needed to choose historical features and identify pipeline costs before training.
+Its hosted measurements are still pending.
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Keep durable checkpoints, caches, configurations, and raw logs
@@ -75,13 +85,14 @@ beyond PyG's existing neighborhood trimming, while preserving supervised outputs
 The intended real task is `rel-stack/user-badge`: predict a future badge award
 using the historical relational graph. See [the plan](docs/PLAN.md) and
 [the execution contract](docs/EXECUTION.md). Source and dataset revisions are in
-`configs/upstream.json`; experiment settings remain provisional until a real
-Colab batch establishes feasibility.
+`configs/upstream.json`; experiment settings remain provisional until the
+feature audit and pipeline profile support a representative workload.
 
 The standalone layers mirror the inspected RelBench GraphSAGE configuration;
 `trgnn.execution.run_layers` also accepts the existing model's `convs` and `norms`
-for later integration. The actual sampler smoke check is a tiny PyG test, not a
-RelBench task audit.
+for real-model integration. Notebook 02 uses the actual RelBench encoders,
+GraphSAGE, and readout on hosted batches. The separate sampler smoke check
+remains a tiny PyG test.
 
 ## What is measured now
 
@@ -94,6 +105,14 @@ It **excludes** sampling, feature gathering, CPU/GPU transfer, encoders, and the
 prediction head. Synthetic timing must never be described as task-level,
 end-to-end, or trained-model performance. The benchmark saves raw interleaved
 measurements, output errors, device details, package versions, and Git revision.
+
+Notebook 02 separately measures untrained forward passes on actual relational
+batches, including the feature/time encoders and readout. Blocks reduced median
+forward latency by 9.17–12.83% versus HGAM in its three tiny batches of 60–130
+sampled nodes. Extra CUDA allocation savings were 18.5–88 KiB. These measurements
+exclude sampling, gathering, and transfer and do not establish trained-model
+or complete inference acceleration. See the
+[real-batch report](reports/REAL_BATCH_STATUS.md) for raw evidence and limits.
 
 ## Attribution and scope
 

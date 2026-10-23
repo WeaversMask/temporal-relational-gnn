@@ -47,7 +47,8 @@ class RealBatchModel(nn.Module):
         )
         self.head = nn.Linear(channels, 1)
 
-    def forward(self, batch, entity, mode="reference"):
+    def encode(self, batch, entity):
+        """Encode the same occurrence features for every execution schedule."""
         # Preserve zero-node types. Some table encoders cannot reshape a zero batch.
         features = {
             name: self.encoder.encoders[name](frame)
@@ -56,7 +57,9 @@ class RealBatchModel(nn.Module):
             for name, frame in batch.tf_dict.items()
         }
         temporal = self.temporal_encoder(batch[entity].seed_time, batch.time_dict, batch.batch_dict)
-        features = {name: value + temporal[name] for name, value in features.items()}
+        return {name: value + temporal[name] for name, value in features.items()}
+
+    def message_passing(self, features, batch, mode="reference"):
         if mode == "reference":
             result = self.gnn(
                 features,
@@ -74,7 +77,15 @@ class RealBatchModel(nn.Module):
                 batch.num_sampled_edges_dict,
                 mode,
             )
+        return result
+
+    def readout(self, result, batch, entity):
         return self.head(result[entity][: batch[entity].seed_time.numel()]).flatten()
+
+    def forward(self, batch, entity, mode="reference"):
+        features = self.encode(batch, entity)
+        result = self.message_passing(features, batch, mode)
+        return self.readout(result, batch, entity)
 
 
 def check_and_measure(model, batch, entity, repeats, device):
