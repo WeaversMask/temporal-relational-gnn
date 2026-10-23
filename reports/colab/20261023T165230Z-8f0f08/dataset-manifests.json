@@ -1,0 +1,20 @@
+{
+  "dataset": {
+    "database": "rel-stack",
+    "repository": "stanford-star/relbench-v1",
+    "revision": "21d7284df2a9621c71f21bc4a1a30b7e8effb8dd",
+    "task": "user-badge"
+  },
+  "files": {
+    "database": {
+      "manifest": "name: rel-stack\nmanifest_version: 1\ndescription: 'Stack Exchange Q&A: users, posts, comments, votes, badges, and post links.'\nval_timestamp: '2020-10-01'\ntest_timestamp: '2021-01-01'\ntables:\n  badges:\n    pkey: Id\n    time_col: Date\n    fkeys:\n      UserId: users\n  votes:\n    pkey: Id\n    time_col: CreationDate\n    fkeys:\n      PostId: posts\n      UserId: users\n  users:\n    pkey: Id\n    time_col: CreationDate\n    fkeys: {}\n  comments:\n    pkey: Id\n    time_col: CreationDate\n    fkeys:\n      UserId: users\n      PostId: posts\n  posts:\n    pkey: Id\n    time_col: CreationDate\n    fkeys:\n      OwnerUserId: users\n      ParentId: posts\n  postLinks:\n    pkey: Id\n    time_col: CreationDate\n    fkeys:\n      PostId: posts\n      RelatedPostId: posts\n  postHistory:\n    pkey: Id\n    time_col: CreationDate\n    fkeys:\n      PostId: posts\n      UserId: users\n",
+      "sha256": "154ff5950daf9a283ead0654abf24f6e72bd705cce1aeea7b7647f25613772e8",
+      "url": "https://huggingface.co/datasets/stanford-star/relbench-v1/resolve/21d7284df2a9621c71f21bc4a1a30b7e8effb8dd/rel-stack/manifest.yaml"
+    },
+    "task": {
+      "manifest": "name: user-badge\nkind: forecast\ntask_type: binary_classification\ndescription: Predict if each user will receive in a new badge the next 2 years.\nentity_table: users\nentity_col: UserId\ntarget_col: WillGetBadge\ntime_col: timestamp\ntimedelta: 91 days\nsql: |-\n  SELECT\n      timestamp,\n      CAST(UserId AS BIGINT) AS UserId,\n      WillGetBadge\n  FROM (\n  SELECT\n      t.timestamp,\n      u.Id as UserId,\n  CASE WHEN\n      COUNT(b.Id) >= 1 THEN 1 ELSE 0 END AS WillGetBadge\n  FROM\n      timestamps t\n  LEFT JOIN\n      users u\n  ON\n      u.CreationDate <= t.timestamp\n  LEFT JOIN\n      badges b\n  ON\n      u.Id = b.UserID\n      AND b.Date > t.timestamp\n      AND b.Date <= t.timestamp + INTERVAL '{timedelta}'\n  GROUP BY\n      t.timestamp,\n      u.Id\n  )\n  WHERE UserId IS NOT NULL\nmanifest_version: 1\n",
+      "sha256": "9a899ea9e41e431460ebae2dd11d51049d3bc729ae9123f8622e41517517f3f7",
+      "url": "https://huggingface.co/datasets/stanford-star/relbench-v1/resolve/21d7284df2a9621c71f21bc4a1a30b7e8effb8dd/rel-stack/tasks/user-badge/manifest.yaml"
+    }
+  }
+}

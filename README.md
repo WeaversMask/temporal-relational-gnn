@@ -4,9 +4,10 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** runnable synthetic correctness and profiling prototype. Real
-RelBench training, real-batch parity, CUDA validation, and end-to-end results are
-not yet complete. No acceleration claim has been established.
+**Current stage:** synthetic CPU/CUDA correctness and the tiny temporal sampler
+have passed in Colab. The next real-batch diagnostic is prepared; execution on
+the actual hosted database, model training, and end-to-end results remain pending.
+See [verified Colab status](docs/COLAB_STATUS.md) and raw exported runs in `reports/colab/`.
 
 ## Start in Colab
 
@@ -26,6 +27,12 @@ and upload it to Colab. The notebook explains its separate runtime clone step.
    wheel helper before requesting the actual temporal-sampler smoke check.
 5. Record the consumption rate displayed by Colab in `colab-budget.json` for
    each run. These are observations, not hard-coded GPU prices.
+
+After those checks pass, open
+[notebook 02: actual relational batches](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/02_real_batch.ipynb).
+It uses temporary storage by default, streams its logs, and includes a ZIP export
+cell. This avoids the Drive authorization problem encountered during initial setup.
+The real database download is substantially larger than the manifest-only check.
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Keep durable checkpoints, caches, configurations, and raw logs

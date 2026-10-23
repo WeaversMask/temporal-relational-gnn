@@ -6,12 +6,18 @@
 - [x] Implement synthetic reference, HGAM, and destination-restricted execution.
 - [x] Verify seed outputs, gradients, and an optimizer step on CPU fixtures.
 - [x] Create a private remote and a resumable Colab starting notebook.
-- [ ] Run CUDA correctness checks and record actual Colab unit/hour consumption.
-- [ ] Check the installed temporal sampler on a tiny real PyG graph.
-- [ ] Inspect pinned task/schema manifests and audit temporal feature availability.
+- [x] Run CUDA correctness checks on Colab T4 (18 tests passed).
+- [ ] Record actual Colab unit/hour consumption (exported budget fields are blank).
+- [x] Check the installed temporal sampler on a tiny real PyG graph.
+- [x] Fetch the pinned task/schema manifests.
+- [ ] Complete the temporal feature availability audit on real data.
 - [ ] Download/project the required real data; build its historical graph.
 - [ ] Run one real batch through the unchanged baseline and both alternative modes.
 - [ ] Measure sampled graph size, host/VRAM use, and pipeline stage proportions.
+
+Verified exports and hashes are under `reports/colab/`. The next notebook is
+`notebooks/02_real_batch.ipynb`; its initial real-data model remains untrained and
+uses constant node features plus relative time. This is not the final predictor.
 
 Decide using representative evidence whether to continue block optimization.
 The 10% end-to-end latency reduction is a practical hypothesis, not a promised
