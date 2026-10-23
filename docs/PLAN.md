@@ -8,7 +8,8 @@
 - [x] Create a private remote and a resumable Colab starting notebook.
 - [x] Run CUDA correctness checks on Colab T4 (36 tests passed in notebook 03).
 - [x] Record the actual Colab unit/hour rate (1.07 observed in notebook 03).
-- [ ] Record ending balance and actual per-run compute-unit consumption.
+- [x] Record a later balance (198.67); account decrease was 0.11 units with overlapping runtimes reported.
+- [ ] Measure isolated per-run compute-unit consumption without overlapping runtimes.
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
 - [ ] Complete the temporal feature availability audit on real data.

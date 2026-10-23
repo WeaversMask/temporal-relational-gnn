@@ -103,5 +103,9 @@ and relationship semantics, the representative frozen workload, training and
 predictive evaluation remain pending.
 
 The observed rate was 1.07 Colab units/hour and the initial remaining balance
-was 198.78 units. The 50-unit reserve remains the plan. No ending balance or
-actual per-run cost was recorded.
+was 198.78 units. The user later reported 198.67 remaining and a notebook 02
+runtime left active in the background. The 0.11-unit account decrease covers
+the observed interval, rather than an isolated notebook 03 cost. The user
+believes the session rate remained 1.07 units/hour; a combined rate is
+unmeasured. See the [budget follow-up](../reports/budget/20261024-notebook03-followup.json).
+The latest balance leaves 148.67 units above the planned 50-unit reserve.

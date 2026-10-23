@@ -16,8 +16,12 @@ and predictive evaluation remain pending. No additional notebook or training run
 is prescribed by this result.
 
 The observed rate was 1.07 units/hour, with an initial balance of 198.78 units.
-The export has no ending balance or measured per-run cost. Continue to preserve
-the 50-unit reserve and record ending balances in any future run.
+A [later user report](../reports/budget/20261024-notebook03-followup.json) gives
+198.67 units remaining and an overlapping notebook 02 runtime. The 0.11-unit
+account decrease therefore cannot establish notebook 03's individual cost.
+The latest balance leaves 148.67 units above the 50-unit reserve. Record start
+and end balances with other managed runtimes disconnected to isolate future
+run consumption.
 
 ## Reproduce the completed diagnostic when needed
 

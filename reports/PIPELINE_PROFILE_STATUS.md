@@ -107,8 +107,14 @@ the corresponding allocated peaks. They do not imply similar total-VRAM savings.
 
 The recorded Colab rate was **1.07 units/hour**, with **198.78 units remaining**
 at the initial observation. The planned budget remains 200 units with a 50-unit
-reserve. No ending balance or measured per-run consumption was recorded, so
-the actual cost of this run cannot be calculated from the export.
+reserve. The original export contains no ending balance. A subsequent
+[user-reported budget follow-up](budget/20261024-notebook03-followup.json)
+records **198.67 units remaining**, a **0.11-unit account decrease** between
+observations. The user reports that notebook 02's runtime was left active in
+the background and believes the session rate stayed at 1.07 units/hour.
+The decrease cannot be assigned to notebook 03 alone; its isolated cost and
+the combined hourly rate remain unmeasured. The latest balance leaves
+**148.67 units above the 50-unit reserve**. Original export files are unchanged.
 
 Historical feature/relationship evidence, representative workload selection,
 training budget and checkpoint, predictive quality, and the final trained
