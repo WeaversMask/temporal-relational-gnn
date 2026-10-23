@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "temporal-relational-gnn"
+version = "0.1.0"
+description = "Correctness and inference experiments for temporal relational GraphSAGE"
+requires-python = ">=3.11"
+dependencies = ["torch>=2.11,<2.15", "torch-geometric==2.8.1"]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1", "ruff==0.15.0"]
+relbench = ["relbench==3.0.2", "pytorch-frame==0.3.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

@@ -1,0 +1,394 @@
+{
+  "blocks_latency_reduction_vs_hgam": 0.1600214800477242,
+  "config": {
+    "batch_size": 8,
+    "channels": 64,
+    "device": "cpu",
+    "fanouts": [
+      4,
+      2
+    ],
+    "output": "results/synthetic-cpu.json",
+    "repeats": 30,
+    "resolved_device": "cpu",
+    "seed": 42,
+    "threads": 1,
+    "warmup": 5
+  },
+  "edge_counts": {
+    "badge|owner|user": [
+      28,
+      56
+    ],
+    "badge|unused|post": [
+      0,
+      0
+    ],
+    "post|author|user": [
+      28,
+      56
+    ],
+    "post|parent|post": [
+      0,
+      56
+    ],
+    "user|peer|user": [
+      28,
+      56
+    ],
+    "user|rev_author|post": [
+      0,
+      56
+    ],
+    "user|rev_owner|badge": [
+      0,
+      56
+    ]
+  },
+  "end_to_end": false,
+  "environment": {
+    "cpu_threads": 1,
+    "cuda_available": false,
+    "cuda_runtime": null,
+    "git_commit": null,
+    "git_dirty": null,
+    "gpu": null,
+    "packages": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "Pygments": "2.21.0",
+      "aiohappyeyeballs": "2.7.1",
+      "aiohttp": "3.14.5",
+      "aiosignal": "1.4.0",
+      "attrs": "26.1.0",
+      "certifi": "2026.10.23",
+      "charset-normalizer": "3.5.2",
+      "filelock": "4.2.4",
+      "frozenlist": "1.8.0",
+      "fsspec": "2026.9.0",
+      "idna": "3.20",
+      "iniconfig": "2.3.1",
+      "mpmath": "1.3.0",
+      "multidict": "7.1.0",
+      "networkx": "3.7",
+      "numpy": "2.5.4",
+      "packaging": "26.3",
+      "pip": "25.0.1",
+      "pluggy": "1.7.0",
+      "propcache": "0.5.4",
+      "psutil": "7.2.2",
+      "pyparsing": "3.3.3",
+      "pytest": "9.1.1",
+      "requests": "2.34.2",
+      "ruff": "0.15.0",
+      "setuptools": "84.2.1",
+      "sympy": "1.14.0",
+      "temporal-relational-gnn": "0.1.0",
+      "torch": "2.14.1",
+      "torch-geometric": "2.8.1",
+      "tqdm": "4.70.1",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.8.0",
+      "xxhash": "4.0.2",
+      "yarl": "1.25.1"
+    },
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.12.14",
+    "recorded_at_utc": "2026-10-23T16:16:48.848686+00:00",
+    "torch": "2.14.1"
+  },
+  "equivalence": {
+    "atol": 1e-05,
+    "max_absolute_error": {
+      "blocks": 0.0,
+      "hgam": 0.0,
+      "reference": 0.0
+    },
+    "rtol": 0.0001
+  },
+  "execution_order": [
+    [
+      "hgam",
+      "reference",
+      "blocks"
+    ],
+    [
+      "blocks",
+      "hgam",
+      "reference"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "hgam",
+      "reference",
+      "blocks"
+    ],
+    [
+      "reference",
+      "hgam",
+      "blocks"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "hgam",
+      "reference",
+      "blocks"
+    ],
+    [
+      "reference",
+      "hgam",
+      "blocks"
+    ],
+    [
+      "blocks",
+      "hgam",
+      "reference"
+    ],
+    [
+      "reference",
+      "hgam",
+      "blocks"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "reference",
+      "hgam",
+      "blocks"
+    ],
+    [
+      "reference",
+      "blocks",
+      "hgam"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "blocks",
+      "reference",
+      "hgam"
+    ],
+    [
+      "blocks",
+      "hgam",
+      "reference"
+    ],
+    [
+      "blocks",
+      "hgam",
+      "reference"
+    ],
+    [
+      "reference",
+      "blocks",
+      "hgam"
+    ],
+    [
+      "blocks",
+      "hgam",
+      "reference"
+    ],
+    [
+      "hgam",
+      "reference",
+      "blocks"
+    ],
+    [
+      "blocks",
+      "reference",
+      "hgam"
+    ],
+    [
+      "reference",
+      "hgam",
+      "blocks"
+    ],
+    [
+      "reference",
+      "hgam",
+      "blocks"
+    ],
+    [
+      "hgam",
+      "reference",
+      "blocks"
+    ],
+    [
+      "hgam",
+      "reference",
+      "blocks"
+    ],
+    [
+      "hgam",
+      "blocks",
+      "reference"
+    ],
+    [
+      "blocks",
+      "reference",
+      "hgam"
+    ]
+  ],
+  "extra_peak_allocated_cuda_bytes": {
+    "blocks": null,
+    "hgam": null,
+    "reference": null
+  },
+  "median_ms": {
+    "blocks": 0.603,
+    "hgam": 0.7178755,
+    "reference": 0.8081879999999999
+  },
+  "node_counts": {
+    "badge": [
+      0,
+      28,
+      56
+    ],
+    "post": [
+      0,
+      28,
+      112
+    ],
+    "user": [
+      8,
+      28,
+      168
+    ]
+  },
+  "notes": [
+    "Includes Python block construction, convolution, node normalization, and ReLU.",
+    "Excludes sampling, feature gathering, transfer, encoders, and prediction head.",
+    "Synthetic occurrence features are not predictions on RelBench data.",
+    "CPU results do not establish GPU acceleration or real-workload performance."
+  ],
+  "scope": "synthetic_preencoded_message_passing_only",
+  "timings_ms": {
+    "blocks": [
+      0.89125,
+      0.656917,
+      0.603584,
+      0.620375,
+      0.60325,
+      0.634125,
+      0.614333,
+      0.5955,
+      0.668292,
+      0.821916,
+      0.613333,
+      0.607292,
+      0.60125,
+      0.597459,
+      0.619334,
+      0.600167,
+      0.600459,
+      0.599458,
+      0.594,
+      0.62125,
+      0.603417,
+      0.60275,
+      0.600791,
+      0.599334,
+      0.594542,
+      0.590625,
+      0.597666,
+      0.60025,
+      0.598,
+      0.621584
+    ],
+    "hgam": [
+      0.717917,
+      0.752125,
+      0.723042,
+      0.719208,
+      0.709458,
+      0.728584,
+      0.708125,
+      0.723583,
+      0.909958,
+      0.764584,
+      0.749833,
+      0.725709,
+      0.71675,
+      0.712834,
+      0.7205,
+      0.806,
+      0.716875,
+      0.717834,
+      0.71575,
+      0.716834,
+      0.713708,
+      0.702292,
+      0.724875,
+      0.76125,
+      0.714458,
+      0.716,
+      0.704584,
+      0.713917,
+      0.711958,
+      0.718208
+    ],
+    "reference": [
+      0.834916,
+      0.821834,
+      0.805291,
+      0.8095,
+      0.805125,
+      0.809792,
+      0.807583,
+      0.805875,
+      0.878292,
+      0.9425,
+      0.892917,
+      0.809125,
+      0.804875,
+      0.804292,
+      0.842208,
+      0.807167,
+      0.808167,
+      0.806375,
+      0.803875,
+      0.8065,
+      0.802791,
+      0.827875,
+      0.808209,
+      0.826417,
+      0.824667,
+      0.811375,
+      0.806708,
+      0.805541,
+      0.8085,
+      0.806417
+    ]
+  },
+  "trained": false
+}

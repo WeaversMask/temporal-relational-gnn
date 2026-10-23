@@ -1,0 +1,21 @@
+{
+  "status": "provisional_until_real_data_preflight",
+  "dataset": "rel-stack",
+  "task": "user-badge",
+  "channels": 64,
+  "num_layers": 2,
+  "fanouts_per_relation": [16, 8],
+  "batch_size": 32,
+  "aggregation": "mean",
+  "relation_aggregation": "sum",
+  "precision": "float32",
+  "include_task_label_tables": false,
+  "training_example_budget": 200000,
+  "seed": 42,
+  "practical_end_to_end_latency_reduction_target": 0.10,
+  "correctness_atol": 0.00001,
+  "correctness_rtol": 0.0001,
+  "compute_units_budget": 200,
+  "compute_units_reserve": 50,
+  "notes": "Timing the synthetic harness does not test this real-data configuration."
+}
