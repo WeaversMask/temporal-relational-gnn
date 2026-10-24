@@ -4,32 +4,33 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** notebook 08 completed its first revised trained-inference
-measurement on T4: **240 tests passed**, all **336 query batches** completed,
-and the original checkpoint, sampled inputs and predictions matched. Blocks
-reduced summed online latency versus HGAM by **8.38% at batch 32** (primary,
-within-run 95% interval **7.75–8.90%**), **8.12% at 128** and **8.21% at 512**.
-Independent reproduction of this version-2 result is the next step.
+**Current stage:** notebook 08's revised trained-inference result has been
+independently reproduced on a different T4. Both sessions passed **240 hosted
+tests** and all **336 query batches**, with the same checkpoint, sampled inputs,
+predictions within tolerance and benchmark contract. Blocks reduced summed online
+latency versus HGAM by **8.38% and 8.59% at batch 32** (primary), with separate
+within-run 95% intervals **7.75–8.90% and 8.06–9.10%**.
 
-Cycle-free auditing preserves the original sampled fingerprints. Natural garbage
-collection remains enabled and every pause remains in the estimator. Three
-observed full collections occurred inside online passes, including two received
-by blocks. Program counters record one additional full collection outside the
-observed case windows; its duration is unmeasured separately. The historical
-size-512 HGAM spike position was ordinary in this run, which does not establish
-that all future pauses have disappeared.
+Secondary size 128 reductions were 8.12%/8.42%; size 512 showed 8.21%/7.65%.
+Size 512 is noisier in the repeat: six passes exceeded 100 ms with little or no
+GC overlap, and its interval widened to 2.07–11.49%. Every observation remains
+included. Cycle-free auditing preserves sampled fingerprints, while natural
+cleanup remains enabled and its actual online costs stay in the estimator.
+Full collections still occur; cleanup does not explain all timing variation.
 
-See the [new measured findings](reports/GC_AWARE_INFERENCE_STATUS.md),
+See the [verified two-run findings](reports/GC_AWARE_INFERENCE_REPRODUCTION.md),
+[first revised run](reports/GC_AWARE_INFERENCE_STATUS.md),
 [notebook 08 protocol](docs/GC_AWARE_INFERENCE.md),
 [completed diagnostic](reports/SPIKE_DIAGNOSTIC_STATUS.md),
 [original two-run report](reports/TRAINED_INFERENCE_REPRODUCTION.md),
 [training results](reports/TRAINING_RUN_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
-[current next steps](docs/NEXT_RUN.md). The earlier 8.91% and 8.77% observations
+[current next steps](docs/NEXT_RUN.md). The earlier 8.91%/8.77% observations
 remain separate old-protocol results. Raw exports are in `reports/colab/`.
-The source activity baseline remains the stronger predictor; historical snapshot
-assumptions, constant/time features and the single-checkpoint/schema/date scope
-remain explicit. Existing notebooks remain available for deliberate reproduction.
+The bounded revised comparison and its independent repeat are complete; no
+additional unchanged GPU run is planned. The stronger activity baseline,
+historical snapshot assumptions, constant/time features and single-checkpoint/
+schema/date scope remain explicit.
 
 ## Start in Colab
 
@@ -88,10 +89,10 @@ measurements diagnose pauses rather than replace notebook 06 speed results.
 See the [completed diagnostic and reproduction instructions](docs/SPIKE_DIAGNOSTIC.md).
 
 [Notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
-completed the first natural-GC measurement with cycle-free auditing and explicit
-cleanup accounting. Repeat the same notebook in a fresh T4 session with
-`RESUME = False` and the same original notebook 05 checkpoint; no new training
-is needed. See [the measured result](reports/GC_AWARE_INFERENCE_STATUS.md).
+completed two independent natural-GC measurements with cycle-free auditing and
+explicit cleanup accounting. For deliberate reproduction, use a fresh T4 session,
+`RESUME = False` and the same original notebook 05 checkpoint. No new training
+is needed. See [the two-run result](reports/GC_AWARE_INFERENCE_REPRODUCTION.md).
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04

@@ -1,17 +1,17 @@
 # Revised trained inference measurement with natural cleanup
 
 [Notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
-completed its first revised measurement in run `20261024T215147Z-bd9574` at
-source `56d82fb`, after the completed
-[collection diagnostic](../reports/SPIKE_DIAGNOSTIC_STATUS.md). All **240 T4 tests**
-and **336 query batches** passed. The primary online latency reduction versus
-HGAM was **8.38%** (within-run interval **7.75–8.90%**); secondary sizes 128/512
-showed **8.12% / 8.21%**. See the
-[measured findings](../reports/GC_AWARE_INFERENCE_STATUS.md).
+completed two independent revised measurements in runs
+`20261024T215147Z-bd9574` and `20261024T223434Z-dd7297`, each passing **240 T4
+tests** and all **336 query batches**. The same contract/checkpoint and sampled
+inputs matched across different physical T4 GPUs. Primary online latency
+reductions versus HGAM were **8.38% and 8.59%**, with separate within-run
+intervals **7.75–8.90% and 8.06–9.10%**. See the
+[verified two-run findings](../reports/GC_AWARE_INFERENCE_REPRODUCTION.md).
 
-Next is an independent fresh T4 repeat of this same notebook and frozen
-configuration. No new notebook or training is needed. The instructions below
-apply to that repeat; do not reuse old measurement sidecars.
+The bounded revised comparison is complete. No further unchanged run is planned;
+the instructions below remain available for deliberate reproduction. Secondary
+size-512 performance is less stable, with non-GC tails retained in the repeat.
 
 The revision removes the avoidable recursive closure in the sampler fingerprint
 check. It keeps automatic garbage collection enabled and retains every actual
@@ -29,13 +29,13 @@ lint and formatting checks also passed. Notebook 08 runs the full suite on T4,
 including a new CUDA check of this executor. Local checks do not establish GPU
 correctness or a performance result.
 
-## Independently repeat in a fresh Colab T4 session
+## Deliberately reproduce in a fresh Colab T4 session
 
 1. Open notebook 08, save a copy, select **T4 GPU**, disconnect other managed
    runtimes and enable the existing read-only `GITHUB_TOKEN` secret.
 2. Enter the current `COMPUTE_UNITS_REMAINING` balance and displayed
    `COMPUTE_UNITS_PER_HOUR` rate in the first control cell. The last verified
-   balance was 194.63; use a new reading. Keep `RESUME = False` for this
+   balance was 194.15; use a new reading. Keep `RESUME = False` for this
    independent repeat. The 50-unit reserve still applies.
 3. Run cells in order. At the upload prompt choose the **same original
    notebook 05 `training.pt` used for notebooks 06 and 07**. Its expected hash is
@@ -124,10 +124,12 @@ If resumed cases span sessions, that aggregate is explicitly marked and is not
 an independent single-session reproduction. Within-size confidence intervals
 are suppressed when that size combines measurement sessions.
 
-Keep the first version-2 result separate from the earlier 8.77–8.91%
-observations. Its independent repeat remains pending. Full collections still
-occurred in the first revised run, and all their online costs were retained.
-Neither a larger benefit nor the absence of future pauses is promised.
+Keep both version-2 sessions separate from the earlier 8.77–8.91%
+observations. Their primary benefit has been independently reproduced in this
+fixed workload; no pooled cross-session confidence interval is claimed. Full
+collections still occurred, and all online costs were retained. The repeat also
+has non-GC size-512 tails and wider uncertainty. Neither broad portability nor
+the absence of future pauses is established.
 
 Scope remains one checkpoint/training seed, schema, validation date and restricted
 constant/time feature policy. The activity baseline remains the stronger source

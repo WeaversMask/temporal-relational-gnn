@@ -5,7 +5,10 @@ at clean source `56d82fb6d783a680e0cb122afd94c15ffc106368`. All **240 tests
 passed on the Tesla T4**, including the revised executor's CUDA check and the
 compiled temporal sampler. All **336 query batches** completed 20 paired repeats
 in one fresh session, with no reused measurement sidecars. This is the first
-hosted version-2 measurement; independent reproduction remains pending.
+hosted version-2 measurement. Its independent repeat has since completed,
+with a primary reduction of 8.59%; see the
+[two-run report](GC_AWARE_INFERENCE_REPRODUCTION.md). The sections below retain
+the first run's measurements.
 
 The primary blocks-versus-HGAM online latency reduction is **8.38%**. All three
 sizes show a positive reduction with their within-run intervals above zero.
@@ -120,11 +123,14 @@ and the protocol change prevent treating their difference as an isolated causal
 effect of the hash correction. The predeclared 10% planning target remains
 unmet; it is not a publication or scientific-validity threshold.
 
-The next measurement is an independent fresh T4 run of the **same notebook 08**,
-with `RESUME = False`, the same original checkpoint and no reused sidecars.
-Review that result before describing the version-2 benefit as reproduced or
-expanding the workload. No new notebook or model training is needed for this
-repeat. See [the run instructions](../docs/GC_AWARE_INFERENCE.md).
+The independent fresh T4 repeat of the **same notebook 08** is now verified,
+with no reused sidecars, unchanged contract and a different physical GPU.
+The primary result is 8.38%/8.59% across these two sessions. Size 512 has wider
+uncertainty in the repeat, including non-GC tails. See the
+[two-run report](GC_AWARE_INFERENCE_REPRODUCTION.md) before making broader claims.
+No further unchanged GPU run is planned; the
+[run instructions](../docs/GC_AWARE_INFERENCE.md) remain available for deliberate
+reproduction.
 
 ## Resources, evidence and scope
 

@@ -139,6 +139,7 @@ A revised comparison and independent repeat are needed before describing a
 stable efficiency result for the helper correction. The separate
 [notebook 08](../docs/GC_AWARE_INFERENCE.md) retains natural cleanup and lightweight
 GC observation under a new protocol. Its
-[first measured result](GC_AWARE_INFERENCE_STATUS.md) is now verified; independent
-reproduction remains pending. The full collection mechanism is directly observed, while the exact historical event and
-the two non-GC early pauses remain appropriately qualified.
+[two-run result](GC_AWARE_INFERENCE_REPRODUCTION.md) is now verified, with primary
+reductions of 8.38%/8.59% and unresolved non-GC size-512 tails retained. The full
+collection mechanism is directly observed, while the exact historical event
+and the two non-GC early pauses remain appropriately qualified.

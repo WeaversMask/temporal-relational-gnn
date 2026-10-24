@@ -1,5 +1,5 @@
 {
-  "status": "gc_aware_first_run_verified_independent_repeat_pending",
+  "status": "gc_aware_independently_reproduced_scope_limited",
   "inference_protocol": "configs/trained_inference.json",
   "trained_inference_result": {
     "report": "reports/TRAINED_INFERENCE_REPRODUCTION.md",
@@ -30,7 +30,7 @@
     ],
     "original_protocol_observations_retained": true,
     "corrected_measurement_protocol_validation_pending": false,
-    "corrected_measurement_protocol_independent_repeat_pending": true
+    "corrected_measurement_protocol_independent_repeat_pending": false
   },
   "dataset": "rel-stack",
   "task": "user-badge",
@@ -60,7 +60,7 @@
   "correctness_rtol": 0.0001,
   "compute_units_budget": 200,
   "compute_units_reserve": 50,
-  "notes": "Notebook 06 completed and independently reproduced 336 query batches with 20 paired repetitions each and 171 T4 tests passed in each session, under the same frozen contract on different physical T4 GPUs. The unchanged notebook 05 constant/time checkpoint passed source replay, occurrence audits and fixed numerical tolerances. Primary batch-32 graph-loaded online reductions versus HGAM were 8.91% and 8.77%, below the 10% practical target; message-passing replay improvement was roughly 17%. Secondary batch-128 reductions were 8.02% and 8.64%; batch-512 reductions were 10.46% and 11.82%, retaining an extreme HGAM trial recurring at the same batch/repeat position with unresolved cause. All trials remain in headline results and per-run intervals are separate. The bounded execution comparison and its report are complete, without model/configuration expansion to pursue the target. The activity baseline remains stronger on the shared 8192-query validation cohort. Historical snapshot assumptions remain unresolved. Notebook 07 directly observed four 228-240 ms full Python collections inside slow online passes across modes and sizes. Instrumented controls do not supply corrected speedup estimates: forced collection relocated 88.656 seconds outside timers, and the short acyclic control does not establish elimination of long-run pauses. Original measurements are retained separately. Notebook 08 completed its first natural-GC measurement with cycle-free replay and input auditing: 240 T4 tests and 336 cases passed; blocks online reductions versus HGAM were 8.38%, 8.12% and 8.21% at sizes 32, 128 and 512. Three observed full collections stayed inside online timings, including two on blocks; program counters record one additional full collection outside observed case windows with separate duration unknown. All observations and costs remain included. Independent repetition of this version-2 protocol is pending.",
+  "notes": "Notebook 06 completed and independently reproduced 336 query batches with 20 paired repetitions each and 171 T4 tests passed in each session, under the same frozen contract on different physical T4 GPUs. The unchanged notebook 05 constant/time checkpoint passed source replay, occurrence audits and fixed numerical tolerances. Primary batch-32 graph-loaded online reductions versus HGAM were 8.91% and 8.77%, below the 10% practical target; message-passing replay improvement was roughly 17%. Secondary batch-128 reductions were 8.02% and 8.64%; batch-512 reductions were 10.46% and 11.82%, retaining an extreme HGAM trial recurring at the same batch/repeat position with unresolved cause. All trials remain in headline results and per-run intervals are separate. The bounded execution comparison and its report are complete, without model/configuration expansion to pursue the target. The activity baseline remains stronger on the shared 8192-query validation cohort. Historical snapshot assumptions remain unresolved. Notebook 07 directly observed four 228-240 ms full Python collections inside slow online passes across modes and sizes. Instrumented controls do not supply corrected speedup estimates: forced collection relocated 88.656 seconds outside timers, and the short acyclic control does not establish elimination of long-run pauses. Original measurements are retained separately. Notebook 08 completed its first natural-GC measurement with cycle-free replay and input auditing: 240 T4 tests and 336 cases passed; blocks online reductions versus HGAM were 8.38%, 8.12% and 8.21% at sizes 32, 128 and 512. Three observed full collections stayed inside online timings, including two on blocks; program counters record one additional full collection outside observed case windows with separate duration unknown. All observations and costs remain included. The independent version-2 repeat also passed all 240 T4 tests and 336 cases under the identical contract on a different physical T4. Primary reductions reproduce at 8.38%/8.59%; size 128 showed 8.12%/8.42%, and size 512 showed 8.21%/7.65%. The repeat has six size-512 passes over 100 ms with little or no GC overlap, including two blocks passes with zero overlap; causes remain unresolved and all observations are retained. Both within-run intervals stay separate. The bounded revised comparison and its independent repeat are complete, with no third unchanged GPU run planned.",
   "timing_diagnostic": {
     "run_id": "20261024T121852Z-4747d5",
     "report": "reports/SPIKE_DIAGNOSTIC_STATUS.md",
@@ -74,53 +74,96 @@
     "historical_spike_attribution": "Strongly consistent with GC cadence, but historical passes have no collection trace",
     "acyclic_helper_eliminates_long_run_spikes_established": false,
     "forced_collection_cost_seconds": 88.655619662,
-    "next_step": "Independently repeat the verified notebook 08 natural-GC measurement in a fresh T4 session"
+    "next_step": "Version-2 comparison independently reproduced; preserve the consolidated report and unresolved non-GC secondary tails before choosing any separate extension"
   },
   "revised_inference_protocol": {
     "version": 2,
     "configuration": "configs/gc_aware_inference.json",
     "notebook": "notebooks/08_gc_aware_inference.ipynb",
     "instructions": "docs/GC_AWARE_INFERENCE.md",
-    "status": "first_hosted_run_verified_independent_repeat_pending",
+    "status": "independently_reproduced_scope_limited",
     "gc_policy": "natural_automatic_keep_every_timing",
     "fingerprint_scope": "cycle-free byte-identical replay and measurement auditing",
     "observer": "minimal GC callbacks and exact timer metadata; overhead present"
   },
   "revised_inference_result": {
-    "run_id": "20261024T215147Z-bd9574",
-    "source_commit": "56d82fb6d783a680e0cb122afd94c15ffc106368",
-    "report": "reports/GC_AWARE_INFERENCE_STATUS.md",
-    "audit": "reports/analysis/20261024T215147Z-bd9574-audit.json",
-    "provenance": "reports/colab/20261024T215147Z-bd9574/PROVENANCE.json",
-    "status": "first_run_verified_independent_repeat_pending",
-    "hosted_t4_tests_passed": 240,
-    "completed_query_batches": 336,
-    "paired_trials": 6720,
-    "benchmark_contract_sha256": "8863a37d502df4eb267e1bb3eeb3ce5561f0e92210d7cb6740df1098410f6b6f",
+    "report": "reports/GC_AWARE_INFERENCE_REPRODUCTION.md",
+    "status": "independently_reproduced_scope_limited",
     "primary_batch_size": 32,
-    "reduction_vs_hgam_percent": {
-      "32": 8.37913581741362,
-      "128": 8.116589513025641,
-      "512": 8.213930898512112
-    },
-    "within_run_95_percent_ci": {
-      "32": [
-        7.749453759092829,
-        8.902132321933866
-      ],
-      "128": [
-        7.253356492510415,
-        8.94014673308927
-      ],
-      "512": [
-        6.414770015530737,
-        9.929709335030314
-      ]
-    },
-    "case_observed_gen2_collections": 3,
-    "program_counter_gen2_collections": 4,
+    "benchmark_contract_sha256": "8863a37d502df4eb267e1bb3eeb3ce5561f0e92210d7cb6740df1098410f6b6f",
+    "independent_sessions": 2,
+    "independently_reproduced": true,
+    "scope": "graph-loaded online inference with lightweight GC observation; one checkpoint/training seed, schema, validation date and constant/time feature policy",
+    "interval_scope": "Separate within-run whole-query-batch intervals; no pooled cross-session confidence interval",
+    "runs": [
+      {
+        "run_id": "20261024T215147Z-bd9574",
+        "source_commit": "56d82fb6d783a680e0cb122afd94c15ffc106368",
+        "report": "reports/colab/20261024T215147Z-bd9574/gc-aware-profile.json",
+        "audit": "reports/analysis/20261024T215147Z-bd9574-audit.json",
+        "provenance": "reports/colab/20261024T215147Z-bd9574/PROVENANCE.json",
+        "hosted_t4_tests_passed": 240,
+        "completed_query_batches": 336,
+        "paired_trials": 6720,
+        "reduction_vs_hgam_percent": {
+          "32": 8.37913581741362,
+          "128": 8.116589513025641,
+          "512": 8.213930898512112
+        },
+        "within_run_95_percent_ci": {
+          "32": [
+            7.749453759092829,
+            8.902132321933866
+          ],
+          "128": [
+            7.253356492510415,
+            8.94014673308927
+          ],
+          "512": [
+            6.414770015530737,
+            9.929709335030314
+          ]
+        },
+        "gpu_uuid": "GPU-6f4c0876-3702-8ced-2308-92df18f69053",
+        "fresh_without_reused_sidecars": true
+      },
+      {
+        "run_id": "20261024T223434Z-dd7297",
+        "source_commit": "0fde659166bd616c0b414da94e3dba586e358918",
+        "report": "reports/colab/20261024T223434Z-dd7297/gc-aware-profile.json",
+        "audit": "reports/analysis/20261024T223434Z-dd7297-audit.json",
+        "provenance": "reports/colab/20261024T223434Z-dd7297/PROVENANCE.json",
+        "hosted_t4_tests_passed": 240,
+        "completed_query_batches": 336,
+        "paired_trials": 6720,
+        "reduction_vs_hgam_percent": {
+          "32": 8.59342155362095,
+          "128": 8.422189419353476,
+          "512": 7.6480775052314875
+        },
+        "within_run_95_percent_ci": {
+          "32": [
+            8.057410483659588,
+            9.101319149290667
+          ],
+          "128": [
+            7.564073558916116,
+            9.298596378701905
+          ],
+          "512": [
+            2.067943184718116,
+            11.49396329909189
+          ]
+        },
+        "gpu_uuid": "GPU-ad92af85-4639-b8e4-50cc-956e943e68e4",
+        "fresh_without_reused_sidecars": true
+      }
+    ],
+    "case_observed_gen2_collections_per_session": 3,
+    "program_counter_gen2_collections_per_session": 4,
     "all_natural_cleanup_costs_retained": true,
-    "independently_reproduced": false,
-    "next_step": "Fresh T4 notebook 08, RESUME=False, same original notebook 05 checkpoint; no reused sidecars"
+    "secondary_size512_repeat_over100ms_passes_without_gen2_overlap": 6,
+    "secondary_size512_repeat_zero_gc_over100ms_blocks_passes": 2,
+    "next_step": "Bounded report complete; no third unchanged GPU run planned. Any broader workload is a separately scoped extension."
   }
 }

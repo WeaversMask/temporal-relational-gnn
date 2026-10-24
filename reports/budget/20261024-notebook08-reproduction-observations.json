@@ -1,0 +1,43 @@
+{
+  "account_balance_decrease_units": 0.39,
+  "balance_delta_precision_decimal_places": 2,
+  "ending_observation_at_utc": "2026-10-24T23:05:47.868216+00:00",
+  "ending_observation_local_date": "2026-10-25",
+  "ending_units_remaining_observed": 194.15,
+  "input_anomalies": [],
+  "isolated_notebook08_reproduction_consumption_units": 0.39,
+  "isolated_runtime_confirmed": true,
+  "limitations": [
+    "The recorded 0.39-unit balance decrease is attributed to this runtime interval using the exported isolation confirmations and start/end observations.",
+    "Balances and their difference have two-decimal precision; this interval is not an independent billing meter for individual execution modes, stages or garbage collections.",
+    "The 1.07-units/hour reading is a user-entered session observation, not a universal T4 price or a rate calculated from benchmark online timings.",
+    "The earlier 0.09-unit account decrease from the first notebook 08 ending balance 194.63 to this reproduction starting balance 194.54 is separate, remains unattributed, and is not included in the isolated 0.39-unit consumption.",
+    "The run ID uses its UTC date; both exported budget observations occur on the following local date in Europe/Berlin.",
+    "Original exported budget files remain unchanged; this file summarizes their recorded observations."
+  ],
+  "local_date": "2026-10-25",
+  "planned_total_units": 200,
+  "previous_account_interval": {
+    "account_balance_decrease_units": 0.09,
+    "attribution": "unattributed; separate from notebook 08 reproduction runtime interval",
+    "ending_observation_at_utc": "2026-10-24T22:34:34.327891+00:00",
+    "ending_units_remaining_observed": 194.54,
+    "source_file": "reports/budget/20261024-notebook08-observations.json",
+    "starting_observation_at_utc": "2026-10-24T22:22:36.536234+00:00",
+    "starting_units_remaining_observed": 194.63
+  },
+  "related_run_id": "20261024T223434Z-dd7297",
+  "reserve_units": 50,
+  "scope": "exported_isolated_colab_runtime_budget_observations",
+  "source": "User-exported notebook 08 independent GC-aware inference reproduction budget files",
+  "source_files": [
+    "reports/colab/20261024T223434Z-dd7297/colab-budget.json",
+    "reports/colab/20261024T223434Z-dd7297/budget-end.json"
+  ],
+  "starting_observation_at_utc": "2026-10-24T22:34:34.327891+00:00",
+  "starting_observation_local_date": "2026-10-25",
+  "starting_units_remaining_observed": 194.54,
+  "timezone": "Europe/Berlin",
+  "units_above_reserve": 144.15,
+  "units_per_hour_observed": 1.07
+}

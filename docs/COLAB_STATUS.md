@@ -1,21 +1,21 @@
 # Colab feasibility and inference: verified 2026-10-25
 
-Notebook 08's first revised trained-inference run completed at clean source
-`56d82fb`, with **240 hosted T4 tests passed** and all **336 query batches**.
-The original checkpoint, saved predictions and sampled inputs matched. Blocks
-reduced summed online latency versus HGAM by **8.38% at batch 32** (primary,
-within-run 95% interval **7.75–8.90%**), **8.12% at 128** and **8.21% at 512**.
-Independent repetition of this version-2 measurement remains pending.
+Notebook 08's version-2 trained-inference result has been independently
+reproduced on a different T4. Both sessions passed **240 hosted tests** and all
+**336 query batches**, with identical checkpoint, benchmark contract and sampled
+inputs. Blocks reduced summed online latency versus HGAM by **8.38% and 8.59%
+at batch 32** (primary), with separate within-run intervals **7.75–8.90% and
+8.06–9.10%**. The bounded revised comparison is complete.
 
-Natural cleanup stays enabled and its actual online cost remains in every
-observation. Three observed full collections landed inside online passes;
-program counters record one more outside case windows, without a separately
-measured duration. The old size-512 spike position was ordinary in this run.
-See the [new measured result](../reports/GC_AWARE_INFERENCE_STATUS.md),
+Secondary size 128 showed 8.12%/8.42%; size 512 showed 8.21%/7.65% and wider
+uncertainty in the repeat. Six size-512 passes there exceed 100 ms with little
+or no GC overlap. Natural cleanup remains enabled and every observation is
+retained; full collections still occur. See the
+[verified two-run result](../reports/GC_AWARE_INFERENCE_REPRODUCTION.md),
 [completed diagnostic](../reports/SPIKE_DIAGNOSTIC_STATUS.md),
 [original two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) and
 [current steps](NEXT_RUN.md). Historical input assumptions and the stronger
-activity baseline remain part of the scope.
+activity baseline remain part of the scope. No third unchanged GPU run is planned.
 
 ## Initial dependency and synthetic checks: 2026-10-23
 
@@ -348,11 +348,52 @@ and describe different boundaries from the old notebook 06 observations.
 The [verified report](../reports/GC_AWARE_INFERENCE_STATUS.md),
 [independent audit](../reports/analysis/20261024T215147Z-bd9574-audit.json) and
 [archive provenance](../reports/colab/20261024T215147Z-bd9574/PROVENANCE.json)
-preserve this first version-2 result. Repeat the same notebook in a fresh T4
-session with `RESUME = False` before describing it as independently reproduced.
-No new training or broader-scope claim is implied.
+preserve this first version-2 result. Its independent repeat has now completed,
+as recorded below. No new training or broader-scope claim is implied.
 
 The isolated export recorded **195.07 to 194.63 units** at an observed
 **1.07 units/hour**, consuming **0.44 units** and leaving **144.63 above reserve**.
 The earlier 195.36-to-195.07 account interval stays separate and unattributed.
 See the [budget observations](../reports/budget/20261024-notebook08-observations.json).
+
+
+## Independent version-2 reproduction: completed 2026-10-24 UTC
+
+Notebook 08 passed again in run `20261024T223434Z-dd7297`, at clean source
+`0fde659166bd616c0b414da94e3dba586e358918`. All **240 T4 tests** and all **336
+query batches** passed, with 20 paired repeats and no reused sidecars. A different
+physical T4 UUID and new measurement session retained the identical contract,
+checkpoint, code/settings and all 6,720 paired sampled inputs and execution orders.
+All saved validation predictions replayed and weights remained unchanged.
+
+| Query batch | First reduction vs HGAM | Repeat reduction vs HGAM | Repeat within-run 95% interval | Repeat blocks queries/s |
+| --- | ---: | ---: | ---: | ---: |
+| **32, primary** | **8.38%** | **8.59%** | **8.06–9.10%** | 1,330 |
+| 128 | 8.12% | 8.42% | 7.56–9.30% | 5,044 |
+| 512 | 8.21% | 7.65% | 2.07–11.49% | 17,524 |
+
+The primary benefit reproduces within this fixed workload. Intervals remain
+separate within-session query-batch bootstrap intervals; no pooled cross-session
+interval is claimed. Size 512 is noisier in the repeat. Six passes exceeding
+100 ms occur in batches 10–11 with little or no GC overlap, including two blocks
+passes with zero overlap. Their causes remain unresolved, and all observations
+remain in the estimator. Full GC does not explain every tail.
+
+Three observed full collections remain inside online passes: reference at
+32/batch85/repeat4, blocks at 32/batch201/repeat13 and reference at
+128/batch23/repeat4. Program counters record four full collections, including
+one outside observed cases with separate duration unknown. Natural costs remain
+included; collection-program wall is 1,473.237 seconds including audits, stage
+replays and reporting, rather than serving throughput. Maximum measured
+logit/loss errors remain `9.5367431640625e-7`/`5.960464477539063e-8`.
+
+The [two-run report](../reports/GC_AWARE_INFERENCE_REPRODUCTION.md),
+[repeat audit](../reports/analysis/20261024T223434Z-dd7297-audit.json) and
+[repeat provenance](../reports/colab/20261024T223434Z-dd7297/PROVENANCE.json)
+preserve the bounded result and its limitations. No further unchanged GPU run
+is needed; any new schema/task/model workload is a separate extension.
+
+The isolated repeat interval was **194.54 to 194.15 units**, consuming **0.39
+units** at an observed **1.07 units/hour**, leaving **144.15 above reserve**.
+The earlier 0.09-unit account gap stays separate and unattributed. See the
+[budget record](../reports/budget/20261024-notebook08-reproduction-observations.json).

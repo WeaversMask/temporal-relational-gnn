@@ -1,57 +1,59 @@
-# Next run: independently repeat notebook 08
+# Next steps after independent reproduction
 
-The first natural-GC measurement passed **240 tests on T4** and all **336 query
-batches** in run `20261024T215147Z-bd9574`. Blocks reduced online latency versus
-HGAM by **8.38% at batch 32** (primary, within-run interval **7.75–8.90%**),
-**8.12% at 128** and **8.21% at 512**. The original weights, predictions and
-sampled inputs matched. Read the
-[verified findings](../reports/GC_AWARE_INFERENCE_STATUS.md).
+The version-2 primary result is independently reproduced: blocks reduced online
+latency versus HGAM by **8.38% and 8.59%** in two fresh T4 sessions, using the
+same checkpoint, sampled inputs and benchmark contract on different physical
+GPUs. Both sessions passed **240 hosted tests** and all **336 query batches**.
+Read the [consolidated findings](../reports/GC_AWARE_INFERENCE_REPRODUCTION.md).
 
-## Repeat the same frozen measurement
+## The bounded experiment is complete
 
-Use the same [notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
-in a **fresh T4 runtime**, with **`RESUME = False`** and no reused measurement
-sidecars. No new notebook, model training or settings change is needed.
+No third unchanged GPU run or new notebook is needed for this result. The
+consolidated report, both original exports, independent numerical audits and
+budget records are preserved. Keep the downloaded checkpoints/ZIPs and disconnect
+any remaining runtime once its export is saved.
 
-1. Disconnect other managed runtimes, enable the existing `GITHUB_TOKEN` secret,
-   and enter current compute-unit balance/rate readings.
-2. Upload the **same original notebook 05 `training.pt`** used for notebooks
-   06–08. Keep the frozen configuration and run all cells.
-3. Let source checks, full saved-validation replay and all three batch sizes
-   complete. Record the ending balance, export the complete ZIP and disconnect.
-4. Verify that new export before describing the version-2 result as independently
-   reproduced. Keep each session's estimates and intervals separate.
+The defensible finding is roughly **8.4–8.6% primary online latency reduction**
+in this fixed workload. The two within-run intervals remain separate; no pooled
+cross-session interval is claimed. GraphSAGE, HGAM and block execution remain
+established methods, with this project adapting and evaluating their execution.
 
-See [the complete run instructions](GC_AWARE_INFERENCE.md).
+If the investigation is extended, choose a separate, predefined question such
+as generality on a second schema/task or behavior in a deeper model. That work
+requires its own protocol and evidence; it is not prepared or measured here.
+The current findings alone do not establish broad deployment or publication
+readiness. Repeating the same configuration to seek a larger percentage is not
+part of the plan.
 
-## What this repeat resolves
+## What remains uncertain
 
-The observed benefit remains positive when natural cleanup pauses are retained.
-The first revised run still had three full collections inside online passes,
-including two received by blocks. A fourth full collection occurred outside the
-case-observer windows according to program counters; its separate duration is
-unknown, while its cost remains in program wall time. Removing the avoidable
-hash cycle does not eliminate all cleanup or explain every smaller slowdown.
+The primary result agrees closely between sessions, and size 128 shows
+8.12%/8.42% reductions. Size 512 is noisier: 8.21%/7.65%, with the repeat's
+within-run interval widening to **2.07–11.49%**. Six additional size-512 passes
+exceed 100 ms in that repeat with little or no GC overlap. Their causes are
+unresolved; every observation remains in the estimator and bootstrap.
 
-The old size-512 HGAM spike position took 28.221 ms in this run. No size-512
-pass exceeded 100 ms, and its reduction was 8.21%. That is consistent with
-changed collection cadence; it does not retrospectively identify the untraced
-old pauses. Keep the old notebook 06 results and notebook 07 diagnostic separate.
+Full collections still occur. Each session has three inside observed online
+passes and a fourth outside case-observer windows according to program counters;
+its separate duration is unknown, while program wall retains the cost. Automatic
+cleanup stays enabled, and no cleanup cost or slow trial is subtracted. Program
+wall includes audits and stage replays and is not serving throughput.
 
-A second fresh version-2 session will show whether the current benefit repeats
-under the same measurement protocol. Retain every observation and keep cleanup
-cost inside its actual timing boundary. Program wall includes audits and stage
-replays and must not be called serving throughput. No larger benefit is promised.
+The same original notebook 05 model uses one training seed, schema, validation
+date and constant/time features under unresolved exported-snapshot assumptions.
+Its predictive metrics remain below the activity baseline's. The test split
+remains untouched. Preserve these boundaries in any write-up or résumé claim.
 
-## Resources and scientific scope
+## Resources and deliberate reproduction
 
-The last verified balance was **194.63 units**, leaving **144.63 above reserve**;
-use the current reading. The first notebook 08 interval consumed an isolated
-**0.44 units** at an observed **1.07 units/hour**. Earlier account gaps remain
-separate. Avoid idle sessions and keep all exported evidence.
+The latest verified balance is **194.15 units**, leaving **144.15 above the
+50-unit reserve**. The repeat consumed an isolated **0.39 units** at an observed
+**1.07 units/hour**. The intervening 0.09-unit account gap remains separate.
+Use current readings for any future run and avoid idle GPU sessions.
 
-The model still uses one checkpoint, schema, validation date and constant/time
-features under unresolved exported-snapshot assumptions. Its predictive metrics
-remain below the activity baseline's. The repeat performs no training or test
-split evaluation. Decide on any additional workload only after this independent
-repeat is verified.
+For deliberate reproduction, retain the same
+[notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb),
+a fresh T4 runtime, `RESUME = False`, no reused sidecars and the **same original
+notebook 05 `training.pt`**. See the
+[full reproduction instructions](GC_AWARE_INFERENCE.md). No new training is
+needed to reproduce this bounded result.
