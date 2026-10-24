@@ -1,8 +1,19 @@
 # Paired inference with the trained model
 
 [Notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
-prepares the trained-model speed comparison. Hosted timings are pending.
-It uses the saved notebook 05 checkpoint and performs no training.
+completed its first trained-model speed comparison on T4 in run
+`20261024T082321Z-4a43ed`: 171 tests passed and all 336 query batches completed
+20 paired repetitions each. It uses the saved notebook 05 checkpoint and
+performs no training. The next step is a clean independent T4 reproduction
+with this same fixed protocol.
+
+The primary batch-32 blocks-versus-HGAM reduction was **8.91%** (within-run
+95% interval 8.47–9.36%), below the predefined 10% practical target. Secondary
+reductions were 8.02% at 128 and 10.46% at 512. The latter is sensitive to one
+slow HGAM trial: an explicit paired exclusion diagnostic gives 8.35%, while the
+headline retains all data. Predictions passed the existing numerical tolerances
+and weights stayed unchanged. See the
+[verified results](../reports/TRAINED_INFERENCE_STATUS.md).
 
 The primary question is whether blocks reduce online latency beyond HGAM at
 batch size 32 while preserving predictions. Batch sizes 128 and 512 provide a
@@ -10,13 +21,16 @@ secondary throughput and memory comparison on the same validation cohort.
 The source GNN's predictive scores remain below the activity baseline's;
 execution improvements do not establish predictive superiority.
 
-## Run in Colab
+## Reproduce in a clean Colab session
 
 1. Save a copy of notebook 06, select **T4 GPU**, disconnect other managed
    runtimes, and enable the existing read-only `GITHUB_TOKEN` secret.
-2. Enter current budget observations in the first control cell when available.
-   Leave `RESUME = False` for the first profiling attempt. The 50-unit reserve
-   still applies.
+2. Enter current budget observations in the first control cell when available:
+   `OBSERVED_UNITS_REMAINING` is the **remaining balance** (198.00 at the end
+   of the first run); `OBSERVED_UNITS_PER_HOUR` is the **hourly consumption
+   rate** (1.07 in that run). Use new readings for this session. Leave
+   `RESUME = False` and do not restore earlier measurement sidecars for an
+   independent reproduction. The 50-unit reserve still applies.
 3. Run the cells in order. When prompted, upload **`checkpoints/training.pt`
    from notebook 05's exported ZIP**. Its expected SHA-256 is
    `92d02f7d2007c0ab560629e9c4e0d48886a1d149930e68e494a861b85659e1d6`.
@@ -32,6 +46,8 @@ execution improvements do not establish predictive superiority.
 This experiment repeats inference over many batches and separately replays
 stages. Its session can take longer than the training run; no duration or
 speedup is promised. It prints completed query batches as measurements finish.
+Keep the same checkpoint and frozen settings when reproducing. Another notebook
+or a larger model is unnecessary for this comparison.
 
 ## Fixed protocol
 
@@ -80,6 +96,9 @@ paired blocks-versus-HGAM/reference reductions. The reduction uses total online
 time, rather than a ratio of medians. Confidence intervals resample whole query
 batches, retaining all repeats and mode pairs. They describe variation within
 this cohort, rather than independent devices, sessions or training seeds.
+The first run is graph-loaded online inference from one session, not a
+cross-session performance claim. A secondary batch size does not replace the
+primary comparison or its predefined practical target.
 
 PyTorch allocated/reserved memory peaks are separate from optional one-second
 `nvidia-smi` device-wide samples of memory, GPU activity and power. Sampled
@@ -88,6 +107,11 @@ counters. The observer's overhead is present during measurement. Batch UTC
 collection windows and raw telemetry permit later inspection without treating
 memory occupancy as GPU utilization. Unavailable telemetry is recorded honestly
 and does not invalidate otherwise valid paired timings.
+
+In the first session, blocks throughput rose from 1,328 to 19,280 queries/second
+across batch sizes, a 14.52-fold batching observation under different grouping
+and sampler draws. Device memory samples were 161–171 MiB. These observations
+leave memory headroom but do not establish the source of a hardware bottleneck.
 
 ## Persistence and recovery
 

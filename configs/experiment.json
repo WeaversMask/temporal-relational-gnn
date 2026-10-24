@@ -1,6 +1,15 @@
 {
-  "status": "trained_inference_prepared_hosted_measurement_pending",
+  "status": "trained_inference_measured_independent_reproduction_pending",
   "inference_protocol": "configs/trained_inference.json",
+  "trained_inference_result": {
+    "run_id": "20261024T082321Z-4a43ed",
+    "report": "reports/TRAINED_INFERENCE_STATUS.md",
+    "primary_batch_size": 32,
+    "primary_latency_reduction_vs_hgam_percent": 8.912763934535029,
+    "within_run_95_percent_interval": [8.468835277915153, 9.359658733823633],
+    "primary_practical_target_met": false,
+    "independent_sessions": 1
+  },
   "dataset": "rel-stack",
   "task": "user-badge",
   "channels": 64,
@@ -26,5 +35,5 @@
   "correctness_rtol": 0.0001,
   "compute_units_budget": 200,
   "compute_units_reserve": 50,
-  "notes": "Notebook 05 passed 2000 reference updates over 64000 training queries and 81 T4 tests. Notebook 06 prepares paired trained inference on that constant/time checkpoint, with complete saved-validation replay and batch sizes 32/128/512. The activity baseline scored better on the shared 8192-query validation cohort. Hosted trained inference timing and batch scaling remain unmeasured. Historical snapshot assumptions remain unresolved."
+  "notes": "Notebook 06 completed 336 query batches with 20 paired repetitions each and 171 T4 tests passed, using the unchanged notebook 05 constant/time checkpoint. Graph-loaded online latency reductions versus HGAM were 8.91%, 8.02% and 10.46% at batch sizes 32/128/512. The primary batch-32 result falls below the 10% practical target. The secondary 512 result is sensitive to one slow HGAM observation; an explicit paired exclusion diagnostic gives 8.35%, while the headline retains all trials. Predictions passed unchanged numerical tolerances. Blocks throughput rose from 1328 to 19280 queries/second across sizes; grouping and sampling differ. These are one-session results, with clean independent reproduction next. The activity baseline remains stronger on the shared 8192-query validation cohort. Historical snapshot assumptions remain unresolved."
 }

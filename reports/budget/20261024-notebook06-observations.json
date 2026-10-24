@@ -1,0 +1,44 @@
+{
+  "account_balance_decrease_units": 0.5,
+  "ending_units_remaining_observed": 198.0,
+  "exported_ending_observation_at_utc": "2026-10-24T08:55:39.630009+00:00",
+  "exported_ending_units_remaining_observed": null,
+  "exported_isolated_runtime_confirmed": true,
+  "exported_starting_observation_at_utc": "2026-10-24T08:23:21.076362+00:00",
+  "exported_starting_units_remaining_observed": 1.07,
+  "exported_units_per_hour_observed": 198.5,
+  "input_anomaly": {
+    "apparent_transposition_of_start_balance_and_hourly_rate": true,
+    "corrected_ending_units_remaining_user_reported": 198.0,
+    "corrected_starting_units_remaining_observed": 198.5,
+    "corrected_units_per_hour_observed": 1.07,
+    "corrected_values_confirmed": true,
+    "literal_exported_start_balance_is_below_reserve": true
+  },
+  "isolated_consumption_attribution": "User-confirmed run-boundary balance difference; original export records isolated_runtime_confirmed=true",
+  "isolated_notebook06_consumption_units": 0.5,
+  "latest_confirmed_balance_is_from_this_run": true,
+  "latest_confirmed_balance_source": "User follow-up after notebook 06 export",
+  "latest_confirmed_units_remaining_observed": 198.0,
+  "limitations": [
+    "The original export transposed the starting balance and displayed hourly rate, and omitted the ending balance. Original exported files remain unchanged.",
+    "Corrected starting balance, hourly rate and ending balance were explicitly confirmed by the user after the run; their observation timestamps were not independently captured.",
+    "The 0.50-unit balance decrease is attributed using the user-confirmed run boundaries and the original isolated_runtime_confirmed=true flag. It is not a raw exported consumption measurement.",
+    "The literal exported 1.07-unit balance would trigger the reserve guard; the confirmed 198.50-unit starting balance was above reserve. This metadata correction does not change the verified scientific measurements."
+  ],
+  "local_date": "2026-10-24",
+  "planned_total_units": 200,
+  "related_run_id": "20261024T082321Z-4a43ed",
+  "reserve_units": 50,
+  "scope": "exported_colab_budget_with_user_confirmed_corrections",
+  "source": "Original notebook 06 exports plus explicit user follow-up confirming starting balance 198.50, ending balance 198.00, and displayed rate 1.07 units/hour",
+  "source_files": [
+    "reports/colab/20261024T082321Z-4a43ed/colab-budget.json",
+    "reports/colab/20261024T082321Z-4a43ed/budget-end.json"
+  ],
+  "starting_units_remaining_observed": 198.5,
+  "timezone": "Europe/Berlin",
+  "units_above_reserve": 148.0,
+  "units_per_hour_observed": 1.07,
+  "user_confirmation_local_date": "2026-10-24"
+}

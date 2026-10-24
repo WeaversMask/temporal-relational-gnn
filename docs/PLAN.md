@@ -6,12 +6,12 @@
 - [x] Implement synthetic reference, HGAM, and destination-restricted execution.
 - [x] Verify seed outputs, gradients, and an optimizer step on CPU fixtures.
 - [x] Create a private remote and a resumable Colab starting notebook.
-- [x] Run CUDA correctness checks on Colab T4 (81 tests passed in notebook 05).
+- [x] Run CUDA correctness checks on Colab T4 (171 tests passed in notebook 06).
 - [x] Record the actual Colab unit/hour rate (1.07 observed in notebook 03).
 - [x] Record a later balance (198.67); account decrease was 0.11 units with overlapping runtimes reported.
 - [x] Record the notebook 04 follow-up balance (198.63); the later 0.04-unit interval decrease is not an isolated run cost.
 - [x] Record notebook 05 balances (198.63 to 198.59) and 1.07 units/hour; isolation was not confirmed.
-- [ ] Measure isolated per-run compute-unit consumption without overlapping runtimes.
+- [x] Record notebook 06's user-confirmed 198.50-to-198.00 boundary balances and 1.07 units/hour; attribute the 0.50-unit decrease using the exported isolation confirmation.
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
 - [ ] Complete the temporal feature availability audit on real data.
@@ -19,7 +19,7 @@
 - [x] Download/project the required real data; build its historical graph.
 - [x] Run one real batch through the unchanged baseline and both alternative modes.
 - [x] Profile sampled graph sizes, host RSS, CUDA allocator peaks and separate pipeline stages for the current untrained resident-graph boundary.
-- [ ] Validate representative trained-workload costs and total device VRAM; stage medians alone do not establish pipeline proportions.
+- [x] Measure the frozen trained workload's online costs, allocator peaks and one-second device-wide memory samples; stage medians alone do not establish pipeline proportions.
 
 Verified exports and hashes are under `reports/colab/`. Notebooks 02 and 03
 passed on the hosted database with three batches of eight queries; see
@@ -29,6 +29,16 @@ graph/model setup. Blocks reduced its median latency by 9.04–11.68% versus
 HGAM. Host RSS and CUDA allocator peaks are measured; total device VRAM is not.
 Separate synchronized stage replays must not be summed into a pipeline total
 or assumed to give exact proportions.
+
+Notebook 06 now supplies the trained comparison and device-wide samples; see
+[`reports/TRAINED_INFERENCE_STATUS.md`](../reports/TRAINED_INFERENCE_STATUS.md).
+All 336 query batches and 20 repetitions completed on T4. The primary batch-32
+reduction versus HGAM was 8.91% (within-run 95% interval 8.47–9.36%), below
+the 10% practical target. Secondary results were 8.02% at 128 and 10.46% at
+512, with the latter sensitive to one slow HGAM observation: a paired exclusion
+diagnostic gives 8.35%, while the headline retains every trial. Model state
+was unchanged and prediction differences passed the original numerical
+tolerances. These are graph-loaded online measurements from one session.
 
 Notebook 03 used an untrained model, one query timestamp and no repeated global
 IDs across its 30 trials. Notebook 04 has now completed 100 supervised updates
@@ -64,13 +74,14 @@ GNN reached ROC-AUC 0.85419 / AP 0.13373 and the activity baseline 0.85585 /
 or a readiness claim for richer historical features.
 
 - [x] Complete the hosted 100-step pilot and preserve losses, timings and checkpoint.
-- [ ] Record isolated start/end unit balances for the next run; the pilot's boundary balances are unavailable.
+- [x] Record isolated start/end unit balances for notebook 06 through an explicit user correction; the pilot's boundary balances remain unavailable.
 - [x] Review held-out subset metrics, baseline quality and trained-checkpoint parity.
 - [x] Prepare the next bounded training budget: 64,000 queries, 2,000 updates and 8,192 validation queries; see `configs/training_run.json`.
 - [x] Complete the larger hosted training run and review its baseline comparison.
 - [x] Preserve and select the notebook 05 checkpoint for the trained execution comparison.
 - [x] Implement the paired trained inference workload and frozen notebook 06 protocol.
-- [ ] Run the trained profiler on T4 and review paired latency, throughput and memory.
+- [x] Run the trained profiler on T4 and review paired latency, throughput and memory.
+- [ ] Reproduce notebook 06 in a clean independent T4 session with the same checkpoint and protocol.
 
 The pilot informed the next training configuration in
 [`configs/training_run.json`](../configs/training_run.json); its
@@ -82,7 +93,13 @@ GNN reached ROC-AUC 0.83194 / AP 0.15439, below the activity baseline's
 preserved for an execution comparison, with the quality gap reported honestly.
 The inference protocol in `configs/trained_inference.json` and
 [notebook 06 instructions](TRAINED_INFERENCE.md) is implemented. Hosted
-measurement remains pending. Its batch scaling keeps the trained model unchanged.
+measurement has completed, with 171 T4 tests passed and all 8,192 query
+occurrences covered at each size. Blocks throughput rose from 1,328 to 19,280
+queries/second, a 14.52-fold batching observation; sizes use different grouping
+and sampler draws. One-second device memory readings were 161–171 MiB.
+The next run is independent reproduction of the same frozen protocol, followed
+by the final report. Preserve the primary comparison and retain the outlier;
+do not expand the model/configuration matrix to pursue the 10% target.
 
 ## Days 5-9: integrate and establish real-model equivalence
 
@@ -103,6 +120,11 @@ Persist each completed configuration's results and save exported resumable
 training checkpoints outside the VM. Finish a clean reproduction, a concise
 report, and an explanation of successes, regressions and limitations. Never label
 synthetic timings as real.
+
+The first trained session is complete. Reuse notebook 06 in a fresh T4 runtime
+with `RESUME = False` and no prior measurement sidecars. Within-run bootstrap
+intervals do not substitute for this independent session or establish
+cross-session stability.
 
 ## Optional days 15-21
 

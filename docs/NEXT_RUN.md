@@ -1,77 +1,60 @@
-# Next run: paired inference with the trained checkpoint
+# Next step: independent reproduction and final report
 
-Notebook 05 passed in hosted run `20261024T073010Z-1f9800`: **81 T4 tests,
-2,000 reference updates and 64,000 distinct training queries processed once**.
-Read the [training assessment](../reports/TRAINING_RUN_STATUS.md). The
-[verbatim exports and hashes](../reports/colab/20261024T073010Z-1f9800/PROVENANCE.json)
-preserve the measurements; the checkpoint binary stays outside Git.
+Notebook 06 completed run `20261024T082321Z-4a43ed`: all three batch sizes,
+336 query batches, 6,720 paired trials and 171 T4 tests passed. The trained
+weights stayed unchanged, and predictions matched within numerical tolerance.
+Read the [verified inference report](../reports/TRAINED_INFERENCE_STATUS.md).
 
-On the same 8,192-query validation subset with 229 positives, GNN ROC-AUC/AP
-were 0.83194/0.15439 and activity-baseline scores were 0.85721/0.27248.
-The GNN improved over initialization and prevalence, while the activity
-baseline scored better on all reported metrics. This checkpoint supports a
-trained execution comparison; its scores do not establish it as the preferred
-predictor. The official test split remains untouched.
+| Batch size | Blocks latency reduction vs HGAM | Within-run 95% interval |
+| --- | ---: | ---: |
+| **32, primary** | **8.91%** | 8.47–9.36% |
+| 128 | 8.02% | 7.07–8.98% |
+| 512 | 10.46% | 7.00–15.05% |
 
-## Frozen weights and next measurement
+The primary result falls below the predefined 10% practical target. The 512
+aggregate is sensitive to one 248.378 ms HGAM trial: excluding that entire
+paired observation as a diagnostic gives 8.35%. The original all-data result
+is retained. These results describe one session and a graph-loaded online
+boundary; the intervals do not establish between-session reproducibility.
 
-Use the completed checkpoint without retraining or changing its architecture,
-features or sampling fanouts. Its SHA-256 is
-`92d02f7d2007c0ab560629e9c4e0d48886a1d149930e68e494a861b85659e1d6`.
-The model remains 64 channels, two layers, fanouts `[16, 8]`, FP32, constants
-and relative record time. Keep the original training contract as provenance;
-record inference batching separately.
+## Reproduce the fixed experiment
 
-The prepared measurement uses
-[notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
-and [`configs/trained_inference.json`](../configs/trained_inference.json).
-Read the [run and recovery instructions](TRAINED_INFERENCE.md). Hosted execution
-is pending. Upload your notebook 05 `training.pt` when prompted; no training
-is performed. The fixed workload is:
+Use [notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
+in a clean independent **T4 session**, following
+[the run instructions](TRAINED_INFERENCE.md). Keep the existing
+[`configs/trained_inference.json`](../configs/trained_inference.json), checkpoint,
+8,192-query cohort, batch sizes 32/128/512, 20 repeats, five warmups, seed 42
+and 2,000 bootstrap draws unchanged.
 
-1. Reconstruct the pinned graph, literal constant statistics and selected
-   cohorts from the checkpoint contract. Verify source inputs, policy,
-   runtime and model compatibility, then strictly load the saved weights.
-2. Replay all 8,192 saved validation queries at batch size 32 and validation
-   seed 1,000,042. Compare labels, all 256 sampler fingerprints and logits
-   with the saved report before timing.
-3. Measure all 8,192 label-independently selected validation occurrences
-   at batch size 32: 256 query batches, 20 paired sampling repetitions and
-   five warmups. Randomize execution-mode order and preserve paired draws.
-4. Run a secondary comparison on the same 8,192 occurrences at batch sizes
-   128 and 512 (64 and 16 query batches), keeping weights, fanouts and features
-   fixed. Pair samples
-   within each batch size. Grouping changes sampler draws across sizes, so
-   this is a batch-scaling experiment rather than identical sampled graphs
-   across sizes.
-5. Report batch median/p95 latency, queries per second, paired reductions
-   against HGAM/reference with uncertainty grouped by query batch, and raw
-   neighborhood counts. Record allocated/reserved memory, total-device
-   telemetry where available, and host RSS. Keep synchronized stage replays
-   separate from complete online pipeline timing.
+Start with `RESUME = False` and a fresh run folder. Retain the old archive
+separately; measure new batches rather than restoring its completed sidecars.
+Upload notebook 05's `training.pt` when prompted. The source-validation replay
+must pass before timing. Record current balance and hourly rate in their named
+fields, export after success or failure, then disconnect the runtime.
 
-The new `trained_profile` CLI reconstructs this checkpoint and verifies all
-saved validation results before timing. Raw batch sidecars support verified
-resume, preserving previous reports and session provenance. The older
-`pipeline_profile` CLI remains an untrained diagnostic. Training resume is
-separate from changing inference batch size.
+Compare the independent session's primary reduction, distributions, sampled
+neighborhoods, hardware/runtime metadata and outliers with this run. Preserve
+both complete datasets. Keep the predefined primary comparison at batch 32;
+report batch scaling and stage diagnostics as secondary findings. After that,
+write the final report with within-session and between-session variation
+clearly distinguished. No new notebook or architecture change is required
+for this reproduction.
 
-## Resources and scope
+## Resources and scientific scope
 
-The complete training call took **214.262 seconds** after setup. Recorded
-training allocator peaks were **53.742 MiB allocated / 58 MiB reserved**.
-GPU memory capacity is ample for this configuration. The next experiment can
-measure larger inference batches and repeated paired trials; their speed and
-memory costs remain unmeasured. Memory occupancy does not establish GPU compute
-utilization, which was not sampled in this run.
+In the first measurement, blocks throughput increased from 1,328 to 19,280
+queries/s between batch sizes 32 and 512. Device-memory observations were
+161–171 MiB. One-second GPU activity medians were 21%, 22% and 29% during
+collection windows including warmups, audits and stage replays. Those readings
+cannot identify an individual mode's utilization or a hardware bottleneck.
 
-The exported balance changed from 198.63 to **198.59**, with a displayed rate
-of 1.07 units/hour. The isolation flag was false, so the 0.04-unit account
-interval is not attributed as isolated notebook cost. The latest balance
-leaves **148.59 above the 50-unit reserve**. No rerun is needed to fill that
-attribution gap; record available observations in the next session.
+The user confirmed corrected budget readings of **198.50 at start, 198.00 at
+end and 1.07 units/hour**. With the exported isolation flag true, the balance
+decrease was 0.50 units; 148 units remain above the 50-unit reserve. The
+[separate correction](../reports/budget/20261024-notebook06-observations.json)
+preserves the original transposed/missing export fields.
 
-The graph remains an exported snapshot with per-query record-time filtering.
-Historical foreign-key edits, deletions, merges and survivorship remain
-unresolved; no additional raw mutable or text features are enabled. The
-[plan](PLAN.md) keeps these limitations separate from the execution experiment.
+The trained GNN's source validation quality remains below the activity
+baseline's. Features are still constants plus relative time, and historical
+foreign-key edits, deletions, merges and survivorship remain unresolved in
+the exported snapshot. The execution result retains those limitations.

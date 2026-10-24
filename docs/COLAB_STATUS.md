@@ -1,11 +1,15 @@
 # Colab feasibility: verified 2026-10-24
 
 The dependency checks, hosted real-batch diagnostic, notebook 03 pipeline profile,
-notebook 04 pilot and notebook 05's 2,000-update training run have passed. The
-trained checkpoints passed exact inference parity on one batch. Subset metrics are measured;
-finished predictive quality and trained inference acceleration remain unmeasured.
+notebook 04 pilot, notebook 05's 2,000-update training run and notebook 06's
+trained inference comparison have passed. Notebook 06 completed all 336 query
+batches with 20 paired repetitions each and 171 T4 tests passed. The primary
+graph-loaded online reduction versus HGAM was 8.91% (within-run 95% interval
+8.47–9.36%), below the 10% practical target. Outputs passed the fixed numerical
+tolerances and weights stayed unchanged. Independent session reproduction and
+finished predictive quality remain pending.
 The metadata audit does not resolve broader historical feature availability.
-See [the training pilot report](../reports/TRAINING_PILOT_STATUS.md) and
+See [the trained inference report](../reports/TRAINED_INFERENCE_STATUS.md) and
 [remaining decisions](NEXT_RUN.md).
 
 ## Initial dependency and synthetic checks: 2026-10-23
@@ -174,16 +178,54 @@ utilization, and allocator figures are not total device-memory use.
 
 The export recorded 198.63 to 198.59 units remaining at 1.07 units/hour.
 Isolation was not confirmed, so the 0.04-unit account interval remains
-unattributed. The latest balance leaves 148.59 units above the reserve.
+unattributed. That earlier balance left 148.59 units above the reserve.
 See the [full training report](../reports/TRAINING_RUN_STATUS.md),
 [budget summary](../reports/budget/20261024-notebook05-observations.json), and
 [next trained-inference requirements](NEXT_RUN.md).
 
-## Prepared trained inference comparison
+## Hosted trained inference comparison: completed 2026-10-24 UTC
 
 [Notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
-is prepared with the notebook 05 checkpoint, complete source-validation replay,
-and paired reference/HGAM/block timing at query batch sizes 32, 128 and 512.
-It saves raw measurement sidecars for verified resume and records GPU telemetry
-when available. No hosted trained inference timings have been measured yet.
-See the [fixed measurement protocol](TRAINED_INFERENCE.md).
+passed in run `20261024T082321Z-4a43ed` at clean source revision
+`0d5720f970dd62f1470bb09da21019d5589b4326`, with **171 T4 tests passed**.
+All 8,192 saved validation cases replayed before measurement. The checkpoint
+and model state stayed unchanged; no training or baseline refit occurred.
+All 336 query batches and 20 paired repetitions each completed, with passed
+occurrence audits and numerical equivalence at the original tolerances. The
+archive preserves 352 original files with
+[SHA-256 provenance](../reports/colab/20261024T082321Z-4a43ed/PROVENANCE.json).
+
+| Query batch | Blocks reduction vs HGAM | Within-run 95% interval | Blocks queries/s |
+| --- | ---: | ---: | ---: |
+| **32, primary** | **8.91%** | 8.47–9.36% | 1,328 |
+| 128 | 8.02% | 7.07–8.98% | 5,164 |
+| 512 | 10.46% | 7.00–15.05% | 19,280 |
+
+The primary estimate and interval are below the predefined 10% practical
+target. One slow HGAM trial influences the secondary batch-512 result; removing
+the entire paired trial as a sensitivity diagnostic gives 8.35%. The headline
+retains all data. These reductions use summed online times, rather than a ratio
+of medians, and the intervals describe query-batch variation within this run.
+
+The graph-loaded online boundary covers serial sampling, gathering, transfer,
+encoders, message passing including block construction, and readout. Setup,
+audits, reporting and DataLoader scheduling are excluded. Throughput rose
+14.52-fold from batch 32 to 512 for blocks, with different grouping and sampler
+draws across sizes. One-second device memory samples were 161–171 MiB;
+these are separate from allocator peaks and cannot identify a hardware
+bottleneck. Equality is numerical, not bitwise. See the
+[full report](../reports/TRAINED_INFERENCE_STATUS.md) for stage evidence,
+memory definitions, outlier sensitivity and limitations.
+
+The raw budget export swapped the apparent start balance and hourly rate and
+omitted the ending balance. The user explicitly confirmed **198.50 at start,
+198.00 at end and 1.07 units/hour**. The 0.50-unit decrease is attributed using
+those user-reported boundaries and the exported isolation flag. The current
+balance leaves **148 units above reserve**. Originals remain unchanged; the
+[separate corrected record](../reports/budget/20261024-notebook06-observations.json)
+preserves their provenance.
+
+Next is a clean independent T4 reproduction using the same notebook 06,
+checkpoint and [fixed protocol](TRAINED_INFERENCE.md), followed by the final
+report. Keep the primary batch-32 comparison; the secondary result does not
+replace it. One session does not establish cross-session stability.

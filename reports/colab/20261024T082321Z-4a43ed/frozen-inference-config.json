@@ -1,0 +1,43 @@
+{
+  "status": "frozen_trained_inference_workload",
+  "dataset": "rel-stack",
+  "task": "user-badge",
+  "parent_training_run": "20261024T073010Z-1f9800",
+  "training_report": "reports/colab/20261024T073010Z-1f9800/training-run.json",
+  "training_report_sha256": "988ffe6bb0c55c2f6fecd769e6f3089b493f266ce40a68915005b659cc458988",
+  "checkpoint_sha256": "92d02f7d2007c0ab560629e9c4e0d48886a1d149930e68e494a861b85659e1d6",
+  "primary_batch_size": 32,
+  "batch_sizes": [
+    32,
+    128,
+    512
+  ],
+  "val_queries": 8192,
+  "repeats": 20,
+  "warmup": 5,
+  "seed": 42,
+  "bootstrap_samples": 2000,
+  "execution_modes": [
+    "reference",
+    "hgam",
+    "blocks"
+  ],
+  "model_weights": "fixed_parent_checkpoint_no_training",
+  "feature_inputs": [
+    "constant",
+    "query_time_minus_record_time"
+  ],
+  "correctness_atol": 1e-05,
+  "correctness_rtol": 0.0001,
+  "compute_units_reserve": 50,
+  "online_boundary": "resident_graph_sampling_through_prediction",
+  "primary_comparison": "paired_blocks_versus_hgam_online_latency_at_batch_size_32",
+  "test_split": "untouched",
+  "assumptions": [
+    "Hosted snapshot with record-time filtering; historical relationship changes, deletions and merges remain unresolved.",
+    "The fixed 8192-query parent validation cohort is not the full-validation workload.",
+    "Preparation, download, graph construction, validation replay and correctness checks are excluded from online timings.",
+    "The warmup count is recorded; raw online timings and synchronized stage replay timings are separate.",
+    "CUDA correctness and performance require an NVIDIA GPU; CPU checks do not establish them."
+  ]
+}

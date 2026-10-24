@@ -1,0 +1,145 @@
+{
+  "all_modes_summed_online_seconds": 528.565203766,
+  "batch_scaling_blocks_512_over_32_throughput_ratio": 14.520371821954322,
+  "collection_window_wall_seconds": 1425.943331271001,
+  "latency_reduction_estimand": "100*(1-sum(blocks online ms)/sum(HGAM online ms)); retains all trials",
+  "limitations": [
+    "One T4 session, fixed checkpoint and training seed, one validation timestamp and cohort.",
+    "Batch sizes ran in ascending order with different grouping and sampler draws across sizes.",
+    "Confidence intervals cover query-batch variation within this run, not independent GPU sessions.",
+    "Stage medians are separate replays and must not be summed into online latency."
+  ],
+  "outlier_sensitivity": {
+    "batch_index_zero_based": 4,
+    "batch_size": 512,
+    "diagnostic_median_ratio_reduction_percent": 7.962798029203255,
+    "diagnostic_reduction_excluding_entire_paired_trial_percent": 8.351201743033887,
+    "full_data_reduction_percent": 10.459421248533996,
+    "hgam_outlier_ms": 248.378079,
+    "interpretation": "Sensitivity diagnostic only; the reported protocol summary retains this complete paired trial. Cause unknown.",
+    "repeat_index_zero_based": 13
+  },
+  "primary_target": {
+    "batch_size": 32,
+    "latency_reduction_percent": 10.0,
+    "met_by_primary_point_estimate": false
+  },
+  "run_id": "20261024T082321Z-4a43ed",
+  "scope": "derived_audit_of_measured_trained_online_inference",
+  "source_report": "reports/colab/20261024T082321Z-4a43ed/trained-profile.json",
+  "summary_by_batch_size": {
+    "128": {
+      "blocks_median_ms": 23.8520735,
+      "blocks_throughput_queries_per_second": 5163.6684980613545,
+      "hgam_median_ms": 26.1504175,
+      "paired_trials": 1280,
+      "query_batches": 64,
+      "query_batches_with_repeated_global_ids": 5,
+      "reduction_percent": 8.017049104815754,
+      "within_run_95_percent_interval": [
+        7.067200428404538,
+        8.980617091084804
+      ]
+    },
+    "32": {
+      "blocks_median_ms": 23.3525115,
+      "blocks_throughput_queries_per_second": 1327.8182141443724,
+      "hgam_median_ms": 25.649834,
+      "paired_trials": 5120,
+      "query_batches": 256,
+      "query_batches_with_repeated_global_ids": 2,
+      "reduction_percent": 8.912763934535029,
+      "within_run_95_percent_interval": [
+        8.468835277915153,
+        9.359658733823633
+      ]
+    },
+    "512": {
+      "blocks_median_ms": 25.8639535,
+      "blocks_throughput_queries_per_second": 19280.414181339656,
+      "hgam_median_ms": 28.1016295,
+      "paired_trials": 320,
+      "query_batches": 16,
+      "query_batches_with_repeated_global_ids": 12,
+      "reduction_percent": 10.459421248533996,
+      "within_run_95_percent_interval": [
+        6.997885420213518,
+        15.051727167644334
+      ]
+    }
+  },
+  "telemetry": {
+    "128": {
+      "device_memory_used_mib": {
+        "median": 163.0,
+        "p95": 163.0,
+        "sampled_max": 163.0
+      },
+      "gpu_utilization_percent": {
+        "median": 22.0,
+        "p95": 24.0,
+        "sampled_max": 25.0
+      },
+      "memory_utilization_percent": {
+        "median": 0.0,
+        "p95": 0.0,
+        "sampled_max": 0.0
+      },
+      "power_watts": {
+        "median": 34.42,
+        "p95": 34.91,
+        "sampled_max": 35.01
+      },
+      "sample_count": 274
+    },
+    "32": {
+      "device_memory_used_mib": {
+        "median": 161.0,
+        "p95": 161.0,
+        "sampled_max": 161.0
+      },
+      "gpu_utilization_percent": {
+        "median": 21.0,
+        "p95": 22.0,
+        "sampled_max": 24.0
+      },
+      "memory_utilization_percent": {
+        "median": 0.0,
+        "p95": 0.0,
+        "sampled_max": 0.0
+      },
+      "power_watts": {
+        "median": 34.02,
+        "p95": 34.42,
+        "sampled_max": 34.61
+      },
+      "sample_count": 1064
+    },
+    "512": {
+      "device_memory_used_mib": {
+        "median": 169.0,
+        "p95": 171.0,
+        "sampled_max": 171.0
+      },
+      "gpu_utilization_percent": {
+        "median": 29.0,
+        "p95": 31.0,
+        "sampled_max": 33.0
+      },
+      "memory_utilization_percent": {
+        "median": 1.0,
+        "p95": 1.0,
+        "sampled_max": 1.0
+      },
+      "power_watts": {
+        "median": 35.28,
+        "p95": 36.17,
+        "sampled_max": 36.37
+      },
+      "sample_count": 75
+    }
+  },
+  "telemetry_matched_rows": 1413,
+  "telemetry_scope": "Device-wide one-second observations in collection windows including warmups, trials, audits and synchronized replays; not individual mode utilization or continuous peaks.",
+  "telemetry_total_rows": 1440
+}
