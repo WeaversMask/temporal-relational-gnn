@@ -6,9 +6,10 @@
 - [x] Implement synthetic reference, HGAM, and destination-restricted execution.
 - [x] Verify seed outputs, gradients, and an optimizer step on CPU fixtures.
 - [x] Create a private remote and a resumable Colab starting notebook.
-- [x] Run CUDA correctness checks on Colab T4 (36 tests passed in notebook 03).
+- [x] Run CUDA correctness checks on Colab T4 (69 tests passed in notebook 04).
 - [x] Record the actual Colab unit/hour rate (1.07 observed in notebook 03).
 - [x] Record a later balance (198.67); account decrease was 0.11 units with overlapping runtimes reported.
+- [x] Record the notebook 04 follow-up balance (198.63); the later 0.04-unit interval decrease is not an isolated run cost.
 - [ ] Measure isolated per-run compute-unit consumption without overlapping runtimes.
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
@@ -28,14 +29,15 @@ HGAM. Host RSS and CUDA allocator peaks are measured; total device VRAM is not.
 Separate synchronized stage replays must not be summed into a pipeline total
 or assumed to give exact proportions.
 
-The model remains untrained with constants plus relative time; all queries
-share one timestamp and no repeated global IDs occurred in the 30 trials.
-The metadata audit passed with `training_ready: false`. Historical feature and
-relationship evidence and the representative frozen workload remain open.
-Notebook 04 prepares a bounded first training pilot; its hosted-data execution
-is pending. It keeps the constant/time policy and unresolved snapshot assumptions
-explicit. Review [`docs/NEXT_RUN.md`](NEXT_RUN.md) and the
-[pilot instructions](TRAINING_PILOT.md) before running it.
+Notebook 03 used an untrained model, one query timestamp and no repeated global
+IDs across its 30 trials. Notebook 04 has now completed 100 supervised updates
+over 3,200 training queries, 39 timestamps and 3,177 unique users. Two training
+updates contained repeated global post occurrences. The trained checkpoint
+passed exact inference logit/loss parity on one validation batch; see
+[`reports/TRAINING_PILOT_STATUS.md`](../reports/TRAINING_PILOT_STATUS.md).
+The metadata audit remains `training_ready: false` for broader historical feature
+approval. Historical relationship evidence and the representative final workload
+remain open; the pilot retained constants/time and the documented snapshot contract.
 
 Decide using representative evidence whether to continue block optimization.
 The 10% end-to-end latency reduction is a practical hypothesis, not a promised
@@ -49,18 +51,20 @@ augmentation initially. Confirm eligible users exist at each query time. Fit
 preprocessing on training-period data; use official temporal splits. Keep keys
 for connectivity and preserve all relationships.
 
-Run the first 100-step pilot from `configs/training_pilot.json` before choosing
-a larger training budget. Its fixed settings are 32 queries per batch, 3,200
+The first 100-step pilot from `configs/training_pilot.json` passed before choosing
+a larger training budget. Its fixed settings were 32 queries per batch, 3,200
 training queries, 512 held-out validation queries, 64 channels, fanouts `[16, 8]`,
-learning rate 0.001 and seed 42. Train only the reference schedule, save resumable
-state every 10 updates, compare the train-fitted activity baseline, and verify
+learning rate 0.001 and seed 42. It trained only the reference schedule, saved
+resumable state, compared the train-fitted activity baseline, and verified
 inference parity across all three schedules with the trained checkpoint. The
-test split remains untouched. This pilot and its subset metrics are not the
-final trained experiment or a readiness claim for richer historical features.
+test split remained untouched. Its 512-query subset had only 17 positives; the
+GNN reached ROC-AUC 0.85419 / AP 0.13373 and the activity baseline 0.85585 /
+0.14655. These are preliminary subset results, not the final trained experiment
+or a readiness claim for richer historical features.
 
-- [ ] Complete the hosted 100-step pilot and preserve losses, timings and checkpoint.
-- [ ] Record isolated start/end unit balances for the pilot.
-- [ ] Review held-out subset metrics, baseline quality and trained-checkpoint parity.
+- [x] Complete the hosted 100-step pilot and preserve losses, timings and checkpoint.
+- [ ] Record isolated start/end unit balances for the next run; the pilot's boundary balances are unavailable.
+- [x] Review held-out subset metrics, baseline quality and trained-checkpoint parity.
 - [ ] Select the credible training budget and representative frozen workload.
 
 Use the pilot evidence to revise the still-provisional `configs/experiment.json`.

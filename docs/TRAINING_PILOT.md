@@ -1,15 +1,25 @@
 # First training pilot: 100 reference updates
 
 [Notebook 04](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/04_training_pilot.ipynb)
-prepares the first supervised training pilot on `rel-stack/user-badge`. Its
-hosted-data GPU execution remains pending. Local tests do not establish that
-training completes in Colab or that the resulting predictor has useful quality.
+completed the first supervised training pilot on `rel-stack/user-badge` in run
+`20261024T051434Z-948a5d`: all 100 updates and 69 tests passed on a Tesla T4.
+See [the reviewed results](../reports/TRAINING_PILOT_STATUS.md) and
+[verbatim exports with provenance](../reports/colab/20261024T051434Z-948a5d/PROVENANCE.json).
+The checkpoint is preserved outside Git with its hash recorded in provenance.
 
 The pilot uses constant node features plus relative record time and the reference
 training schedule. It retains the published model's training behavior, then
 compares reference, HGAM and block inference on one validation batch with the
 same updated checkpoint and sampled occurrences. No trained inference speedup
 is measured in this pilot.
+
+On the fixed validation subset of 512 queries and 17 positives, the trained GNN
+reached ROC-AUC 0.85419, average precision 0.13373 and BCE 0.13122. The
+train-fitted activity baseline reached 0.85585, 0.14655 and 0.12523. The small
+numerical difference does not establish a reliable ranking between models.
+The final one-batch inference check reported zero logit and loss errors across
+reference, HGAM and blocks. Full predictive quality and trained speedup remain
+unmeasured.
 
 ## Frozen pilot configuration
 
@@ -47,7 +57,7 @@ relationship changes, deletions, merges or survivorship. The feature metadata
 audit still has `training_ready: false`: this bounded constant/time pilot does
 not approve richer historical raw attributes or resolve those limitations.
 
-## Run in Colab
+## Reproducing the completed pilot
 
 1. Save a copy of notebook 04. In Colab's managed sessions, disconnect other
    runtimes first. Use one active runtime, then select T4 and connect. For CPU
@@ -73,8 +83,13 @@ not approve richer historical raw attributes or resolve those limitations.
 
 The 50-unit reserve is enforced before setup when the supplied starting balance
 is at or below it. Continue checking the resource panel during the session. Null
-observations remain null. The previously reported 198.67-unit balance is a dated
-observation, not this run's starting balance. An observed account decrease is
+observations remain null. This completed export recorded null start/end balances
+and a null rate despite its isolation flag being true. A later user follow-up
+reported 198.63 units remaining after the preceding 198.67 observation: the
+0.04-unit interval decrease cannot establish this pilot's isolated cost. The
+latest reported balance leaves 148.63 units above the reserve. See the
+[separate budget follow-up](../reports/budget/20261024-notebook04-followup.json).
+An observed account decrease is
 attributed to this run only when the interval was isolated and no balance
 increase occurred. Deltas use two decimal places, matching Colab's displayed
 balance precision; overlapping runtimes cannot provide an isolated run cost.

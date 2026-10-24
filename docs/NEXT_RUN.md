@@ -1,46 +1,47 @@
-# Next run: the first 100-step training pilot
+# Training pilot completed: evidence and proposed next step
 
-Notebooks 02 and 03 passed their hosted-data diagnostics. Notebook 03 run
-`20261023T225501Z-efdf72` includes 36 passing T4 tests, a passed feature-policy
-metadata audit and three paired resident-graph online pipeline batches. Read
-[the measured results and limitations](../reports/PIPELINE_PROFILE_STATUS.md);
-its export and hashes are archived under
-[`reports/colab/20261023T225501Z-efdf72/`](../reports/colab/20261023T225501Z-efdf72/).
+Notebook 04 passed in hosted run `20261024T051434Z-948a5d`: 69 T4 tests,
+100 reference-training updates, a train-fitted activity baseline and exact
+trained-checkpoint inference parity on one validation batch. Read
+[the training pilot assessment](../reports/TRAINING_PILOT_STATUS.md).
+Its thirteen report/configuration/log files and checkpoint metadata are archived
+with [SHA-256 provenance](../reports/colab/20261024T051434Z-948a5d/PROVENANCE.json).
+The checkpoint binary is kept outside Git.
 
-The next prepared run is [notebook 04: training pilot](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/04_training_pilot.ipynb).
-It runs 100 reference-training updates with constant features plus relative time,
-compares a train-fitted historical-activity baseline, evaluates a fixed
-512-query official validation subset, and checks inference parity across
-reference, HGAM and blocks using the resulting checkpoint. The test split stays
-untouched. Its hosted-data GPU run and predictive results remain pending.
+The trained GNN reached ROC-AUC 0.85419 and AP 0.13373 on the fixed 512-query
+validation subset. The historical-activity baseline reached 0.85585 and 0.14655.
+There were only 17 positives. The learned models' small numerical difference
+does not establish a reliable ranking, and neither is a finished predictor.
+Trained inference speedup was not measured.
 
-Read [the pilot instructions](TRAINING_PILOT.md) before running. The first pilot
-configuration is frozen in
-[`configs/training_pilot.json`](../configs/training_pilot.json); it does not freeze
-the final experiment or approve additional historical raw features. Relationship
-changes, deletions, merges and snapshot survivorship remain explicit assumptions.
-The metadata audit still reports `training_ready: false`.
+The completed pilot used the frozen
+[`configs/training_pilot.json`](../configs/training_pilot.json), constant/time
+GNN inputs and official training rows. It covered 39 training timestamps and
+3,177 users across 3,200 query occurrences; two training updates contained
+repeated global post occurrences. Test labels remained untouched. Broader
+historical feature approval, representative final workload selection, a larger
+training budget, full predictive evaluation and trained inference measurements
+remain open. The feature audit still reports `training_ready: false` for richer
+raw feature approval; snapshot edits, deletions, merges and survivorship have
+not been reconstructed.
 
-Use one active Colab runtime and disconnect other managed sessions before
-starting. Enter the current resource-panel unit/hour rate and starting balance;
-record the ending balance after the run. Leave unavailable values null. The
-50-unit reserve applies throughout. The earlier 1.07-unit/hour rate and
-198.67-unit balance are prior observations, not presets for the new session.
-Notebook 03's earlier 0.11-unit account decrease involved overlapping runtimes
-and does not establish its individual cost.
+A proposed next bounded experiment is 64,000 selected training rows and 2,000
+updates at batch size 32, with an 8,192-query validation subset for review. It
+would keep the same architecture, optimizer and features, and fit the GNN and
+activity baseline on the same 64,000 rows. This is a proposal, not a prepared
+or measured run. Reporting/checkpoint preparation comes first: the current
+report rewrites its full history each step, so the short pilot's wall time
+cannot simply be scaled to predict the larger run.
 
-Notebook 04 reuses matching downloaded data, but also needs official training
-labels. A matching notebook 03 receipt without `train.parquet` triggers a
-download. Do not start another full download just to reproduce completed
-notebooks 02 or 03. They remain available for deliberate reproduction when needed.
+The latest user-reported balance is 198.63 units, leaving 148.63 above the
+50-unit reserve. The 0.04-unit decrease since the preceding 198.67 observation
+describes an account interval, not isolated notebook 04 consumption. Exported
+start/end balances and the hourly rate were null even though the isolation flag
+was true. See the [budget follow-up](../reports/budget/20261024-notebook04-followup.json).
 
-Keep the final ZIP: it contains the resumable checkpoint, configuration, raw
-step history, reports and logs, excluding the database. Export it after success
-or failure, then disconnect and delete the runtime. On a later session, restore
-your own earlier `pilot.pt` and explicitly enable resume with the same frozen
-configuration. The target remains 100 total updates. See
-[resuming the pilot](TRAINING_PILOT.md#evidence-and-resuming).
-
-A completed pilot will inform a later decision about historical features,
-representative workload and training budget. It cannot establish final predictive
-quality or trained-model inference acceleration on its own.
+Preserve the exported checkpoint and original archives. The
+[pilot documentation](TRAINING_PILOT.md) records the completed configuration,
+evidence boundaries and resume procedure if an interrupted pilot needs recovery.
+Notebooks 02 and 03 remain earlier diagnostics; their untrained measurements
+do not establish trained inference performance. The outstanding research work
+is recorded in [the plan](PLAN.md).

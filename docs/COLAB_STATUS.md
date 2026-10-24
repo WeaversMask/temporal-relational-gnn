@@ -1,11 +1,11 @@
 # Colab feasibility: verified 2026-10-24
 
-The dependency checks, hosted real-batch diagnostic, and notebook 03 pipeline
-profile have passed. The feature-policy metadata audit passed while historical
-availability and training readiness remain unresolved. Preliminary online
-pipeline timings now include sampling through logits on a resident graph;
-training, predictive quality, and final trained acceleration remain unmeasured.
-See [the pipeline profile report](../reports/PIPELINE_PROFILE_STATUS.md) and
+The dependency checks, hosted real-batch diagnostic, notebook 03 pipeline profile
+and notebook 04's 100-step training pilot have passed. The trained checkpoint
+passed exact inference parity on one batch. Pilot subset metrics are measured;
+finished predictive quality and trained inference acceleration remain unmeasured.
+The metadata audit does not resolve broader historical feature availability.
+See [the training pilot report](../reports/TRAINING_PILOT_STATUS.md) and
 [remaining decisions](NEXT_RUN.md).
 
 ## Initial dependency and synthetic checks: 2026-10-23
@@ -108,4 +108,40 @@ runtime left active in the background. The 0.11-unit account decrease covers
 the observed interval, rather than an isolated notebook 03 cost. The user
 believes the session rate remained 1.07 units/hour; a combined rate is
 unmeasured. See the [budget follow-up](../reports/budget/20261024-notebook03-followup.json).
-The latest balance leaves 148.67 units above the planned 50-unit reserve.
+That earlier balance left 148.67 units above the planned 50-unit reserve.
+
+## Hosted reference-training pilot: completed 2026-10-24 UTC
+
+Notebook 04 passed in run `20261024T051434Z-948a5d`, at clean source revision
+`78feba6ba26622b77e1530ae3ae93315a7857109`. All 69 tests passed on the Tesla
+T4. Thirteen original report/configuration/log files are archived verbatim with
+[SHA-256 provenance](../reports/colab/20261024T051434Z-948a5d/PROVENANCE.json).
+The checkpoint binary stays outside Git; its hash and size are recorded there.
+
+All 100 optimizer updates completed with finite gradients and passed temporal
+occurrence audits. The 3,200-query training cohort covered 39 timestamps and
+3,177 unique users; repeated global post IDs occurred in two training updates
+(three extra occurrences total). The final one-batch comparison had zero logit
+and loss differences across reference, HGAM and blocks. Trained inference
+speedup was not measured.
+
+| Predictor on the same 512-query validation subset | ROC-AUC | Average precision | BCE |
+| --- | ---: | ---: | ---: |
+| Initial GNN | 0.47807 | 0.03259 | 1.02604 |
+| GNN after 100 updates | 0.85419 | 0.13373 | 0.13122 |
+| Historical-activity baseline | 0.85585 | 0.14655 | 0.12523 |
+| Constant training-prevalence baseline | 0.50000 | 0.03320 | 0.14812 |
+
+Only 17 validation examples were positive. The activity baseline's slightly
+better numerical metrics do not establish statistical superiority, and these
+subset results are not finished predictive quality. Inputs and snapshot
+assumptions stayed unchanged; broader historical feature approval, final
+workload selection and full evaluation remain pending.
+
+The exported start/end balance and hourly rate fields were null despite an
+`isolated_runtime_confirmed: true` flag. A later user follow-up reported 198.63
+units remaining. The decrease from the prior 198.67 observation is 0.04 units
+over that interval and does not establish isolated notebook 04 cost. The
+[separate follow-up](../reports/budget/20261024-notebook04-followup.json) preserves
+those distinctions without rewriting the export. The latest reported balance
+leaves 148.63 units above the 50-unit reserve.
