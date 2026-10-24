@@ -1,20 +1,42 @@
 {
-  "status": "trained_inference_measured_independent_reproduction_pending",
+  "status": "reproduced_scope_limited",
   "inference_protocol": "configs/trained_inference.json",
   "trained_inference_result": {
-    "run_id": "20261024T082321Z-4a43ed",
-    "report": "reports/TRAINED_INFERENCE_STATUS.md",
+    "report": "reports/TRAINED_INFERENCE_REPRODUCTION.md",
     "primary_batch_size": 32,
-    "primary_latency_reduction_vs_hgam_percent": 8.912763934535029,
-    "within_run_95_percent_interval": [8.468835277915153, 9.359658733823633],
     "primary_practical_target_met": false,
-    "independent_sessions": 1
+    "independent_sessions": 2,
+    "scope": "graph-loaded online inference; one checkpoint, training seed, schema, validation date and constant/time feature policy",
+    "interval_scope": "Separate within-run query-batch bootstrap intervals; no pooled between-session confidence interval",
+    "runs": [
+      {
+        "run_id": "20261024T082321Z-4a43ed",
+        "report": "reports/colab/20261024T082321Z-4a43ed/trained-profile.json",
+        "primary_latency_reduction_vs_hgam_percent": 8.912763934535029,
+        "within_run_95_percent_interval": [
+          8.468835277915153,
+          9.359658733823633
+        ]
+      },
+      {
+        "run_id": "20261024T102607Z-6593a4",
+        "report": "reports/colab/20261024T102607Z-6593a4/trained-profile.json",
+        "primary_latency_reduction_vs_hgam_percent": 8.76870724865425,
+        "within_run_95_percent_interval": [
+          8.342611686388214,
+          9.18254018366614
+        ]
+      }
+    ]
   },
   "dataset": "rel-stack",
   "task": "user-badge",
   "channels": 64,
   "num_layers": 2,
-  "fanouts_per_relation": [16, 8],
+  "fanouts_per_relation": [
+    16,
+    8
+  ],
   "batch_size": 32,
   "aggregation": "mean",
   "relation_aggregation": "sum",
@@ -30,10 +52,10 @@
     "binary_in_git": false
   },
   "seed": 42,
-  "practical_end_to_end_latency_reduction_target": 0.10,
-  "correctness_atol": 0.00001,
+  "practical_end_to_end_latency_reduction_target": 0.1,
+  "correctness_atol": 1e-05,
   "correctness_rtol": 0.0001,
   "compute_units_budget": 200,
   "compute_units_reserve": 50,
-  "notes": "Notebook 06 completed 336 query batches with 20 paired repetitions each and 171 T4 tests passed, using the unchanged notebook 05 constant/time checkpoint. Graph-loaded online latency reductions versus HGAM were 8.91%, 8.02% and 10.46% at batch sizes 32/128/512. The primary batch-32 result falls below the 10% practical target. The secondary 512 result is sensitive to one slow HGAM observation; an explicit paired exclusion diagnostic gives 8.35%, while the headline retains all trials. Predictions passed unchanged numerical tolerances. Blocks throughput rose from 1328 to 19280 queries/second across sizes; grouping and sampling differ. These are one-session results, with clean independent reproduction next. The activity baseline remains stronger on the shared 8192-query validation cohort. Historical snapshot assumptions remain unresolved."
+  "notes": "Notebook 06 completed and independently reproduced 336 query batches with 20 paired repetitions each and 171 T4 tests passed in each session, under the same frozen contract on different physical T4 GPUs. The unchanged notebook 05 constant/time checkpoint passed source replay, occurrence audits and fixed numerical tolerances. Primary batch-32 graph-loaded online reductions versus HGAM were 8.91% and 8.77%, below the 10% practical target; message-passing replay improvement was roughly 17%. Secondary batch-128 reductions were 8.02% and 8.64%; batch-512 reductions were 10.46% and 11.82%, retaining an extreme HGAM trial recurring at the same batch/repeat position with unresolved cause. All trials remain in headline results and per-run intervals are separate. The bounded execution comparison and its report are complete, without model/configuration expansion to pursue the target. The activity baseline remains stronger on the shared 8192-query validation cohort. Historical snapshot assumptions remain unresolved."
 }

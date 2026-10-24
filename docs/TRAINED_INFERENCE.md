@@ -1,19 +1,26 @@
 # Paired inference with the trained model
 
 [Notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
-completed its first trained-model speed comparison on T4 in run
-`20261024T082321Z-4a43ed`: 171 tests passed and all 336 query batches completed
-20 paired repetitions each. It uses the saved notebook 05 checkpoint and
-performs no training. The next step is a clean independent T4 reproduction
-with this same fixed protocol.
+completed its bounded trained-model comparison and independent reproduction:
+`20261024T082321Z-4a43ed` and `20261024T102607Z-6593a4`. Each different-T4
+session passed 171 tests and completed all 336 query batches with 20 paired
+repetitions each. Both used the same frozen protocol and notebook 05 checkpoint,
+with no training or reused timing sidecars. The linked report records the
+interpretation; this notebook remains available for deliberate reproduction.
 
-The primary batch-32 blocks-versus-HGAM reduction was **8.91%** (within-run
-95% interval 8.47–9.36%), below the predefined 10% practical target. Secondary
-reductions were 8.02% at 128 and 10.46% at 512. The latter is sensitive to one
-slow HGAM trial: an explicit paired exclusion diagnostic gives 8.35%, while the
-headline retains all data. Predictions passed the existing numerical tolerances
-and weights stayed unchanged. See the
-[verified results](../reports/TRAINED_INFERENCE_STATUS.md).
+| Query batch | First-run reduction vs HGAM | Reproduction reduction | Reproduction within-run 95% interval |
+| --- | ---: | ---: | ---: |
+| **32, primary** | **8.91%** | **8.77%** | 8.34–9.18% |
+| 128 | 8.02% | 8.64% | 7.86–9.42% |
+| 512 | 10.46% | 11.82% | 8.97–16.01% |
+
+The first primary interval was 8.47–9.36%. Both primary estimates and intervals
+are below the predefined 10% practical target. The secondary batch-512 results
+retain an extreme HGAM trial that recurred at the same batch/repeat position
+across different GPUs; its cause remains unresolved. Predictions passed the
+existing numerical tolerances and weights stayed unchanged. See the
+[current two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) for raw
+evidence, sensitivity diagnostics and scope.
 
 The primary question is whether blocks reduce online latency beyond HGAM at
 batch size 32 while preserving predictions. Batch sizes 128 and 512 provide a
@@ -26,9 +33,9 @@ execution improvements do not establish predictive superiority.
 1. Save a copy of notebook 06, select **T4 GPU**, disconnect other managed
    runtimes, and enable the existing read-only `GITHUB_TOKEN` secret.
 2. Enter current budget observations in the first control cell when available:
-   `OBSERVED_UNITS_REMAINING` is the **remaining balance** (198.00 at the end
-   of the first run); `OBSERVED_UNITS_PER_HOUR` is the **hourly consumption
-   rate** (1.07 in that run). Use new readings for this session. Leave
+   `COMPUTE_UNITS_REMAINING` is the **remaining balance** (197.46 at the end
+   of the reproduction); `COMPUTE_UNITS_PER_HOUR` is the **hourly consumption
+   rate** (1.07 in both runs). Use new readings for this session. Leave
    `RESUME = False` and do not restore earlier measurement sidecars for an
    independent reproduction. The 50-unit reserve still applies.
 3. Run the cells in order. When prompted, upload **`checkpoints/training.pt`
@@ -96,9 +103,11 @@ paired blocks-versus-HGAM/reference reductions. The reduction uses total online
 time, rather than a ratio of medians. Confidence intervals resample whole query
 batches, retaining all repeats and mode pairs. They describe variation within
 this cohort, rather than independent devices, sessions or training seeds.
-The first run is graph-loaded online inference from one session, not a
-cross-session performance claim. A secondary batch size does not replace the
-primary comparison or its predefined practical target.
+Both runs measure graph-loaded online inference under one fixed workload.
+Their intervals remain per-run; no pooled between-session confidence interval
+is claimed. Two sessions do not establish portability across models, schemas
+or dates. A secondary batch size does not replace the primary comparison or
+its predefined practical target.
 
 PyTorch allocated/reserved memory peaks are separate from optional one-second
 `nvidia-smi` device-wide samples of memory, GPU activity and power. Sampled
@@ -112,6 +121,12 @@ In the first session, blocks throughput rose from 1,328 to 19,280 queries/second
 across batch sizes, a 14.52-fold batching observation under different grouping
 and sampler draws. Device memory samples were 161–171 MiB. These observations
 leave memory headroom but do not establish the source of a hardware bottleneck.
+In the reproduction, every query-batch median favored blocks over both
+baselines; message-passing replay improvement was roughly 17%, compared with
+roughly 9% across the broader online boundary. The second budget export
+recorded an isolated 0.44-unit interval (197.90 to 197.46), leaving 147.46
+above reserve. Historical snapshot assumptions, constant/time features and the
+stronger activity baseline remain part of the interpretation.
 
 ## Persistence and recovery
 

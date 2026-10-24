@@ -1,5 +1,8 @@
 # Trained online inference: verified 2026-10-24
 
+This report preserves the first session. The subsequent independent repeat
+completed; see the [two-session investigation report](TRAINED_INFERENCE_REPRODUCTION.md).
+
 Notebook 06 completed all three batch sizes in run
 `20261024T082321Z-4a43ed`. Blocks reduced measured online latency versus HGAM
 by **8.91% at the primary batch size 32**, **8.02% at 128**, and **10.46% at
@@ -152,8 +155,8 @@ exported-snapshot history assumptions. The activity baseline remains the
 stronger predictor on the source validation cohort. This result concerns
 execution efficiency of the fixed GNN.
 
-The next step is a clean independent T4 reproduction with the same fixed
-protocol and checkpoint, followed by the final report. Preserve the primary
-batch-32 comparison, retain outliers transparently, and assess between-session
-stability before generalizing. Additional model/configuration extensions are
-separate research questions.
+The planned clean independent T4 reproduction with the same fixed protocol and
+checkpoint subsequently completed. Its primary reduction was 8.77%, with the
+same modest benefit and the same below-target conclusion; see the linked
+two-session report. Additional model/configuration extensions remain separate
+research questions.

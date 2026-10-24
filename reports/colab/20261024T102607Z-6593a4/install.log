@@ -1,0 +1,111 @@
+Obtaining file:///content/temporal-relational-gnn
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch<2.15,>=2.11 in /usr/local/lib/python3.13/dist-packages (from temporal-relational-gnn==0.1.0) (2.11.0+cu130)
+Collecting torch-geometric==2.8.1 (from temporal-relational-gnn==0.1.0)
+  Downloading torch_geometric-2.8.1-py3-none-any.whl.metadata (64 kB)
+Collecting pytest==9.1.1 (from temporal-relational-gnn==0.1.0)
+  Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting ruff==0.15.0 (from temporal-relational-gnn==0.1.0)
+  Downloading ruff-0.15.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (26 kB)
+Collecting relbench==3.0.2 (from temporal-relational-gnn==0.1.0)
+  Downloading relbench-3.0.2-py3-none-any.whl.metadata (10 kB)
+Collecting pytorch-frame==0.3.0 (from temporal-relational-gnn==0.1.0)
+  Downloading pytorch_frame-0.3.0-py3-none-any.whl.metadata (20 kB)
+Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.13/dist-packages (from pytest==9.1.1->temporal-relational-gnn==0.1.0) (2.3.1)
+Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.13/dist-packages (from pytest==9.1.1->temporal-relational-gnn==0.1.0) (26.3)
+Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.13/dist-packages (from pytest==9.1.1->temporal-relational-gnn==0.1.0) (1.7.0)
+Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.13/dist-packages (from pytest==9.1.1->temporal-relational-gnn==0.1.0) (2.21.0)
+Requirement already satisfied: numpy in /usr/local/lib/python3.13/dist-packages (from pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (2.1.3)
+Requirement already satisfied: pandas in /usr/local/lib/python3.13/dist-packages (from pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (2.2.3)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.13/dist-packages (from pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (4.67.3)
+Requirement already satisfied: pyarrow in /usr/local/lib/python3.13/dist-packages (from pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (23.0.1)
+Requirement already satisfied: Pillow in /usr/local/lib/python3.13/dist-packages (from pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (11.3.0)
+Requirement already satisfied: huggingface_hub in /usr/local/lib/python3.13/dist-packages (from relbench==3.0.2->temporal-relational-gnn==0.1.0) (1.33.0)
+Requirement already satisfied: pyyaml in /usr/local/lib/python3.13/dist-packages (from relbench==3.0.2->temporal-relational-gnn==0.1.0) (6.0.3)
+Requirement already satisfied: duckdb in /usr/local/lib/python3.13/dist-packages (from relbench==3.0.2->temporal-relational-gnn==0.1.0) (1.3.2)
+Requirement already satisfied: scikit-learn in /usr/local/lib/python3.13/dist-packages (from relbench==3.0.2->temporal-relational-gnn==0.1.0) (1.6.1)
+Requirement already satisfied: typing-extensions in /usr/local/lib/python3.13/dist-packages (from relbench==3.0.2->temporal-relational-gnn==0.1.0) (4.16.0)
+Requirement already satisfied: aiohttp in /usr/local/lib/python3.13/dist-packages (from torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (3.14.5)
+Requirement already satisfied: fsspec in /usr/local/lib/python3.13/dist-packages (from torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (2025.12.0)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (3.1.6)
+Requirement already satisfied: psutil>=5.8.0 in /usr/local/lib/python3.13/dist-packages (from torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (5.9.5)
+Requirement already satisfied: pyparsing in /usr/local/lib/python3.13/dist-packages (from torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (3.3.3)
+Requirement already satisfied: requests in /usr/local/lib/python3.13/dist-packages (from torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (2.32.4)
+Requirement already satisfied: xxhash in /usr/local/lib/python3.13/dist-packages (from torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (4.0.2)
+Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (4.2.4)
+Requirement already satisfied: setuptools<82 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (80.10.2)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (3.7)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.0.3)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings<14,>=13.0.3->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (1.8.3)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy>=1.13.3->torch<2.15,>=2.11->temporal-relational-gnn==0.1.0) (1.3.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (2.7.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (1.8.0)
+Requirement already satisfied: multidict<8.0,>=4.5 in /usr/local/lib/python3.13/dist-packages (from aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (7.1.0)
+Requirement already satisfied: propcache>=0.2.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (0.5.4)
+Requirement already satisfied: yarl<2.0,>=1.25.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (1.25.1)
+Requirement already satisfied: idna>=2.0 in /usr/local/lib/python3.13/dist-packages (from yarl<2.0,>=1.25.1->aiohttp->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (3.20)
+Requirement already satisfied: click<9.0.0,>=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface_hub->relbench==3.0.2->temporal-relational-gnn==0.1.0) (8.5.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface_hub->relbench==3.0.2->temporal-relational-gnn==0.1.0) (1.7.0)
+Requirement already satisfied: httpx<1,>=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface_hub->relbench==3.0.2->temporal-relational-gnn==0.1.0) (0.28.1)
+Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface_hub->relbench==3.0.2->temporal-relational-gnn==0.1.0) (4.15.1)
+Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface_hub->relbench==3.0.2->temporal-relational-gnn==0.1.0) (2026.10.19)
+Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface_hub->relbench==3.0.2->temporal-relational-gnn==0.1.0) (1.0.9)
+Requirement already satisfied: h11>=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*->httpx<1,>=0.23.0->huggingface_hub->relbench==3.0.2->temporal-relational-gnn==0.1.0) (0.16.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (3.0.4)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.13/dist-packages (from pandas->pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.13/dist-packages (from pandas->pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.13/dist-packages (from pandas->pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (2026.5)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.13/dist-packages (from python-dateutil>=2.8.2->pandas->pytorch-frame==0.3.0->temporal-relational-gnn==0.1.0) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.13/dist-packages (from requests->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (3.4.9)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.13/dist-packages (from requests->torch-geometric==2.8.1->temporal-relational-gnn==0.1.0) (2.5.0)
+Requirement already satisfied: scipy>=1.6.0 in /usr/local/lib/python3.13/dist-packages (from scikit-learn->relbench==3.0.2->temporal-relational-gnn==0.1.0) (1.16.3)
+Requirement already satisfied: joblib>=1.2.0 in /usr/local/lib/python3.13/dist-packages (from scikit-learn->relbench==3.0.2->temporal-relational-gnn==0.1.0) (1.6.0)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /usr/local/lib/python3.13/dist-packages (from scikit-learn->relbench==3.0.2->temporal-relational-gnn==0.1.0) (3.7.0)
+Requirement already satisfied: cloudpickle>=3.0 in /usr/local/lib/python3.13/dist-packages (from joblib>=1.2.0->scikit-learn->relbench==3.0.2->temporal-relational-gnn==0.1.0) (3.1.2)
+Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+Downloading pytorch_frame-0.3.0-py3-none-any.whl (146 kB)
+Downloading relbench-3.0.2-py3-none-any.whl (66 kB)
+Downloading ruff-0.15.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 31.8 MB/s  0:00:00
+Downloading torch_geometric-2.8.1-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 39.1 MB/s  0:00:00
+Building wheels for collected packages: temporal-relational-gnn
+  Building editable for temporal-relational-gnn (pyproject.toml): started
+  Building editable for temporal-relational-gnn (pyproject.toml): finished with status 'done'
+  Created wheel for temporal-relational-gnn: filename=temporal_relational_gnn-0.1.0-0.editable-py3-none-any.whl size=1539 sha256=b30588f9b67ac59c172c3cc15e902b252f8e1a4a74a8f6646adebaf2bac02e1c
+  Stored in directory: /tmp/pip-ephem-wheel-cache-yd6tb9hl/wheels/02/be/3d/ecb30dc9feb501114ce213bad59eb622b0438f8bed96d74597
+Successfully built temporal-relational-gnn
+Installing collected packages: ruff, pytest, torch-geometric, relbench, temporal-relational-gnn, pytorch-frame
+  Attempting uninstall: pytest
+    Found existing installation: pytest 8.4.2
+    Uninstalling pytest-8.4.2:
+      Successfully uninstalled pytest-8.4.2
+
+Successfully installed pytest-9.1.1 pytorch-frame-0.3.0 relbench-3.0.2 ruff-0.15.0 temporal-relational-gnn-0.1.0 torch-geometric-2.8.1

@@ -12,6 +12,7 @@
 - [x] Record the notebook 04 follow-up balance (198.63); the later 0.04-unit interval decrease is not an isolated run cost.
 - [x] Record notebook 05 balances (198.63 to 198.59) and 1.07 units/hour; isolation was not confirmed.
 - [x] Record notebook 06's user-confirmed 198.50-to-198.00 boundary balances and 1.07 units/hour; attribute the 0.50-unit decrease using the exported isolation confirmation.
+- [x] Record the independent reproduction's exported 197.90-to-197.46 balances, 1.07 units/hour and isolated 0.44-unit consumption; 147.46 units remain above reserve.
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
 - [ ] Complete the temporal feature availability audit on real data.
@@ -30,15 +31,17 @@ HGAM. Host RSS and CUDA allocator peaks are measured; total device VRAM is not.
 Separate synchronized stage replays must not be summed into a pipeline total
 or assumed to give exact proportions.
 
-Notebook 06 now supplies the trained comparison and device-wide samples; see
-[`reports/TRAINED_INFERENCE_STATUS.md`](../reports/TRAINED_INFERENCE_STATUS.md).
-All 336 query batches and 20 repetitions completed on T4. The primary batch-32
-reduction versus HGAM was 8.91% (within-run 95% interval 8.47–9.36%), below
-the 10% practical target. Secondary results were 8.02% at 128 and 10.46% at
-512, with the latter sensitive to one slow HGAM observation: a paired exclusion
-diagnostic gives 8.35%, while the headline retains every trial. Model state
-was unchanged and prediction differences passed the original numerical
-tolerances. These are graph-loaded online measurements from one session.
+Notebook 06 supplies the trained comparison and its independent reproduction;
+see [`reports/TRAINED_INFERENCE_REPRODUCTION.md`](../reports/TRAINED_INFERENCE_REPRODUCTION.md).
+Both different-T4 sessions completed all 336 query batches and 20 repetitions,
+with 171 tests passed each and the same frozen contract. Primary batch-32
+reductions versus HGAM were 8.91% and 8.77% (within-run 95% intervals
+8.47–9.36% and 8.34–9.18%), both below the 10% practical target. Secondary
+128/512 reductions were 8.02%/10.46% and 8.64%/11.82%. A recurring extreme
+HGAM trial at the same batch-512 position remains in both headline results;
+its cause is unresolved. Model state stayed unchanged and prediction differences
+passed the original numerical tolerances. The bounded graph-loaded online
+comparison is complete; broader historical availability remains unresolved.
 
 Notebook 03 used an untrained model, one query timestamp and no repeated global
 IDs across its 30 trials. Notebook 04 has now completed 100 supervised updates
@@ -81,7 +84,8 @@ or a readiness claim for richer historical features.
 - [x] Preserve and select the notebook 05 checkpoint for the trained execution comparison.
 - [x] Implement the paired trained inference workload and frozen notebook 06 protocol.
 - [x] Run the trained profiler on T4 and review paired latency, throughput and memory.
-- [ ] Reproduce notebook 06 in a clean independent T4 session with the same checkpoint and protocol.
+- [x] Reproduce notebook 06 in a clean independent T4 session with the same checkpoint and protocol.
+- [x] Finish the bounded execution report with the primary result, recurring extreme-trial sensitivity and limits explicit.
 
 The pilot informed the next training configuration in
 [`configs/training_run.json`](../configs/training_run.json); its
@@ -97,9 +101,10 @@ measurement has completed, with 171 T4 tests passed and all 8,192 query
 occurrences covered at each size. Blocks throughput rose from 1,328 to 19,280
 queries/second, a 14.52-fold batching observation; sizes use different grouping
 and sampler draws. One-second device memory readings were 161–171 MiB.
-The next run is independent reproduction of the same frozen protocol, followed
-by the final report. Preserve the primary comparison and retain the outlier;
-do not expand the model/configuration matrix to pursue the 10% target.
+Independent reproduction has completed under the same frozen protocol and
+checkpoint, and the linked report records the interpretation. Preserve the
+primary comparison and retain the recurring extreme trial; do not expand the
+model/configuration matrix to pursue the 10% target.
 
 ## Days 5-9: integrate and establish real-model equivalence
 
@@ -121,10 +126,12 @@ training checkpoints outside the VM. Finish a clean reproduction, a concise
 report, and an explanation of successes, regressions and limitations. Never label
 synthetic timings as real.
 
-The first trained session is complete. Reuse notebook 06 in a fresh T4 runtime
-with `RESUME = False` and no prior measurement sidecars. Within-run bootstrap
-intervals do not substitute for this independent session or establish
-cross-session stability.
+Two independent trained sessions are complete, including a fresh T4 runtime
+with `RESUME = False` and no reused measurement sidecars. Their primary results
+are consistent and below the practical target. Within-run bootstrap intervals
+remain separate; two sessions do not establish portability across checkpoints,
+schemas, dates or historical input assumptions. The bounded comparison and its
+report are complete; no additional unchanged GPU run is required for them.
 
 ## Optional days 15-21
 

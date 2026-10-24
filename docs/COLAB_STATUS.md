@@ -1,16 +1,16 @@
 # Colab feasibility: verified 2026-10-24
 
-The dependency checks, hosted real-batch diagnostic, notebook 03 pipeline profile,
-notebook 04 pilot, notebook 05's 2,000-update training run and notebook 06's
-trained inference comparison have passed. Notebook 06 completed all 336 query
-batches with 20 paired repetitions each and 171 T4 tests passed. The primary
-graph-loaded online reduction versus HGAM was 8.91% (within-run 95% interval
-8.47–9.36%), below the 10% practical target. Outputs passed the fixed numerical
-tolerances and weights stayed unchanged. Independent session reproduction and
-finished predictive quality remain pending.
-The metadata audit does not resolve broader historical feature availability.
-See [the trained inference report](../reports/TRAINED_INFERENCE_STATUS.md) and
-[remaining decisions](NEXT_RUN.md).
+The dependency checks, hosted real-batch diagnostics, training and notebook 06's
+bounded trained inference comparison have passed, including independent
+reproduction on a different T4. Each measured session completed all 336 query
+batches with 20 paired repetitions and 171 T4 tests passed. Primary graph-loaded
+online reductions versus HGAM were **8.91% and 8.77%** (within-run 95% intervals
+8.47–9.36% and 8.34–9.18%), both below the 10% practical target. Outputs
+passed fixed numerical tolerances and weights stayed unchanged. The report
+records the interpretation. Broader historical feature availability
+and finished predictive quality remain unresolved. See the
+[current two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) and
+[remaining steps](NEXT_RUN.md).
 
 ## Initial dependency and synthetic checks: 2026-10-23
 
@@ -220,12 +220,50 @@ memory definitions, outlier sensitivity and limitations.
 The raw budget export swapped the apparent start balance and hourly rate and
 omitted the ending balance. The user explicitly confirmed **198.50 at start,
 198.00 at end and 1.07 units/hour**. The 0.50-unit decrease is attributed using
-those user-reported boundaries and the exported isolation flag. The current
-balance leaves **148 units above reserve**. Originals remain unchanged; the
+those user-reported boundaries and the exported isolation flag. That earlier
+balance left **148 units above reserve**. Originals remain unchanged; the
 [separate corrected record](../reports/budget/20261024-notebook06-observations.json)
 preserves their provenance.
 
-Next is a clean independent T4 reproduction using the same notebook 06,
-checkpoint and [fixed protocol](TRAINED_INFERENCE.md), followed by the final
-report. Keep the primary batch-32 comparison; the secondary result does not
-replace it. One session does not establish cross-session stability.
+## Independent trained inference reproduction: completed 2026-10-24 UTC
+
+Notebook 06 passed again in run `20261024T102607Z-6593a4` at clean source
+revision `b069b581d2ba0672e638411d497504ac4c002cca`. All **171 T4 tests passed**.
+The fresh run reused no measurement sidecars, used the same frozen benchmark
+contract/checkpoint and ran on a different physical T4 UUID. All 336 query
+batches completed 20 paired repetitions each. Source validation replay passed,
+weights stayed fixed and all occurrence/numerical equivalence checks passed.
+Its [archive](../reports/colab/20261024T102607Z-6593a4/PROVENANCE.json) preserves
+352 original files with hashes and sizes.
+
+| Query batch | Blocks reduction vs HGAM | Within-run 95% interval | Blocks queries/s |
+| --- | ---: | ---: | ---: |
+| **32, primary** | **8.77%** | 8.34–9.18% | 1,315 |
+| 128 | 8.64% | 7.86–9.42% | 5,114 |
+| 512 | 11.82% | 8.97–16.01% | 19,181 |
+
+The primary reduction reproduces the first run's 8.91% benefit; both point
+estimates and within-run intervals remain below 10%. Every second-run
+query-batch median favored blocks over both HGAM and the reference. Separate
+message-passing replays show roughly 17% improvement, reduced to roughly 9%
+over the broader online boundary.
+
+The secondary batch-512 HGAM extreme recurred at the same zero-based query
+batch 4, repeat 13: 248.378 ms in the first session and 252.555 ms in the
+second. Its cause is unresolved. Keep every trial in headline results and
+report sensitivity separately; recurrence alone does not identify its cause.
+The [two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) records the
+comparison and remaining limitations. Confidence intervals stay per-run;
+no pooled cross-session confidence interval is claimed.
+
+The reproduction export recorded **197.90 to 197.46 units** at **1.07 units/hour**
+with isolation confirmed, yielding **0.44 units consumed** and **147.46 above
+reserve**. Its [budget summary](../reports/budget/20261024-notebook06-reproduction-observations.json)
+retains original observations without changing the files.
+
+The bounded execution comparison and its report are complete, keeping the
+stronger predictive activity baseline and unresolved exported-snapshot
+assumptions visible. Two sessions still cover one checkpoint,
+training seed, schema, validation date and constant/time feature policy. The
+same [fixed protocol](TRAINED_INFERENCE.md) remains available for deliberate
+reproduction; there is no planned automatic third run or configuration expansion.

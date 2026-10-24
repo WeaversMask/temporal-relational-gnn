@@ -4,28 +4,29 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** notebook 06 completed the trained inference comparison on
-a Colab T4, with **171 tests passed**, all 336 query batches and 20 paired
-repetitions each. Blocks reduced graph-loaded online latency versus HGAM by
-**8.91% at the primary batch size 32** (within-run 95% interval 8.47–9.36%),
-below the predefined 10% practical target. Secondary reductions were 8.02% at
-128 and 10.46% at 512; the latter is sensitive to one slow HGAM observation
-(8.35% in a paired exclusion diagnostic; the headline retains all data).
-Predictions passed unchanged numerical tolerances and model weights stayed
-fixed. These are one-session results, with independent reproduction next.
-The source GNN's predictive metrics remain below the activity baseline's.
-Historical availability and final predictive evaluation remain open. See the
-[trained inference results](reports/TRAINED_INFERENCE_STATUS.md),
-[larger training results](reports/TRAINING_RUN_STATUS.md),
-[training pilot results](reports/TRAINING_PILOT_STATUS.md),
-[pipeline profile results](reports/PIPELINE_PROFILE_STATUS.md),
-[real-batch results](reports/REAL_BATCH_STATUS.md),
+**Current stage:** the bounded trained execution comparison is complete,
+including an independent notebook 06 reproduction on a different T4. Both
+sessions passed **171 tests**, all 336 query batches and 20 paired repetitions
+each, with unchanged weights and the same frozen protocol. Blocks reduced
+primary batch-32 graph-loaded online latency versus HGAM by **8.91% and 8.77%**
+(within-run 95% intervals 8.47–9.36% and 8.34–9.18%). Both are below the
+predefined 10% practical target. Message passing improved by about 17%; the
+broader online pipeline improved by about 9%.
+
+Secondary reductions at batches 128/512 were 8.02%/10.46% and 8.64%/11.82%.
+Both batch-512 results retain a recurring extreme HGAM observation at the same
+trial position; its cause is unresolved. Predictions passed unchanged numerical
+tolerances. The activity baseline remains the stronger predictor. Results cover
+two sessions, one checkpoint/schema/date and constant/time features under
+unresolved exported-snapshot assumptions. See the
+[current two-run report](reports/TRAINED_INFERENCE_REPRODUCTION.md),
+[first inference report](reports/TRAINED_INFERENCE_STATUS.md),
+[training results](reports/TRAINING_RUN_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
-[next-run instructions](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
-The next run repeats
-[notebook 06: paired trained inference](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
-in a clean independent T4 session with the same checkpoint and fixed protocol.
-Read the [reproduction instructions](docs/TRAINED_INFERENCE.md).
+[current next steps](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
+The report records the completed comparison and its limitations. Notebook 06
+remains available for deliberate reproduction through its
+[fixed protocol](docs/TRAINED_INFERENCE.md).
 
 ## Start in Colab
 
@@ -74,8 +75,8 @@ uses that saved checkpoint for inference only. Upload notebook 05's
 `checkpoints/training.pt` when prompted. The benchmark verifies source/data
 compatibility and all saved validation predictions before timing. It persists
 raw paired batch results, resumable progress, summaries and GPU telemetry;
-its first completed run is archived. Use a fresh session with `RESUME = False`
-for independent reproduction; see the [measurement protocol](docs/TRAINED_INFERENCE.md).
+both independent runs are archived. For deliberate reproduction, use a fresh
+session with `RESUME = False`; see the [measurement protocol](docs/TRAINED_INFERENCE.md).
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04
@@ -174,16 +175,22 @@ measurements, rather than total device use or compute utilization. See the
 was unmeasured.
 
 Notebook 06 measured the fixed trained model over all 8,192 validation queries
-at batch sizes 32, 128 and 512. Its primary online reduction versus HGAM was
-8.91%, below the 10% target. Blocks throughput rose from 1,328 to 19,280
-queries/second across sizes, a 14.52-fold batching observation within one
-session; grouping and sampling differ across sizes. Device-wide memory samples
-were 161–171 MiB, distinct from PyTorch allocator peaks. The user-confirmed
-198.50-to-198.00 balance interval consumed 0.50 units with isolation confirmed,
-leaving 148 units above reserve. See the
-[trained inference report](reports/TRAINED_INFERENCE_STATUS.md) for raw evidence,
-outlier sensitivity and scope. The next step is independent reproduction with
-the same protocol before the final report.
+at batch sizes 32, 128 and 512, then reproduced the same protocol in a fresh
+session on a different T4. The primary online reductions versus HGAM were
+8.91% and 8.77%, both below the 10% target. The consistent benefit is about
+17% in message passing and 9% in the graph-loaded online pipeline. In the
+second run, every query-batch median favored blocks over both baselines.
+Retain all trials, including the recurring secondary batch-512 extreme; its
+cause is unresolved. See the [two-run report](reports/TRAINED_INFERENCE_REPRODUCTION.md)
+for sensitivity diagnostics and scope.
+
+The first run's blocks throughput rose from 1,328 to 19,280 queries/second
+across sizes, a 14.52-fold batching observation with different grouping and
+sampling. Its device-wide memory samples were 161–171 MiB, distinct from
+PyTorch allocator peaks. Reproduction budget exports recorded 197.90 to
+197.46 units at 1.07 units/hour with isolation confirmed: 0.44 units consumed,
+leaving 147.46 above reserve. The first run's separately corrected 0.50-unit
+interval is preserved in its historical budget record.
 
 ## Attribution and scope
 

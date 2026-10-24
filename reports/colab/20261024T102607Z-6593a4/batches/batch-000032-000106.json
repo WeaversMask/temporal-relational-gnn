@@ -1,0 +1,5672 @@
+{
+  "artifact_payload_sha256": "8e342e049b6877dcd624cb492ca3b6cad68a0d7765ebb2b10c2478d362318f59",
+  "batch_index": 106,
+  "batch_size": 32,
+  "benchmark_contract_sha256": "6a98ea10137f6a7371f4e2bc514a7c86819c2953839b2f78622c5dfdb681d856",
+  "collection_window": {
+    "finished_at_utc": "2026-10-24T10:39:46.078183+00:00",
+    "scope": "warmup, online trials, audits and separate stage replays",
+    "started_at_utc": "2026-10-24T10:39:42.000362+00:00",
+    "wall_seconds": 4.07782685899997
+  },
+  "format_version": 1,
+  "max_absolute_logit_error": {
+    "blocks": 2.384185791015625e-07,
+    "hgam": 2.384185791015625e-07,
+    "reference": 0.0
+  },
+  "max_absolute_loss_error": {
+    "blocks": 3.725290298461914e-09,
+    "hgam": 0.0,
+    "reference": 0.0
+  },
+  "median_pipeline_ms": {
+    "blocks": 23.216358,
+    "hgam": 24.732545000000002,
+    "reference": 25.8773325
+  },
+  "median_stage_ms": {
+    "blocks": {
+      "encoding": 8.191141,
+      "feature_gather": 1.1372360000000001,
+      "message_passing": 10.61348,
+      "readout": 0.11084,
+      "sampling": 0.8007495,
+      "transfer": 1.70281
+    },
+    "hgam": {
+      "encoding": 8.255357499999999,
+      "feature_gather": 1.1060785,
+      "message_passing": 12.780915499999999,
+      "readout": 0.1133065,
+      "sampling": 0.7412545,
+      "transfer": 1.7149269999999999
+    },
+    "reference": {
+      "encoding": 8.1861835,
+      "feature_gather": 1.128171,
+      "message_passing": 13.9226945,
+      "readout": 0.10347999999999999,
+      "sampling": 0.7420279999999999,
+      "transfer": 1.7315975
+    }
+  },
+  "model_state_sha256": "fe95a7aaabb1efa78de2e7324a2a3c5a4ae7739eb3b467651c8b9c218e1dc5d9",
+  "origin_environment": {
+    "environment": {
+      "cpu_threads": 1,
+      "cuda_available": true,
+      "cuda_runtime": "13.0",
+      "git_commit": "b069b581d2ba0672e638411d497504ac4c002cca",
+      "git_dirty": false,
+      "gpu": {
+        "name": "Tesla T4",
+        "total_memory_bytes": 15637086208
+      },
+      "packages": {
+        "Authlib": "1.9.1",
+        "Bottleneck": "1.4.2",
+        "CacheControl": "0.14.4",
+        "Cython": "3.0.12",
+        "Farama-Notifications": "0.0.6",
+        "Flask": "3.1.3",
+        "GDAL": "3.8.4",
+        "ImageIO": "2.38.1",
+        "Jinja2": "3.1.6",
+        "Mako": "1.3.2.dev0",
+        "Markdown": "3.5.2",
+        "MarkupSafe": "2.1.5",
+        "PuLP": "4.1.0",
+        "PyDrive2": "1.21.1",
+        "PyGObject": "3.48.2",
+        "PyJWT": "2.7.0",
+        "PyOpenGL": "3.1.10",
+        "PySocks": "1.7.1",
+        "PyWavelets": "1.10.0",
+        "PyYAML": "6.0.3",
+        "Pygments": "2.21.0",
+        "SQLAlchemy": "2.1.5",
+        "SecretStorage": "3.5.0",
+        "Send2Trash": "2.1.0",
+        "Sphinx": "8.2.3",
+        "Werkzeug": "3.1.9",
+        "absl-py": "2.0.0",
+        "accelerate": "1.15.0",
+        "access": "1.1.10.post3",
+        "affine": "3.0.1",
+        "aiofiles": "25.1.0",
+        "aiohappyeyeballs": "2.7.1",
+        "aiohttp": "3.14.5",
+        "aiosignal": "1.4.0",
+        "aiosqlite": "0.22.1",
+        "alabaster": "1.0.0",
+        "albucore": "0.0.24",
+        "albumentations": "2.0.8",
+        "ale-py": "0.12.1",
+        "altair": "5.5.0",
+        "annotated-doc": "0.0.5",
+        "annotated-types": "0.8.0",
+        "anyio": "4.15.1",
+        "anywidget": "0.9.21",
+        "apsw": "3.54.1.0",
+        "argon2-cffi": "25.1.0",
+        "argon2-cffi-bindings": "26.1.0",
+        "array_record": "0.8.6",
+        "arrow": "1.4.0",
+        "arviz": "0.22.0",
+        "astropy": "7.2.3",
+        "astropy-iers-data": "0.2026.10.19.0.52.1",
+        "astunparse": "1.6.3",
+        "atpublic": "5.1",
+        "attrs": "26.1.0",
+        "audioop-lts": "0.2.2",
+        "audioread": "3.1.0",
+        "autograd": "1.9.1",
+        "babel": "2.18.0",
+        "backcall": "0.2.0",
+        "beartype": "0.23.1",
+        "beautifulsoup4": "4.13.5",
+        "betterproto": "2.0.0b7",
+        "bigframes": "2.51.0",
+        "bigquery-magics": "0.14.0",
+        "bleach": "6.4.0",
+        "blinker": "1.7.0",
+        "blis": "1.3.3",
+        "blobfile": "3.3.0",
+        "blosc2": "4.14.1",
+        "bokeh": "3.8.2",
+        "bqplot": "0.12.47",
+        "branca": "0.8.2",
+        "brotli": "1.2.0",
+        "cachetools": "6.2.6",
+        "catalogue": "2.0.10",
+        "certifi": "2026.10.19",
+        "cffi": "2.1.1",
+        "chardet": "5.2.0",
+        "charset-normalizer": "3.4.9",
+        "clarabel": "0.11.1",
+        "click": "8.5.0",
+        "cligj": "0.7.2",
+        "cloudpathlib": "0.26.0",
+        "cloudpickle": "3.1.2",
+        "cmake": "3.31.10",
+        "cmdstanpy": "1.3.0",
+        "colorcet": "3.2.1",
+        "colorlover": "0.3.0",
+        "community": "1.0.0b1",
+        "confection": "1.3.3",
+        "cons": "0.4.7",
+        "contourpy": "1.4.0",
+        "cpsat-logutils": "1.0.0",
+        "cramjam": "2.14.0",
+        "cryptography": "41.0.7",
+        "cucim-cu13": "26.6.0",
+        "cuda-bindings": "13.0.3",
+        "cuda-core": "0.7.0",
+        "cuda-pathfinder": "1.8.3",
+        "cuda-python": "13.0.3",
+        "cuda-toolkit": "13.0.2",
+        "cudf-cu13": "26.6.0",
+        "cudf-polars-cu13": "26.6.0",
+        "cufflinks": "0.17.3",
+        "cuml-cu13": "26.6.0",
+        "cupy-cuda13x": "14.0.1",
+        "curl_cffi": "0.16.3",
+        "cuvs-cu13": "26.6.0",
+        "cvxopt": "1.3.2",
+        "cvxpy": "1.6.7",
+        "cycler": "0.12.1",
+        "cyipopt": "1.5.0",
+        "cymem": "2.0.13",
+        "dask": "2026.1.1",
+        "dask-cuda": "26.6.0",
+        "dask-cudf-cu13": "26.6.0",
+        "dataproc-spark-connect": "1.1.0",
+        "datasets": "4.8.5",
+        "db-dtypes": "1.8.0",
+        "dbus-python": "1.3.2",
+        "debugpy": "1.8.15",
+        "decorator": "4.4.2",
+        "defusedxml": "0.7.1",
+        "deprecation": "2.1.0",
+        "diffusers": "0.41.0",
+        "dill": "0.4.1",
+        "distributed": "2026.1.1",
+        "distributed-ucxx-cu13": "0.50.1",
+        "distro": "1.9.0",
+        "dlib": "20.0.1",
+        "dm-tree": "0.1.10",
+        "docstring_parser": "0.18.0",
+        "docutils": "0.21.2",
+        "dopamine_rl": "4.1.2",
+        "duckdb": "1.3.2",
+        "earthengine-api": "1.7.39",
+        "easydict": "1.13",
+        "editdistance": "0.8.1",
+        "eerepr": "0.1.3",
+        "einops": "0.8.2",
+        "en_core_web_sm": "3.8.0",
+        "entrypoints": "0.4.2",
+        "esda": "2.9.0",
+        "et_xmlfile": "2.0.0",
+        "etils": "1.14.0",
+        "etuples": "0.3.10",
+        "fastai": "2.8.12",
+        "fastapi": "0.141.1",
+        "fastcore": "2.2.33",
+        "fastdownload": "0.0.8",
+        "fastjsonschema": "2.22.2",
+        "fastprogress": "1.1.6",
+        "fasttransform": "0.0.5",
+        "filelock": "4.2.4",
+        "firebase-admin": "6.9.0",
+        "flatbuffers": "25.12.19",
+        "flax": "0.11.2",
+        "folium": "0.20.0",
+        "fonttools": "4.67.0",
+        "formulaic": "1.2.2",
+        "fqdn": "1.6.0",
+        "frozendict": "2.4.7",
+        "frozenlist": "1.8.0",
+        "fsspec": "2025.12.0",
+        "future": "1.0.0",
+        "gast": "0.7.0",
+        "gcsfs": "2025.12.0",
+        "gdown": "5.2.2",
+        "geemap": "0.38.9",
+        "geocoder": "1.38.1",
+        "geographiclib": "2.1",
+        "geopandas": "1.2.0",
+        "geopy": "2.4.1",
+        "giddy": "2.3.9",
+        "gin-config": "0.5.0",
+        "glob2": "0.7",
+        "google": "3.0.0",
+        "google-adk": "2.7.1",
+        "google-api-core": "2.30.3",
+        "google-api-python-client": "2.201.0",
+        "google-auth": "2.49.0",
+        "google-auth-httplib2": "0.4.4",
+        "google-auth-oauthlib": "1.5.0",
+        "google-cloud-bigquery": "3.46.2",
+        "google-cloud-bigquery-connection": "1.23.0",
+        "google-cloud-bigquery-storage": "2.43.0",
+        "google-cloud-core": "2.8.0",
+        "google-cloud-dataproc": "5.32.0",
+        "google-cloud-datastore": "2.27.0",
+        "google-cloud-firestore": "2.34.1",
+        "google-cloud-functions": "1.25.0",
+        "google-cloud-language": "2.22.0",
+        "google-cloud-monitoring": "2.32.0",
+        "google-cloud-resource-manager": "1.19.0",
+        "google-cloud-spanner": "3.71.0",
+        "google-cloud-storage": "3.17.1",
+        "google-cloud-storage-control": "1.16.0",
+        "google-cloud-translate": "3.28.0",
+        "google-colab": "1.0.0",
+        "google-crc32c": "1.9.0",
+        "google-genai": "2.12.1",
+        "google-pasta": "0.2.0",
+        "google-resumable-media": "2.11.0",
+        "googleapis-common-protos": "1.75.5",
+        "googledrivedownloader": "1.1.0",
+        "gradio": "6.30.0",
+        "gradio_client": "2.7.2",
+        "grain": "0.2.18",
+        "graphviz": "0.21",
+        "groovy": "0.1.2",
+        "grpc-google-iam-v1": "0.14.5",
+        "grpc-interceptor": "0.15.4",
+        "grpcio": "1.84.0",
+        "grpcio-status": "1.84.0",
+        "grpclib": "0.4.9",
+        "gspread": "6.2.1",
+        "gspread-dataframe": "4.0.0",
+        "gym": "0.25.2",
+        "gym-notices": "0.1.0",
+        "gymnasium": "1.4.0",
+        "h11": "0.16.0",
+        "h2": "4.4.1",
+        "h5netcdf": "1.8.1",
+        "h5py": "3.14.0",
+        "hdbscan": "0.8.44",
+        "hf-gradio": "0.4.1",
+        "hf-xet": "1.7.0",
+        "highspy": "1.15.1",
+        "holidays": "0.107",
+        "holoviews": "1.23.2",
+        "hpack": "4.2.0",
+        "html5lib": "1.1",
+        "httpcore": "1.0.9",
+        "httpcore2": "2.15.1",
+        "httpimport": "1.4.1",
+        "httplib2": "0.20.4",
+        "httptools": "0.9.0",
+        "httpx": "0.28.1",
+        "httpx2": "2.15.1",
+        "huggingface_hub": "1.33.0",
+        "humanize": "4.16.0",
+        "hyperframe": "6.1.0",
+        "hyperopt": "0.3.0",
+        "ibis-framework": "9.5.0",
+        "idna": "3.20",
+        "imageio-ffmpeg": "0.6.0",
+        "imagesize": "2.0.1",
+        "imbalanced-learn": "0.14.2",
+        "immutabledict": "4.3.1",
+        "importlib_metadata": "9.0.1",
+        "imutils": "0.5.4",
+        "inequality": "1.1.2",
+        "inflect": "7.5.0",
+        "iniconfig": "2.3.1",
+        "intel-cmplr-lib-ur": "2025.3.3",
+        "intel-openmp": "2025.3.3",
+        "interface_meta": "2.0.1",
+        "ipyevents": "2.0.4",
+        "ipyfilechooser": "0.6.0",
+        "ipykernel": "6.17.1",
+        "ipyleaflet": "0.20.0",
+        "ipyparallel": "8.8.0",
+        "ipython": "7.34.0",
+        "ipython-genutils": "0.2.0",
+        "ipython-sql": "0.5.0",
+        "ipywidgets": "7.7.1",
+        "isoduration": "20.11.0",
+        "itsdangerous": "2.2.0",
+        "jaraco.classes": "3.4.0",
+        "jaraco.context": "6.1.2",
+        "jaraco.functools": "4.6.0",
+        "jax": "0.11.1",
+        "jax-cuda13-pjrt": "0.11.1",
+        "jax-cuda13-plugin": "0.11.1",
+        "jaxlib": "0.11.1",
+        "jeepney": "0.9.0",
+        "jieba": "0.42.1",
+        "jiter": "0.17.0",
+        "joblib": "1.6.0",
+        "joserfc": "1.7.7",
+        "jsonpatch": "1.36",
+        "jsonpickle": "4.1.4",
+        "jsonpointer": "3.4",
+        "jsonschema": "4.26.0",
+        "jsonschema-specifications": "2025.9.1",
+        "jupyter-console": "6.6.3",
+        "jupyter-events": "0.12.1",
+        "jupyter-leaflet": "0.20.0",
+        "jupyter_client": "7.4.9",
+        "jupyter_core": "5.9.1",
+        "jupyter_kernel_gateway": "2.5.2",
+        "jupyter_server": "2.20.0",
+        "jupyter_server_terminals": "0.5.4",
+        "jupyterlab_pygments": "0.3.0",
+        "jupyterlab_widgets": "3.0.17",
+        "jupytext": "1.19.6",
+        "kaggle": "2.0.2",
+        "kagglehub": "1.0.2",
+        "kagglesdk": "0.1.37",
+        "keras": "3.13.2",
+        "keras-hub": "0.26.0",
+        "keras-nlp": "0.26.0",
+        "keyring": "25.7.0",
+        "keyrings.google-artifactregistry-auth": "1.1.2",
+        "kiwisolver": "1.5.1",
+        "langchain": "1.4.6",
+        "langchain-core": "1.6.12",
+        "langchain-protocol": "0.0.20",
+        "langgraph": "1.2.16",
+        "langgraph-checkpoint": "4.3.0",
+        "langgraph-prebuilt": "1.1.1",
+        "langgraph-sdk": "0.4.8",
+        "langsmith": "0.14.11",
+        "lark": "1.3.1",
+        "launchpadlib": "1.11.0",
+        "lazr.restfulclient": "0.14.6",
+        "lazr.uri": "1.0.6",
+        "lazy-loader": "0.6",
+        "libclang": "18.1.1",
+        "libcudf-cu13": "26.6.0",
+        "libcugraph-cu13": "26.6.0",
+        "libcuml-cu13": "26.6.0",
+        "libcuvs-cu13": "26.6.0",
+        "libkvikio-cu13": "26.6.0",
+        "libnvforest-cu13": "26.6.0",
+        "libpysal": "4.14.1",
+        "libraft-cu13": "26.6.0",
+        "librapidsmpf-cu13": "26.6.0",
+        "librmm-cu13": "26.6.0",
+        "librosa": "0.11.0",
+        "libucx-cu13": "1.20.1",
+        "libucxx-cu13": "0.50.0",
+        "lightgbm": "4.6.0",
+        "linkify-it-py": "2.2.0",
+        "llvmlite": "0.44.0",
+        "locket": "1.0.0",
+        "logical-unification": "0.4.7",
+        "lxml": "6.1.3",
+        "lz4": "4.4.5",
+        "mapclassify": "2.10.0",
+        "markdown-it-py": "4.2.0",
+        "matplotlib": "3.10.0",
+        "matplotlib-inline": "0.2.2",
+        "matplotlib-venn": "1.1.2",
+        "mdit-py-plugins": "0.6.1",
+        "mdurl": "0.1.2",
+        "mgwr": "2.2.1",
+        "miniKanren": "1.0.5",
+        "missingno": "0.5.2",
+        "mistune": "3.4.0",
+        "mizani": "0.13.5",
+        "mkl": "2025.3.1",
+        "ml_dtypes": "0.6.0",
+        "mlxtend": "0.23.4",
+        "mmh3": "5.3.1",
+        "momepy": "0.11.0",
+        "more-itertools": "10.8.0",
+        "moviepy": "1.0.3",
+        "mpmath": "1.3.0",
+        "msgpack": "1.2.3",
+        "multidict": "7.1.0",
+        "multipledispatch": "1.0.0",
+        "multiprocess": "0.70.19",
+        "multitasking": "0.0.13",
+        "murmurhash": "1.0.15",
+        "music21": "9.9.2",
+        "namex": "0.1.0",
+        "narwhals": "2.27.1",
+        "natsort": "8.4.0",
+        "nbclassic": "1.3.3",
+        "nbclient": "0.10.4",
+        "nbconvert": "7.17.2",
+        "nbformat": "5.11.1",
+        "ndindex": "1.10.1",
+        "nest-asyncio": "1.6.0",
+        "networkx": "3.7",
+        "nh3": "0.3.7",
+        "nibabel": "5.4.2",
+        "nltk": "3.9.1",
+        "notebook": "6.5.7",
+        "notebook_shim": "0.2.4",
+        "numba": "0.61.2",
+        "numba-cuda": "0.28.2",
+        "numexpr": "2.14.2",
+        "numpy": "1.26.4",
+        "nvforest-cu13": "26.6.0",
+        "nvidia-cublas": "13.1.0.3",
+        "nvidia-cublas-cu12": "12.9.2.10",
+        "nvidia-cuda-cccl": "13.0.85",
+        "nvidia-cuda-crt": "13.4.92",
+        "nvidia-cuda-cupti": "13.0.85",
+        "nvidia-cuda-cupti-cu12": "12.9.79",
+        "nvidia-cuda-nvcc": "13.0.88",
+        "nvidia-cuda-nvcc-cu12": "12.9.86",
+        "nvidia-cuda-nvrtc": "13.0.88",
+        "nvidia-cuda-nvrtc-cu12": "12.9.86",
+        "nvidia-cuda-runtime": "13.0.96",
+        "nvidia-cuda-runtime-cu12": "12.9.79",
+        "nvidia-cudnn-cu12": "9.27.0.42",
+        "nvidia-cudnn-cu13": "9.19.0.56",
+        "nvidia-cufft": "12.0.0.61",
+        "nvidia-cufft-cu12": "11.4.1.4",
+        "nvidia-cufile": "1.15.1.6",
+        "nvidia-curand": "10.4.0.35",
+        "nvidia-curand-cu12": "10.3.10.19",
+        "nvidia-cusolver": "12.0.4.66",
+        "nvidia-cusolver-cu12": "11.7.5.82",
+        "nvidia-cusparse": "12.6.3.3",
+        "nvidia-cusparse-cu12": "12.5.10.65",
+        "nvidia-cusparselt-cu13": "0.8.0",
+        "nvidia-libnvcomp-cu13": "5.2.0.13",
+        "nvidia-ml-py": "13.615.71",
+        "nvidia-nccl-cu12": "2.32.3",
+        "nvidia-nccl-cu13": "2.28.9",
+        "nvidia-nvimgcodec-cu13": "0.8.0.22",
+        "nvidia-nvjitlink": "13.0.88",
+        "nvidia-nvjitlink-cu12": "12.9.86",
+        "nvidia-nvshmem-cu13": "3.4.5",
+        "nvidia-nvtx": "13.0.85",
+        "nvidia-nvvm": "13.0.88",
+        "nvtx": "0.2.16",
+        "nx-cugraph-cu13": "26.6.0",
+        "oauth2client": "4.1.3",
+        "oauthlib": "3.2.2",
+        "omegaconf": "2.4.0",
+        "onemkl-license": "2025.3.1",
+        "openai": "2.54.0",
+        "opencv-contrib-python": "4.14.0.94",
+        "opencv-python": "5.0.0.93",
+        "opencv-python-headless": "5.0.0.93",
+        "openpyxl": "3.1.5",
+        "opentelemetry-api": "1.42.1",
+        "opentelemetry-resourcedetector-gcp": "1.14.0",
+        "opentelemetry-sdk": "1.42.1",
+        "opentelemetry-semantic-conventions": "0.63b1",
+        "opt_einsum": "3.4.0",
+        "optax": "0.2.8",
+        "optree": "0.20.0",
+        "orbax-checkpoint": "0.12.8",
+        "orjson": "3.13.0",
+        "orloge": "1.0.0",
+        "ormsgpack": "1.13.0",
+        "osqp": "1.1.3",
+        "packaging": "24.0",
+        "pandas": "2.2.3",
+        "pandas-datareader": "0.11.1",
+        "pandas-gbq": "0.30.0",
+        "pandas-stubs": "2.2.3.250527",
+        "pandocfilters": "1.5.1",
+        "panel": "1.9.4",
+        "panel-material-ui": "0.16.5",
+        "param": "2.4.2",
+        "parso": "0.8.7",
+        "parsy": "2.2",
+        "partd": "1.4.2",
+        "patsy": "1.0.3",
+        "peewee": "4.5.3",
+        "peft": "0.21.2",
+        "pexpect": "4.9.0",
+        "pickleshare": "0.7.5",
+        "pillow": "11.3.0",
+        "pip": "26.2.2",
+        "platformdirs": "4.13.5",
+        "plotly": "5.24.1",
+        "plotnine": "0.14.5",
+        "pluggy": "1.7.0",
+        "plum-dispatch": "2.9.0",
+        "pointpats": "2.5.5",
+        "polars": "1.35.2",
+        "polars-runtime-32": "1.35.2",
+        "pooch": "1.9.0",
+        "portpicker": "1.6.0",
+        "preshed": "3.0.13",
+        "prettytable": "3.18.0",
+        "proglog": "0.1.12",
+        "progressbar2": "4.5.0",
+        "prometheus_client": "0.26.0",
+        "promise": "2.3",
+        "prompt_toolkit": "3.0.53",
+        "propcache": "0.5.4",
+        "prophet": "1.5.0",
+        "proto-plus": "1.29.0",
+        "protobuf": "6.33.6",
+        "psutil": "5.9.5",
+        "psycopg2": "2.9.13",
+        "psygnal": "0.16.1",
+        "ptyprocess": "0.7.0",
+        "py-cpuinfo": "9.0.0",
+        "py4j": "0.10.9.9",
+        "pyOpenSSL": "26.4.0",
+        "pyarrow": "23.0.1",
+        "pyasn1": "0.6.4",
+        "pyasn1_modules": "0.4.2",
+        "pycairo": "1.29.2",
+        "pycocotools": "2.0.11",
+        "pycparser": "3.11",
+        "pycryptodomex": "3.24.1",
+        "pydantic": "2.14.1",
+        "pydantic_core": "2.50.1",
+        "pydata-google-auth": "1.9.1",
+        "pydot": "4.0.1",
+        "pydotplus": "2.0.2",
+        "pydub": "0.25.1",
+        "pyerfa": "2.0.1.5",
+        "pyg_lib": "0.9.0+pt211cu130",
+        "pygame": "2.6.1",
+        "pygit2": "1.20.1",
+        "pyiceberg": "0.12.0",
+        "pylibcudf-cu13": "26.6.0",
+        "pylibcugraph-cu13": "26.6.0",
+        "pylibraft-cu13": "26.6.0",
+        "pymc": "5.28.5",
+        "pynndescent": "0.6.0",
+        "pyogrio": "0.13.0",
+        "pyomo": "6.10.1",
+        "pyparsing": "3.1.1",
+        "pyperclip": "1.11.0",
+        "pyproj": "3.8.0",
+        "pyroaring": "1.2.0",
+        "pysal": "25.7",
+        "pyshp": "3.1.6",
+        "pyspark": "4.0.4",
+        "pytensor": "2.38.3",
+        "pytest": "9.1.1",
+        "python-apt": "2.7.7+ubuntu5.3",
+        "python-box": "7.4.1",
+        "python-dateutil": "2.9.0.post0",
+        "python-dotenv": "1.2.4",
+        "python-fasthtml": "0.14.14",
+        "python-json-logger": "4.2.0",
+        "python-louvain": "0.16",
+        "python-multipart": "0.0.32",
+        "python-slugify": "9.1.3",
+        "python-snappy": "0.7.3",
+        "python-utils": "4.1.4",
+        "pytorch-frame": "0.3.0",
+        "pytz": "2025.2",
+        "pyviz_comms": "3.0.6",
+        "pyzmq": "27.0.2",
+        "quantecon": "0.13.1",
+        "raft-dask-cu13": "26.6.0",
+        "rapids-dask-dependency": "26.6.0",
+        "rapids-logger": "0.2.3",
+        "rapidsmpf-cu13": "26.6.0",
+        "rasterio": "1.5.2",
+        "rasterstats": "0.21.0",
+        "ratelim": "0.1.6",
+        "referencing": "0.37.0",
+        "regex": "2025.11.3",
+        "relbench": "3.0.2",
+        "requests": "2.32.4",
+        "requests-oauthlib": "2.0.0",
+        "requests-toolbelt": "1.0.0",
+        "requirements-parser": "0.9.0",
+        "rfc3339-validator": "0.1.4",
+        "rfc3986-validator": "0.1.1",
+        "rfc3987-syntax": "1.1.0",
+        "rich": "13.9.4",
+        "rmm-cu13": "26.6.0",
+        "roman-numerals": "4.1.0",
+        "roman-numerals-py": "4.1.0",
+        "rpds-py": "2026.9.1",
+        "rpy2": "3.5.17",
+        "rsa": "4.9.1",
+        "rtree": "1.4.1",
+        "ruff": "0.15.0",
+        "safehttpx": "0.1.7",
+        "safetensors": "0.8.0",
+        "scikit-image": "0.25.2",
+        "scikit-learn": "1.6.1",
+        "scipy": "1.16.3",
+        "scooby": "0.12.0",
+        "scs": "3.3.1",
+        "seaborn": "0.13.2",
+        "segregation": "2.5.4",
+        "semantic-version": "2.10.0",
+        "sentence-transformers": "5.7.0",
+        "sentencepiece": "0.2.2",
+        "sentry-sdk": "2.72.0",
+        "setuptools": "68.1.2",
+        "shap": "0.54.1",
+        "shapely": "2.2.0",
+        "shellingham": "1.5.4",
+        "simple-parsing": "0.1.9",
+        "simplejson": "4.2.0",
+        "simsimd": "6.5.16",
+        "six": "1.16.0",
+        "sklearn-compat": "0.1.6",
+        "sklearn-pandas": "2.2.0",
+        "slicer": "0.0.8",
+        "smart_open": "8.0.4",
+        "sniffio": "1.3.1",
+        "snowballstemmer": "3.1.1",
+        "sortedcontainers": "2.4.0",
+        "soundfile": "0.14.0",
+        "soupsieve": "3.0.3",
+        "soxr": "1.1.0",
+        "spacy": "3.8.16",
+        "spacy-legacy": "3.0.12",
+        "spacy-loggers": "1.0.5",
+        "spaghetti": "1.7.6",
+        "spanner-graph-notebook": "1.1.11",
+        "spglm": "1.1.0",
+        "sphinxcontrib-applehelp": "2.0.0",
+        "sphinxcontrib-devhelp": "2.0.0",
+        "sphinxcontrib-htmlhelp": "2.1.0",
+        "sphinxcontrib-jsmath": "2.0.0",
+        "sphinxcontrib-qthelp": "2.0.0",
+        "sphinxcontrib-serializinghtml": "2.0.0",
+        "spint": "1.1.0",
+        "splot": "1.1.7",
+        "spopt": "0.7.0",
+        "spreg": "1.9.0",
+        "sqlglot": "25.20.2",
+        "sqlparse": "0.6.0",
+        "srsly": "2.5.4",
+        "standard-aifc": "3.13.0",
+        "standard-chunk": "3.13.0",
+        "standard-sunau": "3.13.0",
+        "stanio": "0.5.1",
+        "starlette": "1.9.0",
+        "statsmodels": "0.15.0",
+        "strictyaml": "1.7.3",
+        "stringzilla": "5.3.1",
+        "stumpy": "1.14.1",
+        "sympy": "1.14.0",
+        "tables": "3.10.2",
+        "tabulate": "0.9.0",
+        "tbb": "2022.3.1",
+        "tblib": "3.2.2",
+        "tcmlib": "1.6.0",
+        "temporal-relational-gnn": "0.1.0",
+        "tenacity": "9.1.4",
+        "tensorboard": "2.21.0",
+        "tensorboard-data-server": "0.7.2",
+        "tensorflow": "2.21.0",
+        "tensorflow-datasets": "4.9.10",
+        "tensorflow-hub": "0.16.1",
+        "tensorflow-metadata": "1.21.0",
+        "tensorflow-probability": "0.25.0",
+        "tensorflow-text": "2.21.1",
+        "tensorstore": "0.1.85",
+        "termcolor": "3.3.0",
+        "terminado": "0.18.1",
+        "text-unidecode": "1.3",
+        "textblob": "0.19.0",
+        "tf-slim": "1.1.0",
+        "tf_keras": "2.21.0",
+        "thinc": "8.3.13",
+        "threadpoolctl": "3.7.0",
+        "tifffile": "2026.10.15",
+        "tiktoken": "0.14.0",
+        "timm": "1.0.30",
+        "tinycss2": "1.5.1",
+        "tobler": "0.14.0",
+        "tokenizers": "0.23.3",
+        "toml": "0.10.2",
+        "tomlkit": "0.14.0",
+        "toolz": "0.12.1",
+        "torch": "2.11.0+cu130",
+        "torch-geometric": "2.8.1",
+        "torchao": "0.10.0",
+        "torchaudio": "2.11.0+cu130",
+        "torchcodec": "0.11.0+cu130",
+        "torchdata": "0.11.0",
+        "torchsummary": "1.5.1",
+        "torchtune": "0.6.1",
+        "torchvision": "0.26.0+cu130",
+        "tornado": "6.5.7",
+        "tqdm": "4.67.3",
+        "traitlets": "5.7.1",
+        "traittypes": "0.2.3",
+        "transformers": "5.20.2",
+        "treelite": "4.7.2",
+        "treescope": "0.1.10",
+        "triton": "3.6.0",
+        "truststore": "0.10.5",
+        "tsfresh": "0.21.2",
+        "tweepy": "4.17.0",
+        "typeguard": "4.6.0",
+        "typer": "0.27.3",
+        "types-pytz": "2026.5.0.20261006",
+        "types-setuptools": "84.0.0.20261006",
+        "typing-inspection": "0.4.4",
+        "typing_extensions": "4.16.0",
+        "tzdata": "2026.5",
+        "tzlocal": "5.4.4",
+        "ucxx-cu13": "0.50.0",
+        "umap-learn": "0.5.12",
+        "umf": "1.0.3",
+        "uri-template": "1.3.0",
+        "uritemplate": "4.2.0",
+        "urllib3": "2.5.0",
+        "uuid_utils": "0.18.0",
+        "uvicorn": "0.54.0",
+        "uvloop": "0.23.0",
+        "vega-datasets": "0.9.0",
+        "wadllib": "1.3.6",
+        "wandb": "0.28.1",
+        "wasabi": "1.1.3",
+        "watchdog": "6.0.0",
+        "watchfiles": "1.3.0",
+        "wcwidth": "0.9.3",
+        "weasel": "1.0.0",
+        "webcolors": "25.10.0",
+        "webencodings": "0.6.1",
+        "websocket-client": "1.9.2",
+        "websockets": "15.0.1",
+        "wheel": "0.48.0",
+        "widgetsnbextension": "3.6.10",
+        "wordcloud": "1.9.6",
+        "wrapt": "2.5.1",
+        "xarray": "2025.12.0",
+        "xarray-einstats": "0.11.0",
+        "xee": "0.1.2",
+        "xgboost": "3.4.1",
+        "xlrd": "2.0.2",
+        "xxhash": "4.0.2",
+        "xyzservices": "2026.9.1",
+        "yarl": "1.25.1",
+        "ydf": "0.15.0",
+        "ydf_tf": "2.21.0",
+        "yellowbrick": "1.5",
+        "yfinance": "0.2.66",
+        "zict": "3.0.0",
+        "zipp": "4.1.1",
+        "zstandard": "0.25.0"
+      },
+      "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+      "python": "3.13.16",
+      "recorded_at_utc": "2026-10-24T10:30:48.624917+00:00",
+      "torch": "2.11.0+cu130"
+    },
+    "gpu_identity": {
+      "device_index": 0,
+      "driver_version": "580.82.07",
+      "name": "Tesla T4",
+      "status": "available",
+      "total_memory_mib": 15360.0,
+      "uuid": "GPU-7ad0969b-f28e-fddc-f813-8e8eea01dd20"
+    },
+    "session_id": "e0893a64a58347799b55e1f3e03a4775"
+  },
+  "query_count": 32,
+  "query_indices": [
+    3392,
+    3393,
+    3394,
+    3395,
+    3396,
+    3397,
+    3398,
+    3399,
+    3400,
+    3401,
+    3402,
+    3403,
+    3404,
+    3405,
+    3406,
+    3407,
+    3408,
+    3409,
+    3410,
+    3411,
+    3412,
+    3413,
+    3414,
+    3415,
+    3416,
+    3417,
+    3418,
+    3419,
+    3420,
+    3421,
+    3422,
+    3423
+  ],
+  "sampler_pairing": "CPU torch RNG reset per paired pass; full sampler fingerprints checked",
+  "sampling_seed": 2162,
+  "session_id": "e0893a64a58347799b55e1f3e03a4775",
+  "status": "passed",
+  "trials": [
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250368,
+          "peak_allocated_bytes": 15430656,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 317952,
+          "peak_allocated_bytes": 15498240,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 373760,
+          "peak_allocated_bytes": 15554048,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "reference",
+        "hgam",
+        "blocks"
+      ],
+      "pipeline_ms": {
+        "blocks": 22.020071,
+        "hgam": 24.55095,
+        "reference": 26.520199
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            13
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2162,
+      "sampler_sha256": "c3839462cfbcb10543efe597b895ac4c57bdd72b631fec16afcc746a56e24607",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.961795,
+          "feature_gather": 1.378323,
+          "message_passing": 10.97076,
+          "readout": 0.15794,
+          "sampling": 0.726907,
+          "transfer": 1.738627
+        },
+        "hgam": {
+          "encoding": 7.862608,
+          "feature_gather": 1.072573,
+          "message_passing": 12.726891,
+          "readout": 0.101567,
+          "sampling": 0.742117,
+          "transfer": 1.626121
+        },
+        "reference": {
+          "encoding": 13.223857,
+          "feature_gather": 1.744599,
+          "message_passing": 25.465801,
+          "readout": 0.103975,
+          "sampling": 0.750099,
+          "transfer": 2.679121
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "reference",
+        "blocks",
+        "hgam"
+      ],
+      "pipeline_ms": {
+        "blocks": 23.969406,
+        "hgam": 24.370408,
+        "reference": 25.911185
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            15
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2163,
+      "sampler_sha256": "b743b779b8bbf9ce10489bf2f62c351917adc1f9beec75ba2f5354f1e5a8b16a",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.194353,
+          "feature_gather": 1.069865,
+          "message_passing": 10.603876,
+          "readout": 0.097996,
+          "sampling": 0.906832,
+          "transfer": 1.626323
+        },
+        "hgam": {
+          "encoding": 7.84445,
+          "feature_gather": 1.089303,
+          "message_passing": 12.697957,
+          "readout": 0.101848,
+          "sampling": 0.722811,
+          "transfer": 1.869723
+        },
+        "reference": {
+          "encoding": 9.980684,
+          "feature_gather": 1.273852,
+          "message_passing": 14.186794,
+          "readout": 0.099023,
+          "sampling": 0.947029,
+          "transfer": 1.648401
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250368,
+          "peak_allocated_bytes": 15430656,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 317952,
+          "peak_allocated_bytes": 15498240,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 373760,
+          "peak_allocated_bytes": 15554048,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "hgam",
+        "reference"
+      ],
+      "pipeline_ms": {
+        "blocks": 21.658092,
+        "hgam": 24.297788,
+        "reference": 42.289144
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            13
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2164,
+      "sampler_sha256": "563c1580daadf5613664c5988dc637094f0b258faf7e9666beb30e5394cf5dcb",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.655497,
+          "feature_gather": 1.134328,
+          "message_passing": 10.040224,
+          "readout": 0.098942,
+          "sampling": 0.803692,
+          "transfer": 1.713327
+        },
+        "hgam": {
+          "encoding": 8.134282,
+          "feature_gather": 1.072099,
+          "message_passing": 12.266309,
+          "readout": 0.112431,
+          "sampling": 0.740392,
+          "transfer": 1.994211
+        },
+        "reference": {
+          "encoding": 14.250431,
+          "feature_gather": 2.044671,
+          "message_passing": 23.6582,
+          "readout": 0.168823,
+          "sampling": 1.275936,
+          "transfer": 4.277807
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250368,
+          "peak_allocated_bytes": 15430656,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 317952,
+          "peak_allocated_bytes": 15498240,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 373760,
+          "peak_allocated_bytes": 15554048,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "reference",
+        "hgam"
+      ],
+      "pipeline_ms": {
+        "blocks": 31.072101,
+        "hgam": 24.950736,
+        "reference": 25.825551
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            13
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2165,
+      "sampler_sha256": "07d29764e88d73c7fbc1ce25cc0047f706a44e279985db14f21783f93a384c45",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 7.973166,
+          "feature_gather": 1.206608,
+          "message_passing": 12.192459,
+          "readout": 0.115189,
+          "sampling": 0.785805,
+          "transfer": 1.637687
+        },
+        "hgam": {
+          "encoding": 8.236604,
+          "feature_gather": 1.156771,
+          "message_passing": 12.399689,
+          "readout": 0.099971,
+          "sampling": 0.736865,
+          "transfer": 2.07656
+        },
+        "reference": {
+          "encoding": 8.123718,
+          "feature_gather": 1.069266,
+          "message_passing": 13.917103,
+          "readout": 0.108034,
+          "sampling": 0.827388,
+          "transfer": 1.705501
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "hgam",
+        "reference"
+      ],
+      "pipeline_ms": {
+        "blocks": 22.759927,
+        "hgam": 24.840944,
+        "reference": 24.221149
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            15
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2166,
+      "sampler_sha256": "b82facebe03ea7321a55cd904083ef269111fe1ef8deb003935de3ed5d1fa608",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.187929,
+          "feature_gather": 1.06969,
+          "message_passing": 10.120471,
+          "readout": 0.100129,
+          "sampling": 0.799126,
+          "transfer": 1.632422
+        },
+        "hgam": {
+          "encoding": 8.274111,
+          "feature_gather": 1.067154,
+          "message_passing": 12.330056,
+          "readout": 0.130903,
+          "sampling": 0.736935,
+          "transfer": 1.643522
+        },
+        "reference": {
+          "encoding": 7.892122,
+          "feature_gather": 1.067929,
+          "message_passing": 14.057175,
+          "readout": 0.102431,
+          "sampling": 0.725884,
+          "transfer": 1.768332
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "reference",
+        "blocks",
+        "hgam"
+      ],
+      "pipeline_ms": {
+        "blocks": 24.679258,
+        "hgam": 36.180775,
+        "reference": 24.874771
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2167,
+      "sampler_sha256": "ee6bc07ade47144617887c8c89b1c110492e3d6dac60766728494e2429a93bcb",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 9.218654,
+          "feature_gather": 1.140144,
+          "message_passing": 10.609202,
+          "readout": 0.160195,
+          "sampling": 0.785806,
+          "transfer": 1.826004
+        },
+        "hgam": {
+          "encoding": 8.415164,
+          "feature_gather": 1.070663,
+          "message_passing": 12.777527,
+          "readout": 0.119091,
+          "sampling": 0.789603,
+          "transfer": 1.631785
+        },
+        "reference": {
+          "encoding": 8.500844,
+          "feature_gather": 1.259344,
+          "message_passing": 16.062783,
+          "readout": 0.125317,
+          "sampling": 0.875858,
+          "transfer": 1.772758
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 249856,
+          "peak_allocated_bytes": 15430144,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 316416,
+          "peak_allocated_bytes": 15496704,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 371712,
+          "peak_allocated_bytes": 15552000,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "hgam",
+        "blocks",
+        "reference"
+      ],
+      "pipeline_ms": {
+        "blocks": 22.837498,
+        "hgam": 24.624146,
+        "reference": 24.446325
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            11
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2168,
+      "sampler_sha256": "dbbecbd5242b14115e5e86665feee553272e79e2585cf9879a6baf17baec8b2f",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.475554,
+          "feature_gather": 1.22455,
+          "message_passing": 10.798072,
+          "readout": 0.098522,
+          "sampling": 0.956673,
+          "transfer": 1.760897
+        },
+        "hgam": {
+          "encoding": 8.615918,
+          "feature_gather": 1.069047,
+          "message_passing": 13.382874,
+          "readout": 0.138189,
+          "sampling": 0.739754,
+          "transfer": 1.727566
+        },
+        "reference": {
+          "encoding": 8.349884,
+          "feature_gather": 1.150311,
+          "message_passing": 13.210556,
+          "readout": 0.213718,
+          "sampling": 0.728759,
+          "transfer": 1.882098
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "reference",
+        "hgam"
+      ],
+      "pipeline_ms": {
+        "blocks": 21.977714,
+        "hgam": 23.95458,
+        "reference": 26.036302
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2169,
+      "sampler_sha256": "9e836ebadda3f37dcfae04e087c97859da05bc0d7ed77012cfd4f38453599ea9",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.032039,
+          "feature_gather": 1.118526,
+          "message_passing": 10.244821,
+          "readout": 0.100647,
+          "sampling": 0.799127,
+          "transfer": 1.775939
+        },
+        "hgam": {
+          "encoding": 8.410676,
+          "feature_gather": 1.309773,
+          "message_passing": 13.644006,
+          "readout": 0.10079,
+          "sampling": 0.792371,
+          "transfer": 1.668642
+        },
+        "reference": {
+          "encoding": 7.848401,
+          "feature_gather": 1.096769,
+          "message_passing": 14.181526,
+          "readout": 0.102745,
+          "sampling": 0.741825,
+          "transfer": 1.647685
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "hgam",
+        "reference",
+        "blocks"
+      ],
+      "pipeline_ms": {
+        "blocks": 24.572443,
+        "hgam": 25.81743,
+        "reference": 25.84348
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2170,
+      "sampler_sha256": "2ef53ee5c9a364db4ace9701e09feca964799627ef645a87d303c7e07b8e4bb2",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.064009,
+          "feature_gather": 1.08183,
+          "message_passing": 9.94899,
+          "readout": 0.100711,
+          "sampling": 0.764352,
+          "transfer": 1.706768
+        },
+        "hgam": {
+          "encoding": 10.983068,
+          "feature_gather": 1.171084,
+          "message_passing": 19.950067,
+          "readout": 0.165111,
+          "sampling": 0.849003,
+          "transfer": 1.725257
+        },
+        "reference": {
+          "encoding": 8.681444,
+          "feature_gather": 1.106031,
+          "message_passing": 13.154502,
+          "readout": 0.101968,
+          "sampling": 0.737237,
+          "transfer": 1.714913
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "hgam",
+        "reference",
+        "blocks"
+      ],
+      "pipeline_ms": {
+        "blocks": 21.68483,
+        "hgam": 23.704632,
+        "reference": 26.566593
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2171,
+      "sampler_sha256": "f7b7323c9030f22066b09552b87bd670bda2a51507e42c082e5a69351d12109a",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.085064,
+          "feature_gather": 1.178463,
+          "message_passing": 10.652695,
+          "readout": 0.101941,
+          "sampling": 0.807439,
+          "transfer": 1.649785
+        },
+        "hgam": {
+          "encoding": 9.116743,
+          "feature_gather": 1.199853,
+          "message_passing": 13.029287,
+          "readout": 0.099667,
+          "sampling": 0.763824,
+          "transfer": 1.723719
+        },
+        "reference": {
+          "encoding": 9.477239,
+          "feature_gather": 1.086351,
+          "message_passing": 13.246274,
+          "readout": 0.105749,
+          "sampling": 0.734845,
+          "transfer": 1.643389
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "reference",
+        "hgam",
+        "blocks"
+      ],
+      "pipeline_ms": {
+        "blocks": 24.59775,
+        "hgam": 25.692595,
+        "reference": 24.778259
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2172,
+      "sampler_sha256": "2fe4bb915b895309f623b19a3bd42fd6fea019b28d60d9eadb4cd833770e0076",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 7.835425,
+          "feature_gather": 1.075318,
+          "message_passing": 10.978404,
+          "readout": 0.106617,
+          "sampling": 0.722671,
+          "transfer": 1.751604
+        },
+        "hgam": {
+          "encoding": 8.029794,
+          "feature_gather": 1.307529,
+          "message_passing": 12.40279,
+          "readout": 0.113245,
+          "sampling": 0.799028,
+          "transfer": 1.706135
+        },
+        "reference": {
+          "encoding": 7.718335,
+          "feature_gather": 1.063236,
+          "message_passing": 13.699575,
+          "readout": 0.122939,
+          "sampling": 0.726094,
+          "transfer": 1.753175
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "reference",
+        "hgam",
+        "blocks"
+      ],
+      "pipeline_ms": {
+        "blocks": 23.762477,
+        "hgam": 36.037573,
+        "reference": 25.794682
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2173,
+      "sampler_sha256": "3ffda8aa493336f29fc22169a05b0b654561f99f652615db6d7d20f6d9cab877",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.314685,
+          "feature_gather": 1.217876,
+          "message_passing": 11.506091,
+          "readout": 0.134134,
+          "sampling": 0.744227,
+          "transfer": 1.657652
+        },
+        "hgam": {
+          "encoding": 8.050916,
+          "feature_gather": 1.073661,
+          "message_passing": 12.095178,
+          "readout": 0.119063,
+          "sampling": 0.737302,
+          "transfer": 1.629858
+        },
+        "reference": {
+          "encoding": 8.055159,
+          "feature_gather": 1.067615,
+          "message_passing": 17.239099,
+          "readout": 0.143363,
+          "sampling": 0.742231,
+          "transfer": 1.744995
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "hgam",
+        "blocks",
+        "reference"
+      ],
+      "pipeline_ms": {
+        "blocks": 24.164399,
+        "hgam": 25.573172,
+        "reference": 24.731974
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2174,
+      "sampler_sha256": "705e9ceaa5c2825ae2832f4b5ffd843d7f7b6bb09ad3ba52e81f2fb510d08cf2",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.047152,
+          "feature_gather": 1.175883,
+          "message_passing": 10.063096,
+          "readout": 0.120575,
+          "sampling": 0.842221,
+          "transfer": 1.815346
+        },
+        "hgam": {
+          "encoding": 8.138346,
+          "feature_gather": 1.140161,
+          "message_passing": 13.287655,
+          "readout": 0.105251,
+          "sampling": 0.742416,
+          "transfer": 1.802535
+        },
+        "reference": {
+          "encoding": 8.118207,
+          "feature_gather": 1.156508,
+          "message_passing": 13.362523,
+          "readout": 0.110358,
+          "sampling": 0.767559,
+          "transfer": 1.871045
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250368,
+          "peak_allocated_bytes": 15430656,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 317952,
+          "peak_allocated_bytes": 15498240,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 373760,
+          "peak_allocated_bytes": 15554048,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "hgam",
+        "reference",
+        "blocks"
+      ],
+      "pipeline_ms": {
+        "blocks": 27.801623,
+        "hgam": 24.194896,
+        "reference": 26.554916
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            12
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2175,
+      "sampler_sha256": "19be45b0dda2fe719e445e23b545035c2c167d74fa5a08ce3b3432de29b24b69",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.50176,
+          "feature_gather": 1.073494,
+          "message_passing": 10.617758,
+          "readout": 0.11362,
+          "sampling": 0.802372,
+          "transfer": 1.668439
+        },
+        "hgam": {
+          "encoding": 8.422968,
+          "feature_gather": 1.073029,
+          "message_passing": 12.784304,
+          "readout": 0.113368,
+          "sampling": 0.738334,
+          "transfer": 1.739722
+        },
+        "reference": {
+          "encoding": 8.577914,
+          "feature_gather": 1.443576,
+          "message_passing": 13.925141,
+          "readout": 0.106346,
+          "sampling": 0.90779,
+          "transfer": 1.712765
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250368,
+          "peak_allocated_bytes": 15430656,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 317952,
+          "peak_allocated_bytes": 15498240,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 373760,
+          "peak_allocated_bytes": 15554048,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "reference",
+        "hgam"
+      ],
+      "pipeline_ms": {
+        "blocks": 22.372652,
+        "hgam": 24.325864,
+        "reference": 26.846451
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            13
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2176,
+      "sampler_sha256": "a5df24bc598305eedffa0d16daf647d32ffdf81e7e194006d2257690b9c97e69",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.669541,
+          "feature_gather": 1.115471,
+          "message_passing": 12.811502,
+          "readout": 0.12486,
+          "sampling": 0.874748,
+          "transfer": 1.682927
+        },
+        "hgam": {
+          "encoding": 8.475584,
+          "feature_gather": 1.263669,
+          "message_passing": 12.394154,
+          "readout": 0.158354,
+          "sampling": 0.723471,
+          "transfer": 1.683955
+        },
+        "reference": {
+          "encoding": 7.92976,
+          "feature_gather": 1.06372,
+          "message_passing": 14.693803,
+          "readout": 0.099561,
+          "sampling": 0.733389,
+          "transfer": 1.702742
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250368,
+          "peak_allocated_bytes": 15430656,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 317952,
+          "peak_allocated_bytes": 15498240,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 373760,
+          "peak_allocated_bytes": 15554048,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "hgam",
+        "blocks",
+        "reference"
+      ],
+      "pipeline_ms": {
+        "blocks": 23.595218,
+        "hgam": 25.190442,
+        "reference": 25.630264
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            13
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2177,
+      "sampler_sha256": "2ca1327e90a53c2fe713d82afd32699bd6826630fa7ab0eabedb448f9aeebb2d",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 7.921196,
+          "feature_gather": 1.309984,
+          "message_passing": 10.711873,
+          "readout": 0.116383,
+          "sampling": 0.733051,
+          "transfer": 1.805419
+        },
+        "hgam": {
+          "encoding": 8.13865,
+          "feature_gather": 1.26476,
+          "message_passing": 13.16725,
+          "readout": 0.117328,
+          "sampling": 0.773403,
+          "transfer": 1.755508
+        },
+        "reference": {
+          "encoding": 8.760719,
+          "feature_gather": 1.070483,
+          "message_passing": 13.920248,
+          "readout": 0.098929,
+          "sampling": 0.798187,
+          "transfer": 1.7182
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250368,
+          "peak_allocated_bytes": 15430656,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 317952,
+          "peak_allocated_bytes": 15498240,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 373760,
+          "peak_allocated_bytes": 15554048,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "reference",
+        "hgam"
+      ],
+      "pipeline_ms": {
+        "blocks": 22.010847,
+        "hgam": 23.580812,
+        "reference": 26.10238
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            13
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2178,
+      "sampler_sha256": "491c909c47a757e7303159fd5d4070578baf42ca463349411e1ef376a9cd1594",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.467498,
+          "feature_gather": 1.454011,
+          "message_passing": 12.509454,
+          "readout": 0.176179,
+          "sampling": 0.743956,
+          "transfer": 2.004395
+        },
+        "hgam": {
+          "encoding": 7.935562,
+          "feature_gather": 1.088382,
+          "message_passing": 15.283292,
+          "readout": 0.175004,
+          "sampling": 0.720202,
+          "transfer": 1.635209
+        },
+        "reference": {
+          "encoding": 7.882247,
+          "feature_gather": 1.260643,
+          "message_passing": 12.990401,
+          "readout": 0.098296,
+          "sampling": 0.730084,
+          "transfer": 1.746308
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "hgam",
+        "reference"
+      ],
+      "pipeline_ms": {
+        "blocks": 32.021312,
+        "hgam": 25.539564,
+        "reference": 24.718227
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            15
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2179,
+      "sampler_sha256": "cd987613f11f85bf30da6d490ef2621f509810a1997d588bc2e6c0aa3cd3ead7",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 8.461243,
+          "feature_gather": 1.105952,
+          "message_passing": 10.540688,
+          "readout": 0.10806,
+          "sampling": 0.81175,
+          "transfer": 1.651675
+        },
+        "hgam": {
+          "encoding": 8.640044,
+          "feature_gather": 1.122854,
+          "message_passing": 13.374743,
+          "readout": 0.117865,
+          "sampling": 0.732151,
+          "transfer": 1.645175
+        },
+        "reference": {
+          "encoding": 7.921266,
+          "feature_gather": 1.093404,
+          "message_passing": 13.72734,
+          "readout": 0.098879,
+          "sampling": 0.734538,
+          "transfer": 1.714947
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "blocks",
+        "reference",
+        "hgam"
+      ],
+      "pipeline_ms": {
+        "blocks": 21.320695,
+        "hgam": 25.215558,
+        "reference": 26.577109
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2180,
+      "sampler_sha256": "77521cad5d21c045e8b16eb9eb5dbc03a6f64f8b8c62286fa04df532f84d9e79",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 7.912396,
+          "feature_gather": 1.069181,
+          "message_passing": 10.491747,
+          "readout": 0.117825,
+          "sampling": 0.838332,
+          "transfer": 1.698852
+        },
+        "hgam": {
+          "encoding": 7.963579,
+          "feature_gather": 1.242554,
+          "message_passing": 12.161724,
+          "readout": 0.099017,
+          "sampling": 0.781261,
+          "transfer": 1.656426
+        },
+        "reference": {
+          "encoding": 8.003053,
+          "feature_gather": 1.283057,
+          "message_passing": 13.332659,
+          "readout": 0.102955,
+          "sampling": 0.73423,
+          "transfer": 1.658378
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "cuda_memory": {
+        "blocks": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 250880,
+          "peak_allocated_bytes": 15431168,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "hgam": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 319488,
+          "peak_allocated_bytes": 15499776,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        },
+        "reference": {
+          "baseline_allocated_bytes": 15180288,
+          "baseline_reserved_bytes": 31457280,
+          "extra_peak_allocated_bytes": 375808,
+          "peak_allocated_bytes": 15556096,
+          "peak_reserved_bytes": 31457280,
+          "scope": "PyTorch allocator; excludes other GPU users and driver memory"
+        }
+      },
+      "execution_order": [
+        "hgam",
+        "blocks",
+        "reference"
+      ],
+      "pipeline_ms": {
+        "blocks": 22.437007,
+        "hgam": 23.300669,
+        "reference": 25.99083
+      },
+      "sampled_counts": {
+        "edges": {
+          "badges|f2p_UserId|users": [
+            34,
+            0
+          ],
+          "comments|f2p_PostId|posts": [
+            0,
+            23
+          ],
+          "comments|f2p_UserId|users": [
+            17,
+            0
+          ],
+          "postHistory|f2p_PostId|posts": [
+            0,
+            51
+          ],
+          "postHistory|f2p_UserId|users": [
+            41,
+            0
+          ],
+          "postLinks|f2p_PostId|posts": [
+            0,
+            1
+          ],
+          "postLinks|f2p_RelatedPostId|posts": [
+            0,
+            2
+          ],
+          "posts|f2p_OwnerUserId|users": [
+            14,
+            0
+          ],
+          "posts|f2p_ParentId|posts": [
+            0,
+            9
+          ],
+          "posts|rev_f2p_ParentId|posts": [
+            0,
+            4
+          ],
+          "posts|rev_f2p_PostId|comments": [
+            0,
+            17
+          ],
+          "posts|rev_f2p_PostId|postHistory": [
+            0,
+            41
+          ],
+          "posts|rev_f2p_PostId|postLinks": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_PostId|votes": [
+            0,
+            0
+          ],
+          "posts|rev_f2p_RelatedPostId|postLinks": [
+            0,
+            0
+          ],
+          "users|rev_f2p_OwnerUserId|posts": [
+            0,
+            14
+          ],
+          "users|rev_f2p_UserId|badges": [
+            0,
+            34
+          ],
+          "users|rev_f2p_UserId|comments": [
+            0,
+            17
+          ],
+          "users|rev_f2p_UserId|postHistory": [
+            0,
+            41
+          ],
+          "users|rev_f2p_UserId|votes": [
+            0,
+            0
+          ],
+          "votes|f2p_PostId|posts": [
+            0,
+            28
+          ],
+          "votes|f2p_UserId|users": [
+            0,
+            0
+          ]
+        },
+        "nodes": {
+          "badges": [
+            0,
+            34,
+            0
+          ],
+          "comments": [
+            0,
+            17,
+            16
+          ],
+          "postHistory": [
+            0,
+            41,
+            14
+          ],
+          "postLinks": [
+            0,
+            0,
+            3
+          ],
+          "posts": [
+            0,
+            14,
+            18
+          ],
+          "users": [
+            32,
+            0,
+            0
+          ],
+          "votes": [
+            0,
+            0,
+            28
+          ]
+        }
+      },
+      "sampler_seed": 2181,
+      "sampler_sha256": "c2f167a5d842aeeb573c2901bf92b0f634013371dd103e6270bb6d6313fa1266",
+      "seed_times_unix_seconds": [
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400,
+        1601510400
+      ],
+      "stage_ms": {
+        "blocks": {
+          "encoding": 7.842626,
+          "feature_gather": 1.162481,
+          "message_passing": 10.072445,
+          "readout": 0.098623,
+          "sampling": 0.840844,
+          "transfer": 1.638979
+        },
+        "hgam": {
+          "encoding": 11.118425,
+          "feature_gather": 1.069187,
+          "message_passing": 15.890199,
+          "readout": 0.102555,
+          "sampling": 0.746149,
+          "transfer": 1.845134
+        },
+        "reference": {
+          "encoding": 8.248649,
+          "feature_gather": 1.171467,
+          "message_passing": 13.966524,
+          "readout": 0.102985,
+          "sampling": 0.858236,
+          "transfer": 1.789246
+        }
+      },
+      "visibility_audit": {
+        "repeated_global_id_occurrences": {
+          "badges": 0,
+          "comments": 0,
+          "postHistory": 0,
+          "postLinks": 0,
+          "posts": 0,
+          "users": 0,
+          "votes": 0
+        },
+        "status": "passed"
+      }
+    }
+  ]
+}
