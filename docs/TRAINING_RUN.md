@@ -1,9 +1,17 @@
 # Larger training run: 64,000 queries
 
 [Notebook 05](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb)
-prepares the next bounded reference-training run after the successful
-[100-update pilot](../reports/TRAINING_PILOT_STATUS.md). Its hosted execution
-and predictive results are pending.
+completed the bounded reference-training run after the successful
+[100-update pilot](../reports/TRAINING_PILOT_STATUS.md). All 2,000 updates and
+81 tests passed on the T4 in run `20261024T073010Z-1f9800`.
+See the [reviewed results](../reports/TRAINING_RUN_STATUS.md) and
+[export provenance](../reports/colab/20261024T073010Z-1f9800/PROVENANCE.json).
+
+Training-call wall time was 214.262 seconds, with a 53.742 MiB peak PyTorch
+allocation. On 8,192 validation queries with 229 positives, the GNN reached
+ROC-AUC 0.83194 / AP 0.15439; the activity baseline reached 0.85721 / 0.27248.
+One trained validation batch passed exact three-mode logit/loss parity.
+Trained inference speed remains unmeasured.
 
 The run starts from fresh weights. It keeps the pilot's architecture, constant
 features, relative record time, optimizer and sampling settings. Both the GNN
@@ -38,7 +46,7 @@ history in the final report. Checkpoints independently preserve model,
 optimizer, query order, random state and the input contract. A hard VM loss
 can require replaying updates after the last saved checkpoint.
 
-## Run in Colab
+## Reproducing the completed run
 
 1. Open notebook 05 and save a copy. Disconnect other managed runtimes, select
    **T4 GPU**, and enable the existing read-only `GITHUB_TOKEN` secret.
@@ -55,10 +63,10 @@ can require replaying updates after the last saved checkpoint.
 5. Disconnect and delete the runtime after downloading the archive. Preserve
    the planned 50-unit reserve.
 
-The short pilot is evidence of feasibility, rather than a runtime guarantee for
-this larger run. Setup, baseline fitting, validation, reporting and checkpoint
-writes also take time. Training work-region timings and complete training-call
-wall time have separate definitions in the JSON. The notebook does not measure
+The completed run measured 185.104 seconds of timed training work and
+214.262 seconds of training-call wall time. Setup, baseline fitting and
+validation were outside that call; graph construction alone took 56.046
+seconds. Reproduction runtimes may differ. The notebook does not measure
 trained inference speedup.
 
 ## Recovery and evidence

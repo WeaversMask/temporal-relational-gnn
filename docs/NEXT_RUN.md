@@ -1,54 +1,72 @@
-# Next run: 64,000 training queries
+# Next step: paired inference with the trained checkpoint
 
-Notebook 04 passed in hosted run `20261024T051434Z-948a5d`: 69 T4 tests,
-100 reference-training updates, a train-fitted activity baseline and exact
-trained-checkpoint inference parity on one validation batch. Read
-[the training pilot assessment](../reports/TRAINING_PILOT_STATUS.md).
-Its thirteen report/configuration/log files and checkpoint metadata are archived
-with [SHA-256 provenance](../reports/colab/20261024T051434Z-948a5d/PROVENANCE.json).
-The checkpoint binary is kept outside Git.
+Notebook 05 passed in hosted run `20261024T073010Z-1f9800`: **81 T4 tests,
+2,000 reference updates and 64,000 distinct training queries processed once**.
+Read the [training assessment](../reports/TRAINING_RUN_STATUS.md). The
+[verbatim exports and hashes](../reports/colab/20261024T073010Z-1f9800/PROVENANCE.json)
+preserve the measurements; the checkpoint binary stays outside Git.
 
-The trained GNN reached ROC-AUC 0.85419 and AP 0.13373 on the fixed 512-query
-validation subset. The historical-activity baseline reached 0.85585 and 0.14655.
-There were only 17 positives. The learned models' small numerical difference
-does not establish a reliable ranking, and neither is a finished predictor.
-Trained inference speedup was not measured.
+On the same 8,192-query validation subset with 229 positives, GNN ROC-AUC/AP
+were 0.83194/0.15439 and activity-baseline scores were 0.85721/0.27248.
+The GNN improved over initialization and prevalence, while the activity
+baseline scored better on all reported metrics. This checkpoint supports a
+trained execution comparison; its scores do not establish it as the preferred
+predictor. The official test split remains untouched.
 
-The completed pilot used the frozen
-[`configs/training_pilot.json`](../configs/training_pilot.json), constant/time
-GNN inputs and official training rows. It covered 39 training timestamps and
-3,177 users across 3,200 query occurrences; two training updates contained
-repeated global post occurrences. Test labels remained untouched. Broader
-historical feature approval, representative final workload selection, a larger
-training budget, full predictive evaluation and trained inference measurements
-remain open. The feature audit still reports `training_ready: false` for richer
-raw feature approval; snapshot edits, deletions, merges and survivorship have
-not been reconstructed.
+## Frozen weights and next measurement
 
-The next prepared experiment is
-[notebook 05: larger training run](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb).
-Its frozen configuration uses 64,000 selected training rows and 2,000 updates
-at batch size 32, with an 8,192-query validation subset. It keeps the same
-architecture, optimizer and features, and fits the GNN and activity baseline
-on the same 64,000 rows. It starts from fresh weights and processes each
-selected training row once. Hosted execution remains pending.
+Use the completed checkpoint without retraining or changing its architecture,
+features or sampling fanouts. Its SHA-256 is
+`92d02f7d2007c0ab560629e9c4e0d48886a1d149930e68e494a861b85659e1d6`.
+The model remains 64 channels, two layers, fanouts `[16, 8]`, FP32, constants
+and relative record time. Keep the original training contract as provenance;
+record inference batching separately.
 
-Read the [run instructions](TRAINING_RUN.md). Progress reports and checkpoints
-save every 100 updates, while the final report retains every recorded step.
-Recovery uses this run's own checkpoint and input contract. The new fixed
-cohorts need not contain the earlier pilot cohorts. Once its results are
-reviewed, freeze the checkpoint and representative workload for paired trained
-inference measurements.
+The proposed measurement uses the following bounded workload. Implementation
+and hosted execution are pending; there is no prepared notebook 06 yet.
 
-The latest user-reported balance is 198.63 units, leaving 148.63 above the
-50-unit reserve. The 0.04-unit decrease since the preceding 198.67 observation
-describes an account interval, not isolated notebook 04 consumption. Exported
-start/end balances and the hourly rate were null even though the isolation flag
-was true. See the [budget follow-up](../reports/budget/20261024-notebook04-followup.json).
+1. Reconstruct the pinned graph, literal constant statistics and selected
+   cohorts from the checkpoint contract. Verify source inputs, policy,
+   runtime and model compatibility, then strictly load the saved weights.
+2. Replay all 8,192 saved validation queries at batch size 32 and validation
+   seed 1,000,042. Compare labels, all 256 sampler fingerprints and logits
+   with the saved report before timing.
+3. Measure all 8,192 label-independently selected validation occurrences
+   at batch size 32: 256 query batches, 20 paired sampling repetitions and
+   five warmups. Randomize execution-mode order and preserve paired draws.
+4. Run a secondary comparison on the same 8,192 occurrences at batch sizes
+   128 and 512 (64 and 16 query batches), keeping weights, fanouts and features
+   fixed. Pair samples
+   within each batch size. Grouping changes sampler draws across sizes, so
+   this is a batch-scaling experiment rather than identical sampled graphs
+   across sizes.
+5. Report batch median/p95 latency, queries per second, paired reductions
+   against HGAM/reference with uncertainty grouped by query batch, and raw
+   neighborhood counts. Record allocated/reserved memory, total-device
+   telemetry where available, and host RSS. Keep synchronized stage replays
+   separate from complete online pipeline timing.
 
-Preserve the exported checkpoint and original archives. The
-[pilot documentation](TRAINING_PILOT.md) records the completed configuration,
-evidence boundaries and resume procedure if an interrupted pilot needs recovery.
-Notebooks 02 and 03 remain earlier diagnostics; their untrained measurements
-do not establish trained inference performance. The outstanding research work
-is recorded in [the plan](PLAN.md).
+The current `pipeline_profile` CLI initializes random weights. A trained-profile
+entry point must reconstruct this checkpoint before its output can be called
+trained inference performance. Training resume is separate from changing
+inference batch size.
+
+## Resources and scope
+
+The complete training call took **214.262 seconds** after setup. Recorded
+training allocator peaks were **53.742 MiB allocated / 58 MiB reserved**.
+GPU memory capacity is ample for this configuration. The next experiment can
+measure larger inference batches and repeated paired trials; their speed and
+memory costs remain unmeasured. Memory occupancy does not establish GPU compute
+utilization, which was not sampled in this run.
+
+The exported balance changed from 198.63 to **198.59**, with a displayed rate
+of 1.07 units/hour. The isolation flag was false, so the 0.04-unit account
+interval is not attributed as isolated notebook cost. The latest balance
+leaves **148.59 above the 50-unit reserve**. No rerun is needed to fill that
+attribution gap; record available observations in the next session.
+
+The graph remains an exported snapshot with per-query record-time filtering.
+Historical foreign-key edits, deletions, merges and survivorship remain
+unresolved; no additional raw mutable or text features are enabled. The
+[plan](PLAN.md) keeps these limitations separate from the execution experiment.

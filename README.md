@@ -4,21 +4,23 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** notebook 04 passed on a Colab T4 with 69 passing tests,
-100 reference-training updates, a train-fitted activity baseline and exact
-trained-checkpoint inference parity on one validation batch. The trained GNN's
-pilot subset ROC-AUC was 0.85419 and average precision 0.13373; the activity
-baseline was numerically slightly better. These are 512-query subset results
-with only 17 positives. Final quality, historical availability, the representative
-workload and trained inference timing remain open. See the
+**Current stage:** notebook 05 passed on a Colab T4 with 81 passing tests and
+2,000 reference-training updates over 64,000 queries. On 8,192 validation
+queries with 229 positives, the trained GNN reached ROC-AUC 0.83194 / average
+precision 0.15439; the activity baseline scored higher at 0.85721 / 0.27248.
+Training took 214.262 seconds, with a 53.742 MiB peak PyTorch allocation.
+The checkpoint passed exact three-mode inference parity on one batch and is
+preserved for paired trained inference measurements, which remain pending.
+Historical availability and final predictive evaluation remain open. See the
+[larger training results](reports/TRAINING_RUN_STATUS.md),
 [training pilot results](reports/TRAINING_PILOT_STATUS.md),
 [pipeline profile results](reports/PIPELINE_PROFILE_STATUS.md),
 [real-batch results](reports/REAL_BATCH_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
 [next-run instructions](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
-The next prepared run is
-[notebook 05: 64,000 training queries](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb),
-with [run instructions](docs/TRAINING_RUN.md). Its hosted execution is pending.
+The next step is a trained-checkpoint profiler with paired execution modes and
+a secondary batch-size comparison. Its implementation remains pending; see
+[the next-run requirements](docs/NEXT_RUN.md).
 
 ## Start in Colab
 
@@ -56,10 +58,11 @@ untouched, and exported a resumable checkpoint. Its subset metrics are prelimina
 and the pilot did not benchmark trained inference speedup.
 
 [Notebook 05](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb)
-prepares 2,000 updates over 64,000 selected training queries and an 8,192-query
-validation subset. Both models fit the same training cohort; the GNN starts
-from fresh weights. Reports and checkpoints save every 100 updates with the
-full history retained at completion. See [the instructions](docs/TRAINING_RUN.md).
+completed 2,000 updates over 64,000 selected training queries and an 8,192-query
+validation subset. Both models fitted the same training cohort; the GNN started
+from fresh weights. The exported checkpoint and full history are preserved.
+See [the results](reports/TRAINING_RUN_STATUS.md) and
+[reproduction instructions](docs/TRAINING_RUN.md).
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04
@@ -146,8 +149,15 @@ Notebook 04 completed 100 supervised updates over 3,200 training queries and
 GNN reached ROC-AUC 0.85419 / AP 0.13373; the train-fitted activity baseline
 reached 0.85585 / 0.14655. One trained validation batch matched all three
 execution modes exactly. No trained inference speedup or isolated run cost was
-measured. See the [pilot report](reports/TRAINING_PILOT_STATUS.md). The latest
-user-reported balance is 198.63 units, leaving 148.63 above the 50-unit reserve.
+measured. See the [pilot report](reports/TRAINING_PILOT_STATUS.md).
+
+Notebook 05 completed a one-pass reference-training run and a larger fixed
+validation comparison. The activity baseline had a substantial average-precision
+advantage over the trained GNN. Training-call wall time was 3 minutes 34 seconds;
+allocated/reserved training peaks were 53.742 / 58 MiB. These are allocator
+measurements, rather than total device use or compute utilization. See the
+[training run report](reports/TRAINING_RUN_STATUS.md). The ending balance was
+198.59 units, leaving 148.59 above the reserve; isolated run cost is unmeasured.
 
 ## Attribution and scope
 

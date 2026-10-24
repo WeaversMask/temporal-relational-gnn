@@ -1,5 +1,5 @@
 {
-  "status": "larger_training_prepared_inference_workload_provisional",
+  "status": "trained_checkpoint_selected_inference_workload_proposed",
   "dataset": "rel-stack",
   "task": "user-badge",
   "channels": 64,
@@ -11,11 +11,19 @@
   "precision": "float32",
   "include_task_label_tables": false,
   "training_example_budget": 64000,
+  "trained_checkpoint": {
+    "run_id": "20261024T073010Z-1f9800",
+    "completed_steps": 2000,
+    "sha256": "92d02f7d2007c0ab560629e9c4e0d48886a1d149930e68e494a861b85659e1d6",
+    "input_contract_sha256": "7f141d0b0b5359b569533724d7155c263d33ef36e2c8dcfd40ee389be3a7e1de",
+    "report": "reports/colab/20261024T073010Z-1f9800/training-run.json",
+    "binary_in_git": false
+  },
   "seed": 42,
   "practical_end_to_end_latency_reduction_target": 0.10,
   "correctness_atol": 0.00001,
   "correctness_rtol": 0.0001,
   "compute_units_budget": 200,
   "compute_units_reserve": 50,
-  "notes": "Notebook 04 passed a 100-update reference-training pilot. Notebook 05 prepares 64000 selected training queries and 2000 updates with constants plus relative time; configs/training_run.json freezes that bounded training run. Larger hosted results and trained inference timing remain unmeasured. Historical snapshot assumptions and the final inference workload remain unresolved."
+  "notes": "Notebook 05 passed 2000 reference updates over 64000 training queries and 81 T4 tests. Select its saved constant/time checkpoint for paired execution comparison; the activity baseline scored better on the shared 8192-query validation cohort. Trained inference timing and batch scaling remain unmeasured. Historical snapshot assumptions remain unresolved; see docs/NEXT_RUN.md for the proposed workload."
 }

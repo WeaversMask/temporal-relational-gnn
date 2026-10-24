@@ -1,8 +1,8 @@
 # Colab feasibility: verified 2026-10-24
 
-The dependency checks, hosted real-batch diagnostic, notebook 03 pipeline profile
-and notebook 04's 100-step training pilot have passed. The trained checkpoint
-passed exact inference parity on one batch. Pilot subset metrics are measured;
+The dependency checks, hosted real-batch diagnostic, notebook 03 pipeline profile,
+notebook 04 pilot and notebook 05's 2,000-update training run have passed. The
+trained checkpoints passed exact inference parity on one batch. Subset metrics are measured;
 finished predictive quality and trained inference acceleration remain unmeasured.
 The metadata audit does not resolve broader historical feature availability.
 See [the training pilot report](../reports/TRAINING_PILOT_STATUS.md) and
@@ -143,15 +143,38 @@ The exported start/end balance and hourly rate fields were null despite an
 units remaining. The decrease from the prior 198.67 observation is 0.04 units
 over that interval and does not establish isolated notebook 04 cost. The
 [separate follow-up](../reports/budget/20261024-notebook04-followup.json) preserves
-those distinctions without rewriting the export. The latest reported balance
-leaves 148.63 units above the 50-unit reserve.
+those distinctions without rewriting the export. That earlier balance
+left 148.63 units above the 50-unit reserve.
 
-## Next prepared run: 64,000 training queries
+## Hosted larger training run: completed 2026-10-24 UTC
 
 [Notebook 05](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb)
-prepares 2,000 reference updates over 64,000 selected training queries, with an
-8,192-query validation subset and a baseline fitted to the same training rows.
-It uses fresh weights and preserves the pilot's model, features and sampling
-settings. Progress and checkpoints save every 100 updates; same-folder resume
-keeps the preceding report as a separate artifact. Hosted execution is pending.
-See the [configuration and recovery instructions](TRAINING_RUN.md).
+passed in run `20261024T073010Z-1f9800` at clean source commit
+`c9879d3bcb5cd76814bd9bc088a9ea4481aa0a40`. All **81 tests passed on T4**.
+All 64,000 selected queries were consumed once across 2,000 finite-gradient
+updates with passed occurrence audits. Eighteen training batches had repeated
+global IDs, which remained distinct occurrences. The checkpoint is preserved
+outside Git, with [export hashes](../reports/colab/20261024T073010Z-1f9800/PROVENANCE.json).
+
+| Same 8,192-query validation cohort, 229 positives | ROC-AUC | AP | BCE |
+| --- | ---: | ---: | ---: |
+| Trained GNN | 0.83194 | 0.15439 | 0.11392 |
+| Historical-activity baseline | 0.85721 | 0.27248 | 0.09880 |
+
+The activity baseline scored better on all three metrics. Different cohorts
+prevent interpreting the earlier pilot's scores as a controlled quality trend.
+One trained validation batch again passed exact three-mode logits/loss parity;
+trained inference speed remains unmeasured.
+
+Training-call wall time was 214.262 seconds, with 185.104 seconds of timed
+work. Graph construction took 56.046 seconds separately. Training allocator
+peaks were 53.742 MiB allocated and 58 MiB reserved; process-lifetime host
+peak RSS reached 2.481 GiB. Memory headroom does not establish GPU compute
+utilization, and allocator figures are not total device-memory use.
+
+The export recorded 198.63 to 198.59 units remaining at 1.07 units/hour.
+Isolation was not confirmed, so the 0.04-unit account interval remains
+unattributed. The latest balance leaves 148.59 units above the reserve.
+See the [full training report](../reports/TRAINING_RUN_STATUS.md),
+[budget summary](../reports/budget/20261024-notebook05-observations.json), and
+[next trained-inference requirements](NEXT_RUN.md).

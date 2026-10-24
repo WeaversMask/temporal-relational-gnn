@@ -6,10 +6,11 @@
 - [x] Implement synthetic reference, HGAM, and destination-restricted execution.
 - [x] Verify seed outputs, gradients, and an optimizer step on CPU fixtures.
 - [x] Create a private remote and a resumable Colab starting notebook.
-- [x] Run CUDA correctness checks on Colab T4 (69 tests passed in notebook 04).
+- [x] Run CUDA correctness checks on Colab T4 (81 tests passed in notebook 05).
 - [x] Record the actual Colab unit/hour rate (1.07 observed in notebook 03).
 - [x] Record a later balance (198.67); account decrease was 0.11 units with overlapping runtimes reported.
 - [x] Record the notebook 04 follow-up balance (198.63); the later 0.04-unit interval decrease is not an isolated run cost.
+- [x] Record notebook 05 balances (198.63 to 198.59) and 1.07 units/hour; isolation was not confirmed.
 - [ ] Measure isolated per-run compute-unit consumption without overlapping runtimes.
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
@@ -66,15 +67,21 @@ or a readiness claim for richer historical features.
 - [ ] Record isolated start/end unit balances for the next run; the pilot's boundary balances are unavailable.
 - [x] Review held-out subset metrics, baseline quality and trained-checkpoint parity.
 - [x] Prepare the next bounded training budget: 64,000 queries, 2,000 updates and 8,192 validation queries; see `configs/training_run.json`.
-- [ ] Complete the larger hosted training run and review its baseline comparison.
-- [ ] Freeze the trained checkpoint and representative inference workload.
+- [x] Complete the larger hosted training run and review its baseline comparison.
+- [x] Preserve and select the notebook 05 checkpoint for the trained execution comparison.
+- [ ] Implement and validate the proposed paired trained inference workload.
 
 The pilot informed the next training configuration in
 [`configs/training_run.json`](../configs/training_run.json); its
 [notebook 05 instructions](TRAINING_RUN.md) retain the conditional snapshot
-contract. The inference workload in `configs/experiment.json` remains
-provisional. Train the larger checkpoint and compare predictive quality on
-official validation queries before freezing the primary inference workload.
+contract. Its 2,000 updates consumed all 64,000 training queries once and took
+214.262 seconds. On 8,192 validation queries with 229 positives, the trained
+GNN reached ROC-AUC 0.83194 / AP 0.15439, below the activity baseline's
+0.85721 / 0.27248. These use different cohorts from the pilot. The weights are
+preserved for an execution comparison, with the quality gap reported honestly.
+The proposed inference workload in `configs/experiment.json` and
+[next-run requirements](NEXT_RUN.md) still needs implementation and hosted
+measurement. Its batch scaling keeps the trained model unchanged.
 
 ## Days 5-9: integrate and establish real-model equivalence
 

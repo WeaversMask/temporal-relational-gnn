@@ -1,0 +1,49 @@
+{
+  "status": "frozen_bounded_training_run_not_final_experiment",
+  "dataset": "rel-stack",
+  "task": "user-badge",
+  "steps": 2000,
+  "batch_size": 32,
+  "train_queries": 64000,
+  "val_queries": 8192,
+  "channels": 64,
+  "num_layers": 2,
+  "fanouts": [
+    16,
+    8
+  ],
+  "learning_rate": 0.001,
+  "seed": 42,
+  "checkpoint_every": 100,
+  "report_every": 100,
+  "training_execution_mode": "reference",
+  "initialization": "fresh_model_not_notebook04_checkpoint",
+  "feature_inputs": [
+    "constant",
+    "query_time_minus_record_time"
+  ],
+  "include_task_label_tables": false,
+  "official_splits": {
+    "fit": "train",
+    "bounded_evaluation_subset": "val",
+    "test": "untouched"
+  },
+  "activity_baseline": {
+    "features": "historically visible activity counts at each query time",
+    "estimator": "logistic_regression",
+    "fit_split": "same_64000_selected_training_queries",
+    "evaluation_split": "same_8192_query_validation_subset"
+  },
+  "correctness_atol": 1e-05,
+  "correctness_rtol": 0.0001,
+  "compute_units_reserve": 50,
+  "assumptions": [
+    "Hosted snapshot with record-time filtering; historical relationship changes, deletions and merges remain unresolved.",
+    "No raw mutable/text attribute or task target is a node feature; richer historical feature availability remains unresolved.",
+    "Constant encoder statistics are independent of validation; learned preprocessing and baseline fitting use training only.",
+    "The fixed 8192-query validation subset is not the final full-validation metric.",
+    "One selected training-query pass measures this bounded schedule; convergence and predictive superiority require evidence.",
+    "Post-training execution parity covers one sampled validation batch and does not measure trained inference speed."
+  ],
+  "notes": "Start a fresh model for 2000 total reference-training updates on 64000 selected training queries. Keep the resulting checkpoint for later paired inference measurements; do not claim a final predictor or trained inference acceleration from this run."
+}
