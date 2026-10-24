@@ -145,3 +145,13 @@ over that interval and does not establish isolated notebook 04 cost. The
 [separate follow-up](../reports/budget/20261024-notebook04-followup.json) preserves
 those distinctions without rewriting the export. The latest reported balance
 leaves 148.63 units above the 50-unit reserve.
+
+## Next prepared run: 64,000 training queries
+
+[Notebook 05](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb)
+prepares 2,000 reference updates over 64,000 selected training queries, with an
+8,192-query validation subset and a baseline fitted to the same training rows.
+It uses fresh weights and preserves the pilot's model, features and sampling
+settings. Progress and checkpoints save every 100 updates; same-folder resume
+keeps the preceding report as a separate artifact. Hosted execution is pending.
+See the [configuration and recovery instructions](TRAINING_RUN.md).

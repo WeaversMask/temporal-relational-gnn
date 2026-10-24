@@ -1,5 +1,6 @@
 import json
 import sys
+from pathlib import Path
 
 import pandas as pd
 import pytest
@@ -10,7 +11,108 @@ from torch_frame.data import Dataset
 from torch_geometric.data import HeteroData
 from torch_geometric.typing import WITH_PYG_LIB
 
-from trgnn.training_pilot import fixed_constant_statistics, main
+from trgnn.artifacts import write_json
+from trgnn.training_pilot import (
+    TrainingProgressReporter,
+    archive_previous_report,
+    file_sha256,
+    fixed_constant_statistics,
+    main,
+    parse_args,
+)
+
+
+def test_periodic_reporting_keeps_every_update_and_tracks_independent_checkpoints(tmp_path, capsys):
+    checkpoint, output = tmp_path / "model.pt", tmp_path / "report.json"
+    report = {
+        "trained": False,
+        "training": {"completed_steps": 0, "history": []},
+        "checkpoint": {"path": str(checkpoint)},
+    }
+    checkpoint.write_bytes(b"initial checkpoint")
+    write_json(output, report)
+    progress = TrainingProgressReporter(
+        report,
+        output=output,
+        checkpoint=checkpoint,
+        steps=7,
+        checkpoint_every=2,
+        report_every=3,
+    )
+    for step in range(1, 8):
+        if step % 2 == 0 or step == 7:
+            checkpoint.write_bytes(f"checkpoint at {step}".encode())
+        progress.record_step({"step": step, "loss": 1.0 / step})
+        assert report["training"]["completed_steps"] == step
+        persisted = json.loads(output.read_text())
+        expected = step if step == 7 else step // 3 * 3
+        assert persisted["training"]["completed_steps"] == expected
+        assert [row["step"] for row in persisted["training"]["history"]] == list(
+            range(1, expected + 1)
+        )
+        saved_step = step if step == 7 else step // 2 * 2
+        assert report["checkpoint"]["completed_steps"] == saved_step
+        assert report["checkpoint"]["sha256"] == file_sha256(checkpoint)
+    assert report["trained"] is True
+    assert capsys.readouterr().out.splitlines() == [
+        "Step 3/7: loss=0.333333",
+        "Step 6/7: loss=0.166667",
+        "Step 7/7: loss=0.142857",
+    ]
+
+
+def test_restored_history_is_durable_before_any_new_reporting_interval(tmp_path):
+    checkpoint, output = tmp_path / "model.pt", tmp_path / "report.json"
+    checkpoint.write_bytes(b"restored checkpoint")
+    report = {
+        "trained": False,
+        "training": {"completed_steps": 0, "history": []},
+        "checkpoint": {},
+    }
+    progress = TrainingProgressReporter(
+        report,
+        output=output,
+        checkpoint=checkpoint,
+        steps=2000,
+        checkpoint_every=100,
+        report_every=100,
+    )
+    progress.record_restore(
+        {"completed_steps": 2, "history": [{"step": 1}, {"step": 2}], "resumed": True}
+    )
+    persisted = json.loads(output.read_text())
+    assert persisted["trained"] is True
+    assert persisted["training"]["completed_steps"] == 2
+    assert persisted["training"]["resumed"] is True
+    assert persisted["checkpoint"]["sha256"] == file_sha256(checkpoint)
+    progress.record_step({"step": 3, "loss": 0.5})
+    assert report["training"]["completed_steps"] == 3
+    assert json.loads(output.read_text())["training"]["completed_steps"] == 2
+
+
+def test_resume_archives_previous_report_verbatim_without_reusing_archive_paths(tmp_path):
+    output = tmp_path / "training.json"
+    original = b'{"validation_before": {"metrics": {"count": 8192}}}\n'
+    output.write_bytes(original)
+    first = archive_previous_report(output)
+    second = archive_previous_report(output)
+    assert first["path"] != second["path"]
+    for archived in (first, second):
+        path = Path(archived["path"])
+        assert path.parent == output.parent
+        assert path.suffix == ".json"
+        assert path.read_bytes() == original
+        assert archived["sha256"] == file_sha256(output)
+    output.write_text('{"status": "started"}')
+    assert Path(first["path"]).read_bytes() == original
+
+
+def test_report_interval_defaults_to_each_update_and_must_be_positive(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["training_pilot"])
+    assert parse_args().report_every == 1
+    monkeypatch.setattr(sys, "argv", ["training_pilot", "--report-every", "0"])
+    with pytest.raises(SystemExit):
+        parse_args()
 
 
 def test_pilot_uses_literal_statistics_and_rejects_other_features():
@@ -38,12 +140,13 @@ def test_pilot_uses_literal_statistics_and_rejects_other_features():
 
 
 @pytest.mark.skipif(not WITH_PYG_LIB, reason="Requires the compiled temporal sampler")
-def test_complete_pilot_cli_and_resume_on_local_relational_data(tmp_path, monkeypatch):
+@pytest.mark.parametrize("interruption", [RuntimeError, KeyboardInterrupt])
+def test_complete_pilot_cli_and_resume_on_local_relational_data(
+    tmp_path, monkeypatch, interruption
+):
     root = tmp_path / "rel-stack"
     (root / "db").mkdir(parents=True)
     (root / "tasks/user-badge").mkdir(parents=True)
-    from pathlib import Path
-
     pins = json.loads((Path(__file__).resolve().parents[1] / "configs/upstream.json").read_text())
     (root / ".trgnn-source.json").write_text(json.dumps(pins["dataset"]))
     database = {
@@ -109,6 +212,8 @@ def test_complete_pilot_cli_and_resume_on_local_relational_data(tmp_path, monkey
         "2",
         "--channels",
         "8",
+        "--report-every",
+        "1",
         "--fanouts",
         "1",
         "1",
@@ -126,7 +231,9 @@ def test_complete_pilot_cli_and_resume_on_local_relational_data(tmp_path, monkey
     assert report["validation_after"]["metrics"]["count"] == 2
     assert report["trained_mode_equivalence"]["status"] == "passed"
     assert checkpoint.is_file()
+    original_report_bytes = output.read_bytes()
     command[command.index("--steps") + 1] = "2"
+    command[command.index("--report-every") + 1] = "100"
     monkeypatch.setattr(sys, "argv", [*command, "--resume"])
     main()
     resumed = json.loads(output.read_text())
@@ -135,6 +242,11 @@ def test_complete_pilot_cli_and_resume_on_local_relational_data(tmp_path, monkey
     assert resumed["training"]["resumed"] is True
     assert resumed["checkpoint"]["resume_source_sha256"] == report["checkpoint"]["sha256"]
     assert resumed["validation_before"]["status"] == "not_measured_on_resume"
+    archived = resumed["archived_previous_report"]
+    assert Path(archived["path"]).read_bytes() == original_report_bytes
+    assert archived["sha256"] == file_sha256(Path(archived["path"]))
+    assert resumed["config"]["report_every"] == 100
+    assert "report_every" not in resumed["input_contract"]["settings"]
     assert torch.isfinite(torch.tensor(resumed["validation_after"]["logits"])).all()
 
     import trgnn.training_pilot as pilot_module
@@ -146,18 +258,22 @@ def test_complete_pilot_cli_and_resume_on_local_relational_data(tmp_path, monkey
 
         def record_then_fail(row):
             record(row)
-            raise RuntimeError("simulated interruption after resumed update")
+            raise interruption("simulated interruption after resumed update")
 
         kwargs["on_step"] = record_then_fail
         return original_train(*args, **kwargs)
 
     monkeypatch.setattr(pilot_module, "train_pilot", fail_after_resumed_update)
-    command[command.index("--steps") + 1] = "3"
+    command[command.index("--steps") + 1] = "4"
     monkeypatch.setattr(sys, "argv", [*command, "--resume"])
-    with pytest.raises(RuntimeError, match="simulated interruption"):
+    resumed_report_bytes = output.read_bytes()
+    with pytest.raises(interruption, match="simulated interruption"):
         main()
     failed = json.loads(output.read_text())
     assert failed["status"] == "failed"
     assert failed["trained"] is True
     assert failed["training"]["completed_steps"] == 3
     assert [row["step"] for row in failed["training"]["history"]] == [1, 2, 3]
+    assert failed["checkpoint"]["completed_steps"] == 2
+    assert torch.load(checkpoint, map_location="cpu", weights_only=True)["completed_steps"] == 2
+    assert Path(failed["archived_previous_report"]["path"]).read_bytes() == resumed_report_bytes

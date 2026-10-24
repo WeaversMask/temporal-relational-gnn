@@ -16,6 +16,9 @@ workload and trained inference timing remain open. See the
 [real-batch results](reports/REAL_BATCH_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
 [next-run instructions](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
+The next prepared run is
+[notebook 05: 64,000 training queries](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb),
+with [run instructions](docs/TRAINING_RUN.md). Its hosted execution is pending.
 
 ## Start in Colab
 
@@ -52,9 +55,15 @@ official training rows and a 512-query validation subset, left the test split
 untouched, and exported a resumable checkpoint. Its subset metrics are preliminary,
 and the pilot did not benchmark trained inference speedup.
 
+[Notebook 05](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/05_training_run.ipynb)
+prepares 2,000 updates over 64,000 selected training queries and an 8,192-query
+validation subset. Both models fit the same training cohort; the GNN starts
+from fresh weights. Reports and checkpoints save every 100 updates with the
+full history retained at completion. See [the instructions](docs/TRAINING_RUN.md).
+
 Code stays in Git; large data stays out of Git. Run active data processing on the
-VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebook 04
-includes its checkpoint in the download and does not mount Drive. Colab VM
+VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04
+and 05 include their checkpoints in the download without mounting Drive. Colab VM
 contents are disposable. Use one active runtime, record start/end balances, and
 keep the 50-unit reserve. GPU access, RAM, and session lifetime are variable, so
 use short, resumable runs. Disconnect GPUs once the export is saved.

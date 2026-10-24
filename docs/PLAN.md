@@ -65,11 +65,16 @@ or a readiness claim for richer historical features.
 - [x] Complete the hosted 100-step pilot and preserve losses, timings and checkpoint.
 - [ ] Record isolated start/end unit balances for the next run; the pilot's boundary balances are unavailable.
 - [x] Review held-out subset metrics, baseline quality and trained-checkpoint parity.
-- [ ] Select the credible training budget and representative frozen workload.
+- [x] Prepare the next bounded training budget: 64,000 queries, 2,000 updates and 8,192 validation queries; see `configs/training_run.json`.
+- [ ] Complete the larger hosted training run and review its baseline comparison.
+- [ ] Freeze the trained checkpoint and representative inference workload.
 
-Use the pilot evidence to revise the still-provisional `configs/experiment.json`.
-Then train one credible checkpoint and compare predictive quality on the official
-splits. Freeze features, graph semantics, model, primary workload and tolerances.
+The pilot informed the next training configuration in
+[`configs/training_run.json`](../configs/training_run.json); its
+[notebook 05 instructions](TRAINING_RUN.md) retain the conditional snapshot
+contract. The inference workload in `configs/experiment.json` remains
+provisional. Train the larger checkpoint and compare predictive quality on
+official validation queries before freezing the primary inference workload.
 
 ## Days 5-9: integrate and establish real-model equivalence
 

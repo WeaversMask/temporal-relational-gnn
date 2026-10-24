@@ -1,5 +1,5 @@
 {
-  "status": "provisional_until_feature_and_pipeline_audit",
+  "status": "larger_training_prepared_inference_workload_provisional",
   "dataset": "rel-stack",
   "task": "user-badge",
   "channels": 64,
@@ -10,12 +10,12 @@
   "relation_aggregation": "sum",
   "precision": "float32",
   "include_task_label_tables": false,
-  "training_example_budget": 200000,
+  "training_example_budget": 64000,
   "seed": 42,
   "practical_end_to_end_latency_reduction_target": 0.10,
   "correctness_atol": 0.00001,
   "correctness_rtol": 0.0001,
   "compute_units_budget": 200,
   "compute_units_reserve": 50,
-  "notes": "Notebook 04 passed a 100-update reference-training pilot with constants plus relative time; see reports/TRAINING_PILOT_STATUS.md. This proposed 200000-example configuration remains unmeasured and unfrozen. Historical snapshot assumptions and the final workload remain unresolved."
+  "notes": "Notebook 04 passed a 100-update reference-training pilot. Notebook 05 prepares 64000 selected training queries and 2000 updates with constants plus relative time; configs/training_run.json freezes that bounded training run. Larger hosted results and trained inference timing remain unmeasured. Historical snapshot assumptions and the final inference workload remain unresolved."
 }

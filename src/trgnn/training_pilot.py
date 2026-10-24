@@ -11,6 +11,7 @@ import hashlib
 import json
 import math
 import time
+import uuid
 from pathlib import Path
 
 import numpy as np
@@ -44,6 +45,51 @@ from trgnn.training_data import select_training_queries, validate_query_entities
 def file_sha256(path: Path) -> str:
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def archive_previous_report(path: Path) -> dict:
+    """Preserve a retry's source report byte-for-byte before replacing its path."""
+    archived = path.with_name(f"{path.stem}.previous-{uuid.uuid4().hex}{path.suffix}")
+    with archived.open("xb") as stream:
+        stream.write(path.read_bytes())
+    return {"path": str(archived), "sha256": file_sha256(archived)}
+
+
+class TrainingProgressReporter:
+    """Keep all updates in memory while bounding report writes and stdout updates."""
+
+    def __init__(self, report, *, output, checkpoint, steps, checkpoint_every, report_every):
+        self.report = report
+        self.output = output
+        self.checkpoint = checkpoint
+        self.steps = steps
+        self.checkpoint_every = checkpoint_every
+        self.report_every = report_every
+
+    def record_step(self, record):
+        self.report["training"]["history"].append(record)
+        self.report["training"]["completed_steps"] = record["step"]
+        self.report["trained"] = True
+        if record["step"] % self.checkpoint_every == 0 or record["step"] == self.steps:
+            self.report["checkpoint"].update(
+                {"sha256": file_sha256(self.checkpoint), "completed_steps": record["step"]}
+            )
+        elif "completed_steps" not in self.report["checkpoint"]:
+            # Fresh training saves step zero before its first update. Resumed
+            # progress already has the saved count from record_restore().
+            self.report["checkpoint"].update(
+                {"sha256": file_sha256(self.checkpoint), "completed_steps": 0}
+            )
+        if record["step"] % self.report_every == 0 or record["step"] == self.steps:
+            write_json(self.output, self.report)
+            print(f"Step {record['step']}/{self.steps}: loss={record['loss']:.6f}", flush=True)
+
+    def record_restore(self, progress):
+        self.report["training"].update(progress)
+        self.report["trained"] = progress["completed_steps"] > 0
+        self.report["checkpoint"]["completed_steps"] = progress["completed_steps"]
+        self.report["checkpoint"]["sha256"] = file_sha256(self.checkpoint)
+        write_json(self.output, self.report)
 
 
 def fixed_constant_statistics(graph) -> dict:
@@ -136,6 +182,9 @@ def parse_args():
     parser.add_argument("--learning-rate", type=float, default=0.001)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--checkpoint-every", type=int, default=10)
+    parser.add_argument(
+        "--report-every", type=int, default=1, help="Write progress JSON and stdout every N updates"
+    )
     parser.add_argument("--checkpoint", type=Path, default=Path("checkpoints/training-pilot.pt"))
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--output", type=Path, default=Path("results/training-pilot.json"))
@@ -147,6 +196,7 @@ def parse_args():
         args.val_queries,
         args.channels,
         args.checkpoint_every,
+        args.report_every,
     )
     if min(dimensions) < 1 or any(n < 0 for n in args.fanouts):
         parser.error("Use positive dimensions and bounded non-negative fanouts")
@@ -196,6 +246,8 @@ def main():
             "Checkpoint resume requires matching inputs, code, configuration and runtime versions.",
         ],
     }
+    if args.resume and args.output.is_file():
+        report["archived_previous_report"] = archive_previous_report(args.output)
     write_json(args.output, report)
     try:
         if args.resume and not args.checkpoint.is_file():
@@ -332,23 +384,16 @@ def main():
             )
         write_json(args.output, report)
 
-        def record_step(record):
-            report["training"]["history"].append(record)
-            report["training"]["completed_steps"] = record["step"]
-            report["trained"] = True
-            if record["step"] % args.checkpoint_every == 0 or record["step"] == args.steps:
-                report["checkpoint"].update(
-                    {"sha256": file_sha256(args.checkpoint), "completed_steps": record["step"]}
-                )
-            write_json(args.output, report)
-            print(f"Step {record['step']}/{args.steps}: loss={record['loss']:.6f}", flush=True)
-
-        def record_restore(progress):
-            report["training"].update(progress)
-            report["trained"] = progress["completed_steps"] > 0
-            report["checkpoint"]["completed_steps"] = progress["completed_steps"]
-            report["checkpoint"]["sha256"] = file_sha256(args.checkpoint)
-            write_json(args.output, report)
+        # Reporting and checkpoint intervals do not change the stochastic training
+        # schedule, so their values are recorded in config rather than the contract.
+        progress = TrainingProgressReporter(
+            report,
+            output=args.output,
+            checkpoint=args.checkpoint,
+            steps=args.steps,
+            checkpoint_every=args.checkpoint_every,
+            report_every=args.report_every,
+        )
 
         started = time.perf_counter()
         report["training"] = train_pilot(
@@ -363,8 +408,8 @@ def main():
             resume=args.resume,
             contract=contract,
             checkpoint_every=args.checkpoint_every,
-            on_step=record_step,
-            on_restore=record_restore,
+            on_step=progress.record_step,
+            on_restore=progress.record_restore,
         )
         report["training"]["wall_seconds_this_attempt"] = time.perf_counter() - started
         report["trained"] = report["training"]["completed_steps"] > 0
@@ -396,7 +441,7 @@ def main():
         synchronize(args.device)
         report["host_memory"]["after_training"] = host_memory()
         report["status"] = "passed"
-    except Exception as exc:
+    except (Exception, KeyboardInterrupt) as exc:
         report["status"] = "failed"
         report["error"] = f"{type(exc).__name__}: {exc}"
         write_json(args.output, report)
