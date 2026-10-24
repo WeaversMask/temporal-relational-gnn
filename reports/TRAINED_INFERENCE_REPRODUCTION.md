@@ -1,5 +1,10 @@
 # Trained inference investigation: independent reproduction, 2026-10-24
 
+Subsequent [GPU diagnostic findings](SPIKE_DIAGNOSTIC_STATUS.md) directly observed
+full Python collection inside similar quarter-second online pauses. The original
+percentages below remain unchanged observations of this original protocol;
+they are not corrected estimates from a collection-controlled benchmark.
+
 The fixed trained model's execution benefit reproduced in a fresh T4 session:
 blocks reduced graph-loaded online latency versus HGAM by **8.91% in the first
 session and 8.77% in the second** at the predefined primary batch size 32.
@@ -120,10 +125,12 @@ tail-sensitive benefit remains less settled than the primary comparison.
 
 A subsequent [CPU lifecycle probe](analysis/512-fingerprint-gc-investigation.json)
 established that the original fingerprint helper leaves collectible recursive
-closure cycles. Collection during a later timed pass is a concrete hypothesis,
-not yet an attribution of either historical T4 spike. The separately prepared
-[notebook 07 diagnostic](../docs/SPIKE_DIAGNOSTIC.md) records collection overlap
-without altering the original source or results.
+closure cycles. The completed [notebook 07 diagnostic](SPIKE_DIAGNOSTIC_STATUS.md)
+then observed four full collections lasting 228–240 ms inside similarly slow
+online passes at other modes/positions. The historical size-512 position was
+ordinary in that run. Collection cadence is now a strong explanation of the
+earlier events, while their exact attribution remains retrospective inference.
+The short cycle-free control does not establish elimination of all long pauses.
 
 ## Why the complete saving is smaller than the GNN-stage saving
 

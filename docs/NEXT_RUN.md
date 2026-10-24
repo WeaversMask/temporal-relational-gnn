@@ -1,39 +1,52 @@
-# Next step: diagnose the recurring batch-512 pause
+# Current finding: Python collection can dominate a timed pass
 
-The trained inference comparison and independent repeat are complete. The
-primary latency reduction versus HGAM was **8.91% and 8.77%**, with unchanged
-weights and numerically equivalent predictions. The 10% planning target is
-recorded for transparency; the repeated approximately 9% improvement remains
-a positive result for this workload. See the
-[two-session report](../reports/TRAINED_INFERENCE_REPRODUCTION.md).
+Notebook 07 completed all **332 cases**, with **200 tests passed on T4**.
+Four online passes took 251–267 ms, with 228–240 ms of full Python garbage
+collection inside their exact timers. They occurred in different modes and
+batch sizes during sampling or gathering. The original batch-512/HGAM position
+was ordinary (28.770 ms) in this instrumented run.
 
-The user has selected a focused follow-up: explain the one HGAM observation that
-recurred at approximately 250 ms in both sessions at size 512, batch 4, repeat
-13. A CPU probe found self-referential closures left by the sampler fingerprint
-helper. Collection during a later timed pass is a concrete hypothesis; the
-original GPU pause's cause is still unconfirmed.
+Read the [verified diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md).
+It supports collection cadence as the likely explanation of the earlier spikes,
+while preserving the limit that those historical passes had no GC trace. Two
+early slow passes in this run had no GC overlap and remain unexplained.
 
-## Run notebook 07
+## What to change before another performance run
 
-Use the new [batch-512 diagnostic notebook](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/07_spike_diagnostic.ipynb)
-in a fresh **T4** runtime with the same notebook 05 `training.pt`. Run all cells,
-record current start/end budget readings, export the complete ZIP and disconnect.
-The [diagnostic instructions](SPIKE_DIAGNOSTIC.md) explain the three conditions
-and the evidence needed before assigning a cause.
+The original recursive fingerprint helper has a CPU-proven avoidable reference
+cycle. An equivalent cycle-free implementation passed the actual T4 input and
+prediction checks, but its short control does not establish that all long
+collections disappear. It still collected many other objects.
 
-The first condition replays the original preceding workload order while recording
-collection events. It can take roughly as long as notebook 06; two additional
-short controls then examine batches 3–5. Extra observation can change where
-collection occurs, so we inspect every slow pass rather than requiring the old
-location to recur. All original benchmark code, weights, sampling and exports
-remain preserved. Diagnostic times are not replacement speedup estimates.
+The next engineering step is to remove that avoidable cycle under an explicitly
+versioned measurement protocol, keeping the checkpoint, sampled occurrences,
+primary batch size and tolerances fixed. The checkpoint binds original source
+hashes, so do not silently edit the old training/profiling source or bypass its
+checks. A new profiling implementation can preserve the legacy reconstruction
+contract and record the changed audit implementation separately.
 
-The last verified balance was **197.46 units**, leaving **147.46 above reserve**.
-The preceding repeat recorded an isolated 0.44-unit decrease. Enter a new balance
-and rate rather than treating those observations as current measurements.
+Predeclare how collection is treated. Natural automatic-GC online results should
+retain its actual costs. Any controlled comparison that moves cleanup outside
+the timer must label that boundary and report cleanup and total time as well.
+The diagnostic's forced control spent **88.656 seconds** collecting outside its
+inference timer; that is relocated work, not free acceleration.
 
-After the export, determine whether a recorded collection accounts for the pause.
-If confirmed, evaluate a cycle-free hashing correction under a separately
-recorded timing protocol. If not, retain the unresolved cause and use the traces
-to narrow the next test. Do not replace the primary comparison with a secondary
-result or retune the model to pursue the round 10% target.
+After that change is concrete and CPU-verified, prepare a fresh uninstrumented
+comparison. Do not reuse the instrumented notebook 07 latencies as corrected
+speedups, subtract GC from the old trials, or replace the original primary
+comparison with the tail-sensitive batch-512 aggregate. The original primary
+8.77–8.91% remains a measured observation of the old protocol, pending this
+additional measurement-method check.
+
+## Resources and preserved evidence
+
+The latest run recorded **195.94 to 195.36 units**, with isolation confirmed,
+for **0.58 units consumed** at an observed 1.07 units/hour. The ending balance
+leaves **145.36 above reserve**. Earlier account intervals remain separate.
+All original diagnostic case bytes are retained in a compressed archive, with
+a [complete provenance manifest](../reports/colab/20261024T121852Z-4747d5/PROVENANCE.json).
+The trained checkpoint remains outside Git.
+
+No additional GPU run is ready or required simply to recheck these traces.
+Keep notebook 07 for deliberate diagnostic reproduction; its
+[instructions](SPIKE_DIAGNOSTIC.md) document the exact conditions and limits.

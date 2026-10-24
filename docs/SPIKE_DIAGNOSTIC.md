@@ -1,9 +1,17 @@
 # Diagnose the recurring batch-512 pause
 
 [Notebook 07](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/07_spike_diagnostic.ipynb)
-tests a concrete Python garbage-collection lead for the HGAM pause. The original
-trained benchmark results and checkpoint-bound source remain unchanged. This is
-an instrumented diagnostic, not a replacement performance measurement.
+completed on T4 in run `20261024T121852Z-4747d5`, at clean source `da47db9`.
+**200 tests passed in the T4 runtime**, and all **332 cases** completed: 326
+original-history cases, three forced-collection controls and three cycle-free
+hash controls. Weights, contracts and archived sampled-input fingerprints
+matched. The original benchmark source and measurements remain unchanged.
+These are instrumented diagnostic results, not replacement performance results.
+See the [measured findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md).
+
+The next step is to review and correct the measurement protocol, including
+amortized cleanup, before another benchmark. No new GPU benchmark is prepared.
+The instructions below remain available for deliberate diagnostic reproduction.
 
 ## What we have established
 
@@ -23,20 +31,45 @@ hashes without those cycles. See the [raw CPU probe](../reports/analysis/512-fin
 This establishes a hashing-helper lifecycle issue on the recorded CPython
 3.12 runtime. It does **not** establish that it caused either original T4 pause,
 whose runtime was Python 3.13. Hashing occurs outside the online timer, but its
-unreachable cycles can survive until a later collection. We need collection
-start/stop times aligned to an actual reproduced pause.
+unreachable cycles can survive until a later collection. Notebook 07 now aligns
+collection start/stop times with new observed slow passes; it cannot add missing
+events to the historical runs.
 
 Python documents [collection callbacks](https://docs.python.org/3.13/library/gc.html#gc.callbacks)
 for measuring collection frequency and duration, and distinguishes automatic
 cyclic collection from reference-count reclamation. The diagnostic uses those
 callbacks without changing the old benchmark source.
 
-## Run the prepared diagnostic
+## Measured diagnostic outcome
+
+Four automatic-condition online passes took 251.483–266.993 ms and contained
+generation-2 collections lasting 227.667–239.758 ms, across different modes
+and sizes. Those collections explain most extra duration in the new traced
+passes. The original batch-512 batch-4 repeat-13 HGAM position was normal at
+28.770 ms with no GC overlap. This strongly supports a collection explanation
+consistent with the historical spikes; their untraced causes remain unproved.
+Two early 108.55/133.98 ms passes had no GC, so not all pauses have this source.
+
+The original-hash automatic target window and the short cycle-free automatic
+control both had zero generation-2 collections. This is not evidence that
+changing the helper removed the spike; other cycles remain. Forced collection
+performed 405 full collections outside original executor timers, totaling
+88.656 seconds. That moves cleanup rather than removes its cost. Neither
+control supplies a corrected online speedup.
+
+The old 8.77–8.91% primary results remain old-protocol observations with every
+trial retained. A future GC-aware benchmark must be a new protocol and account
+for amortized cleanup instead of describing excluded work as an end-to-end gain.
+The diagnostic budget was 195.94 to 195.36 units: 0.58 isolated consumption at
+an observed 1.07 units/hour, leaving 145.36 above reserve. Earlier account gaps
+are separate.
+
+## Reproduce the completed diagnostic
 
 1. Open notebook 07 in a fresh **T4 GPU** runtime. Disconnect other managed
    runtimes and enable the existing read-only `GITHUB_TOKEN` secret.
 2. Enter the current `COMPUTE_UNITS_REMAINING` balance and displayed
-   `COMPUTE_UNITS_PER_HOUR` rate. The last verified balance was 197.46 units;
+   `COMPUTE_UNITS_PER_HOUR` rate. The latest verified balance is 195.36 units;
    use the new reading. Keep the 50-unit reserve.
 3. Run cells in order and upload the same notebook 05 **`training.pt`** when
    prompted. The notebook checks its hash and the original reports before use.
@@ -86,30 +119,34 @@ window. Interrupted or failed current-case traces are retained when available.
 
 ## How to interpret the result
 
-A long collection that occurs inside a reproduced slow online pass and accounts
-for its extra duration would support collection as the immediate source of that
-new pause. If the cycle-free control no longer accumulates the proven helper
-cycles, that supports the proposed lifecycle correction. Inspect all modes and
-positions; extra observation allocations can move collection away from the old
-batch/repeat or into another mode.
+Collection callbacks align long full collections with the new slow passes and
+account for most added duration. Extra observation allocations changed when
+collection occurred, so different modes and positions were affected. Host spans
+are not CUDA kernel timings, and two early non-GC pauses remain separate.
 
-Absence of a pause in the short controls alone does not prove its cause: they
-follow the automatic condition and have different heap histories. Nor can a new
-trace retroactively prove an unrecorded event in the original sessions. If the
-pause does not reproduce or GC does not account for it, retain an unresolved
-conclusion and use the recorded host spans to choose the next targeted trace.
+The short controls follow the automatic phase and have different heap histories.
+Their lack of a full collection cannot establish that the cycle-free helper
+removed the historical spike. Collection between passes explicitly moves cost
+outside the old executor timer; report that cleanup cost rather than treating it
+as eliminated. The trace does not retroactively prove an unrecorded event in
+notebook 06. Review the future timing boundary and amortized cleanup before
+another performance experiment.
 
 Keep instrumented times separate from the existing 8.77–8.91% primary result.
 Any later timing-harness correction and clean benchmark must be recorded as a
 new protocol; do not silently delete the old spikes or relabel observations.
 
-## Preparation checks
+## Validation and preserved evidence
 
 Local validation passed 191 tests with nine environment-dependent skips, plus
 Ruff lint and format checks. The 29 new diagnostic tests cover unchanged
 fingerprints and predictions, precise timer/GC overlap, collection outside the
 timed executor, restoration after interruption, frozen thread/seed settings,
 source protection and partial-trace persistence. Notebook code cells compile
-and the referenced source-report hashes match. These CPU checks do not establish
-CUDA correctness or the cause of the original GPU pause; notebook 07 performs
-the separate sampler/GPU preflight and current suite before measurement.
+and the referenced source-report hashes match. These preparation checks were CPU
+evidence. The completed hosted run separately
+passed sampler/GPU preflight and all 200 tests in its T4 runtime. Neither test
+count alone proves the historical pause cause. The archive preserves all root
+reports and logs unchanged; the 664 profile/trace files are byte-identical entries
+in `diagnostic-cases.tar.gz`, with per-entry SHA-256 hashes and sizes in
+[PROVENANCE.json](../reports/colab/20261024T121852Z-4747d5/PROVENANCE.json).

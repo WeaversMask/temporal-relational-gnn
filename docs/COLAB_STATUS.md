@@ -1,16 +1,17 @@
 # Colab feasibility: verified 2026-10-24
 
-The dependency checks, hosted real-batch diagnostics, training and notebook 06's
-bounded trained inference comparison have passed, including independent
-reproduction on a different T4. Each measured session completed all 336 query
-batches with 20 paired repetitions and 171 T4 tests passed. Primary graph-loaded
-online reductions versus HGAM were **8.91% and 8.77%** (within-run 95% intervals
-8.47–9.36% and 8.34–9.18%), both below the 10% practical target. Outputs
-passed fixed numerical tolerances and weights stayed unchanged. The report
-records the interpretation. Broader historical feature availability
-and finished predictive quality remain unresolved. See the
-[current two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) and
-[remaining steps](NEXT_RUN.md).
+Notebook 07's instrumented timing-pause diagnostic completed on T4 with
+**200 hosted tests passed** and all **332 cases**. Four new slow online passes
+contained generation-2 collections accounting for most added duration. The
+historical spikes remain untraced, so this supports a consistent explanation
+without retroactively proving their cause. The original notebook 06 primary
+8.91% and 8.77% reductions remain old-protocol observations; diagnostic controls
+are not corrected benchmarks. The next step is measurement-protocol review,
+including amortized cleanup, before another GPU benchmark. See the
+[current diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md),
+[original two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) and
+[current steps](NEXT_RUN.md). Historical input availability and the stronger
+activity baseline remain part of the scope.
 
 ## Initial dependency and synthetic checks: 2026-10-23
 
@@ -268,17 +269,40 @@ training seed, schema, validation date and constant/time feature policy. The
 same [fixed protocol](TRAINED_INFERENCE.md) remains available for deliberate
 reproduction; there is no planned automatic third run or configuration expansion.
 
-## Follow-up diagnostic: prepared, GPU confirmation pending
+## Follow-up diagnostic: completed 2026-10-24 UTC
 
-A CPU-only lifecycle probe confirmed that the original sampler fingerprint
-helper leaves self-referential closure cycles: 100 calls left 100 functions,
-and full collection removed 400 unreachable objects on the recorded CPython
-3.12 runtime. This establishes a helper lifecycle issue, not the cause of the
-historical T4 pauses. The original GPU sessions used Python 3.13 and did not
-record collection events.
+[Notebook 07](SPIKE_DIAGNOSTIC.md) passed in run `20261024T121852Z-4747d5`
+at clean source `da47db9d008d63046c5c35559765b199d455c174`, with **200 tests
+passed in the T4 runtime**. All 332 cases completed: 326 original-history
+cases, three forced-collection controls and three cycle-free-hash controls.
+The original weights, benchmark contract and archived sampled-input
+fingerprints matched. No training occurred. The archive preserves 16 unchanged
+root files and 664 diagnostic case files; the latter are byte-identical entries
+in a deterministic compressed archive, with all hashes and sizes in
+[provenance](../reports/colab/20261024T121852Z-4747d5/PROVENANCE.json).
 
-[Notebook 07](SPIKE_DIAGNOSTIC.md) records exact original timer boundaries,
-collection callbacks and host spans, with controlled collection and cycle-free
-hashing conditions. It preserves the original benchmark code and data, verifies
-archived sampled inputs, and saves separate diagnostic traces. A T4 run is
-needed to determine whether collection accounts for a reproduced pause.
+Four new automatic-condition slow online passes across different modes and
+sizes took **251.483–266.993 ms**, with **227.667–239.758 ms** generation-2
+collection overlap. The historical size-512 batch-4 repeat-13 HGAM position
+instead took **28.770 ms with zero GC overlap**. Collection directly explains
+most extra time in the new traced passes and is strongly consistent with the
+old spike pattern. The old runs contain no event traces, so their specific
+causes remain unproved. Two early 108.55/133.98 ms passes had no collection;
+not every pause is a GC pause.
+
+Both the original-hashing automatic target window (512 batches 3–5) and the
+short cycle-free automatic control had zero generation-2 collections. These
+controls cannot show that changing the helper fixed the spike; other cycles
+remain. The forced condition performed **405 full collections outside executor
+timers**, costing **88.656 seconds**. It relocated cleanup cost rather than
+removing it, and supplies no free performance improvement. All instrumented
+timings remain separate from the old 8.77–8.91% primary observations.
+
+The [diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md) records evidence
+and limits. Next is to review and correct the measurement protocol, including
+amortized cleanup, before another benchmark. No new GPU benchmark is prepared.
+
+Budget exports recorded **195.94 to 195.36 units**, an isolated **0.58-unit**
+interval at an observed **1.07 units/hour**, leaving **145.36 above reserve**.
+The [budget summary](../reports/budget/20261024-notebook07-observations.json)
+keeps the earlier account gap separate and preserves original observations.

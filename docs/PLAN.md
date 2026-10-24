@@ -12,7 +12,8 @@
 - [x] Record the notebook 04 follow-up balance (198.63); the later 0.04-unit interval decrease is not an isolated run cost.
 - [x] Record notebook 05 balances (198.63 to 198.59) and 1.07 units/hour; isolation was not confirmed.
 - [x] Record notebook 06's user-confirmed 198.50-to-198.00 boundary balances and 1.07 units/hour; attribute the 0.50-unit decrease using the exported isolation confirmation.
-- [x] Record the independent reproduction's exported 197.90-to-197.46 balances, 1.07 units/hour and isolated 0.44-unit consumption; 147.46 units remain above reserve.
+- [x] Record the independent reproduction's exported 197.90-to-197.46 balances, 1.07 units/hour and isolated 0.44-unit consumption.
+- [x] Record notebook 07's exported 195.94-to-195.36 balances, 1.07 units/hour and isolated 0.58-unit consumption; 145.36 units remain above reserve, with the prior account gap unattributed.
 - [x] Check the installed temporal sampler on a tiny real PyG graph.
 - [x] Fetch the pinned task/schema manifests.
 - [ ] Complete the temporal feature availability audit on real data.
@@ -87,7 +88,8 @@ or a readiness claim for richer historical features.
 - [x] Reproduce notebook 06 in a clean independent T4 session with the same checkpoint and protocol.
 - [x] Finish the bounded execution report with the primary result, recurring extreme-trial sensitivity and limits explicit.
 - [x] Prepare notebook 07 and a CPU lifecycle probe for the recursive fingerprint helper.
-- [ ] Run the instrumented batch-512 diagnostic on T4 and determine whether collection accounts for a reproduced pause; retain unresolved causality if it does not.
+- [x] Complete notebook 07 on T4: 200 hosted tests and 332 diagnostic cases passed; four traced full collections account for most added duration in new slow passes.
+- [ ] Review and correct the measurement protocol before another benchmark, preserving old results and accounting for amortized cleanup rather than shifting costs outside timing.
 
 The pilot informed the next training configuration in
 [`configs/training_run.json`](../configs/training_run.json); its
@@ -134,6 +136,24 @@ are consistent and below the practical target. Within-run bootstrap intervals
 remain separate; two sessions do not establish portability across checkpoints,
 schemas, dates or historical input assumptions. The bounded comparison and its
 report are complete; no additional unchanged GPU run is required for them.
+
+Notebook 07 has completed the targeted diagnostic at source `da47db9`, with
+326 original-history cases, three forced-collection controls and three
+cycle-free-hash controls. Weights, contract and archived sampled fingerprints
+matched. Four new 251.483–266.993 ms online passes included 227.667–239.758 ms
+generation-2 collections. The old batch-512/repeat position instead took
+28.770 ms with zero GC overlap. This supports collection as a mechanism
+consistent with the old spikes, but their untraced causes remain unproved;
+two other early pauses had no GC overlap.
+
+Both short automatic target-window conditions had zero full collections, so
+absence of a spike does not establish that cycle-free hashing fixed it. Forced
+collection took 88.656 seconds outside executor timers: cleanup moved, rather
+than disappeared. Preserve the old 8.77–8.91% protocol observations and keep
+instrumented traces separate. See the
+[diagnostic findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md). Review a GC-aware
+protocol with amortized cleanup before preparing another performance run;
+there is no new GPU benchmark prepared yet.
 
 ## Optional days 15-21
 

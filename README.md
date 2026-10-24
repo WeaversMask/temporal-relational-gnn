@@ -4,31 +4,31 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** the bounded trained execution comparison is complete,
-including an independent notebook 06 reproduction on a different T4. Both
-sessions passed **171 tests**, all 336 query batches and 20 paired repetitions
-each, with unchanged weights and the same frozen protocol. Blocks reduced
-primary batch-32 graph-loaded online latency versus HGAM by **8.91% and 8.77%**
-(within-run 95% intervals 8.47–9.36% and 8.34–9.18%). Both are below the
-predefined 10% practical target. Message passing improved by about 17%; the
-broader online pipeline improved by about 9%.
+**Current stage:** notebook 07 completed the timing-pause diagnostic on T4:
+**200 tests passed** and all **332 cases** completed with the original weights,
+contracts and sampled-input fingerprints. Four new slow online passes
+(251.483–266.993 ms) contained full Python garbage collections lasting
+227.667–239.758 ms. The old batch-512 position was normal in this traced run.
+This strongly supports garbage collection as an explanation consistent with
+the historical spikes; the original untraced events cannot be proved retroactively.
+Two other early slow passes had no collection, so collection does not explain
+every pause.
 
-Secondary reductions at batches 128/512 were 8.02%/10.46% and 8.64%/11.82%.
-Both batch-512 results retain a recurring extreme HGAM observation at the same
-trial position; its cause is unresolved. Predictions passed unchanged numerical
-tolerances. The activity baseline remains the stronger predictor. Results cover
-two sessions, one checkpoint/schema/date and constant/time features under
-unresolved exported-snapshot assumptions. See the
-[current two-run report](reports/TRAINED_INFERENCE_REPRODUCTION.md),
-[first inference report](reports/TRAINED_INFERENCE_STATUS.md),
+The original notebook 06 primary reductions of **8.91% and 8.77%** remain
+observations under the old protocol, both below the 10% target. Diagnostic
+controls do not supply corrected speedup estimates: both short automatic
+controls had no full collections, and forced collection moved **88.656 seconds**
+of cleanup outside executor timers. The next step is to review and correct the
+measurement protocol, including amortized cleanup, before another benchmark.
+No new GPU run is prepared. See the
+[current diagnostic findings](reports/SPIKE_DIAGNOSTIC_STATUS.md),
+[original two-run report](reports/TRAINED_INFERENCE_REPRODUCTION.md),
 [training results](reports/TRAINING_RUN_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
 [current next steps](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
-The report records the completed comparison and its limitations. The current
-follow-up is [notebook 07: diagnose the recurring batch-512 pause](docs/SPIKE_DIAGNOSTIC.md).
-A CPU probe established reference cycles in the fingerprint helper; collection
-as the cause of the original GPU pause remains unconfirmed. Notebook 06 remains
-available for deliberate reproduction through its [fixed protocol](docs/TRAINED_INFERENCE.md).
+The source activity baseline remains the stronger predictor; historical snapshot
+assumptions, constant/time features and the single-checkpoint/schema/date scope
+remain explicit. Existing notebooks remain available for deliberate reproduction.
 
 ## Start in Colab
 
@@ -80,9 +80,15 @@ raw paired batch results, resumable progress, summaries and GPU telemetry;
 both independent runs are archived. For deliberate reproduction, use a fresh
 session with `RESUME = False`; see the [measurement protocol](docs/TRAINED_INFERENCE.md).
 
+[Notebook 07](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/07_spike_diagnostic.ipynb)
+completed the instrumented follow-up with the same checkpoint and saved-input
+contracts. Its callbacks and host spans perturb allocation and timing, so its
+measurements diagnose pauses rather than replace notebook 06 speed results.
+See the [completed diagnostic and reproduction instructions](docs/SPIKE_DIAGNOSTIC.md).
+
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04
-through 06 include their checkpoints in the download without mounting Drive. Colab VM
+through 07 include their checkpoints in the download without mounting Drive. Colab VM
 contents are disposable. Use one active runtime, record start/end balances, and
 keep the 50-unit reserve. GPU access, RAM, and session lifetime are variable, so
 use short, resumable runs. Disconnect GPUs once the export is saved.
@@ -193,6 +199,19 @@ PyTorch allocator peaks. Reproduction budget exports recorded 197.90 to
 197.46 units at 1.07 units/hour with isolation confirmed: 0.44 units consumed,
 leaving 147.46 above reserve. The first run's separately corrected 0.50-unit
 interval is preserved in its historical budget record.
+
+Notebook 07 recorded four generation-2 collections inside new slow online passes
+across different modes and batch sizes, establishing collection as the immediate
+source of most added duration in those new events. It did not trace the old
+spikes, and no full collection occurred in either short automatic target-window
+control. The cycle-free helper therefore has no demonstrated spike-removal
+result. Forced cleanup was relocated outside original timers, rather than made
+free. Its 664 case files are preserved in a verified compressed archive; root
+reports and logs remain unchanged. See the
+[diagnostic report](reports/SPIKE_DIAGNOSTIC_STATUS.md). The isolated budget
+interval was **195.94 to 195.36 units**, or **0.58 consumed** at an observed
+1.07 units/hour, leaving **145.36 above reserve**. Earlier account decreases
+remain separate.
 
 ## Attribution and scope
 
