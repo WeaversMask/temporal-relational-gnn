@@ -1,51 +1,39 @@
-# Current result: independent reproduction completed
+# Next step: diagnose the recurring batch-512 pause
 
-The fresh notebook 06 run `20261024T102607Z-6593a4` completed all three sizes,
-336 query batches and 6,720 paired trials, with 171 tests passed on T4. It used
-the same checkpoint and protocol as the first session, on a different device,
-with no resumed measurement sidecars. Read the
-[two-session investigation report](../reports/TRAINED_INFERENCE_REPRODUCTION.md).
+The trained inference comparison and independent repeat are complete. The
+primary latency reduction versus HGAM was **8.91% and 8.77%**, with unchanged
+weights and numerically equivalent predictions. The 10% planning target is
+recorded for transparency; the repeated approximately 9% improvement remains
+a positive result for this workload. See the
+[two-session report](../reports/TRAINED_INFERENCE_REPRODUCTION.md).
 
-| Batch size | First latency reduction vs HGAM | Independent repeat |
-| --- | ---: | ---: |
-| **32, primary** | **8.91%** | **8.77%** |
-| 128 | 8.02% | 8.64% |
-| 512 | 10.46% | 11.82% |
+The user has selected a focused follow-up: explain the one HGAM observation that
+recurred at approximately 250 ms in both sessions at size 512, batch 4, repeat
+13. A CPU probe found self-referential closures left by the sampler fingerprint
+helper. Collection during a later timed pass is a concrete hypothesis; the
+original GPU pause's cause is still unconfirmed.
 
-The primary improvement repeated and remains below the 10% practical target.
-Predictions matched within unchanged tolerances and weights stayed fixed.
-The larger batch's HGAM timing spike recurred at the same batch/repeat position
-on a different GPU. All data remain included, with sensitivity diagnostics and
-its unresolved cause disclosed in the report.
+## Run notebook 07
 
-## No additional unchanged run is needed for this comparison
+Use the new [batch-512 diagnostic notebook](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/07_spike_diagnostic.ipynb)
+in a fresh **T4** runtime with the same notebook 05 `training.pt`. Run all cells,
+record current start/end budget readings, export the complete ZIP and disconnect.
+The [diagnostic instructions](SPIKE_DIAGNOSTIC.md) explain the three conditions
+and the evidence needed before assigning a cause.
 
-The planned independent repeat is complete, and the current evidence is ready
-for explanation and reporting. Keep both original exports and the trained
-checkpoint. If a Colab runtime is still connected, download its ZIP and
-then disconnect/delete it.
+The first condition replays the original preceding workload order while recording
+collection events. It can take roughly as long as notebook 06; two additional
+short controls then examine batches 3–5. Extra observation can change where
+collection occurs, so we inspect every slow pass rather than requiring the old
+location to recur. All original benchmark code, weights, sampling and exports
+remain preserved. Diagnostic times are not replacement speedup estimates.
 
-The report distinguishes the approximately 9% complete online saving from the
-approximately 17% message-passing-stage saving, records the unachieved primary
-target, and preserves the activity baseline's predictive advantage and the
-historical snapshot limitations. It makes no pooled cross-device confidence
-claim from two sessions.
+The last verified balance was **197.46 units**, leaving **147.46 above reserve**.
+The preceding repeat recorded an isolated 0.44-unit decrease. Enter a new balance
+and rate rather than treating those observations as current measurements.
 
-Explaining the recurring size-512 spike would need a targeted trace experiment
-with a separately recorded protocol. Do not replace the primary batch-32 result
-with a secondary result or retune the workload to pursue the threshold. A richer
-model, additional training seeds, another schema or historical reconstruction
-would extend the study beyond this frozen execution comparison.
-
-## Budget and future reproduction
-
-This repeat recorded **197.90 at start, 197.46 at end and 1.07 units/hour**,
-with isolation confirmed. Its 0.44-unit balance decrease leaves **147.46 units
-above reserve**. The [budget record](../reports/budget/20261024-notebook06-reproduction-observations.json)
-is separate from the first session's corrected 0.50-unit interval.
-
-For a deliberate future reproduction, use
-[notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
-in a fresh T4 runtime with `RESUME = False`, the same notebook 05 `training.pt`
-and unchanged [frozen protocol](../configs/trained_inference.json). Follow the
-[run instructions](TRAINED_INFERENCE.md) and save new measurements separately.
+After the export, determine whether a recorded collection accounts for the pause.
+If confirmed, evaluate a cycle-free hashing correction under a separately
+recorded timing protocol. If not, retain the unresolved cause and use the traces
+to narrow the next test. Do not replace the primary comparison with a secondary
+result or retune the model to pursue the round 10% target.

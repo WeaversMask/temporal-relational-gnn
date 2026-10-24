@@ -24,9 +24,11 @@ unresolved exported-snapshot assumptions. See the
 [training results](reports/TRAINING_RUN_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
 [current next steps](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
-The report records the completed comparison and its limitations. Notebook 06
-remains available for deliberate reproduction through its
-[fixed protocol](docs/TRAINED_INFERENCE.md).
+The report records the completed comparison and its limitations. The current
+follow-up is [notebook 07: diagnose the recurring batch-512 pause](docs/SPIKE_DIAGNOSTIC.md).
+A CPU probe established reference cycles in the fingerprint helper; collection
+as the cause of the original GPU pause remains unconfirmed. Notebook 06 remains
+available for deliberate reproduction through its [fixed protocol](docs/TRAINED_INFERENCE.md).
 
 ## Start in Colab
 

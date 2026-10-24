@@ -118,6 +118,13 @@ large duration and cannot identify which stage caused the uninstrumented spike.
 Only 16 query-batch clusters contribute to each size-512 interval. Its exact
 tail-sensitive benefit remains less settled than the primary comparison.
 
+A subsequent [CPU lifecycle probe](analysis/512-fingerprint-gc-investigation.json)
+established that the original fingerprint helper leaves collectible recursive
+closure cycles. Collection during a later timed pass is a concrete hypothesis,
+not yet an attribution of either historical T4 spike. The separately prepared
+[notebook 07 diagnostic](../docs/SPIKE_DIAGNOSTIC.md) records collection overlap
+without altering the original source or results.
+
 ## Why the complete saving is smaller than the GNN-stage saving
 
 In the reproduction, HGAM-to-block message-passing replay medians were

@@ -86,6 +86,8 @@ or a readiness claim for richer historical features.
 - [x] Run the trained profiler on T4 and review paired latency, throughput and memory.
 - [x] Reproduce notebook 06 in a clean independent T4 session with the same checkpoint and protocol.
 - [x] Finish the bounded execution report with the primary result, recurring extreme-trial sensitivity and limits explicit.
+- [x] Prepare notebook 07 and a CPU lifecycle probe for the recursive fingerprint helper.
+- [ ] Run the instrumented batch-512 diagnostic on T4 and determine whether collection accounts for a reproduced pause; retain unresolved causality if it does not.
 
 The pilot informed the next training configuration in
 [`configs/training_run.json`](../configs/training_run.json); its

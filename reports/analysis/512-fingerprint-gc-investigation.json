@@ -1,0 +1,175 @@
+{
+  "benchmark_run_performed": false,
+  "checkpoint_used": false,
+  "collection_events": [
+    {
+      "collected": 0,
+      "event": "start",
+      "generation": 2,
+      "phase": "pre_probe_cleanup",
+      "uncollectable": 0
+    },
+    {
+      "collected": 61,
+      "event": "stop",
+      "generation": 2,
+      "phase": "pre_probe_cleanup",
+      "uncollectable": 0
+    },
+    {
+      "collected": 0,
+      "event": "start",
+      "generation": 2,
+      "phase": "original_explicit_full_collection",
+      "uncollectable": 0
+    },
+    {
+      "collected": 400,
+      "event": "stop",
+      "generation": 2,
+      "phase": "original_explicit_full_collection",
+      "uncollectable": 0
+    },
+    {
+      "collected": 0,
+      "event": "start",
+      "generation": 2,
+      "phase": "module_level_explicit_full_collection",
+      "uncollectable": 0
+    },
+    {
+      "collected": 0,
+      "event": "stop",
+      "generation": 2,
+      "phase": "module_level_explicit_full_collection",
+      "uncollectable": 0
+    }
+  ],
+  "fixture": {
+    "description": "Two disjoint temporal user occurrences share global user ID zero, with two event occurrences and forward/reverse relationships.",
+    "expected_sha256": "8cbfe00338736ad7fe647ce797c0e37088ac50fb7a4c7836ed00676a78f90dec",
+    "node_ids": {
+      "events": [
+        0,
+        1
+      ],
+      "users": [
+        0,
+        0
+      ]
+    },
+    "occurrence_ownership": {
+      "events": [
+        0,
+        1
+      ],
+      "users": [
+        0,
+        1
+      ]
+    },
+    "seed_times_unix_seconds": [
+      1583020800,
+      1601510400
+    ]
+  },
+  "gpu_used": false,
+  "initial_gc_state": {
+    "callback_count": 0,
+    "debug": 0,
+    "enabled": true,
+    "thresholds": [
+      700,
+      10,
+      10
+    ]
+  },
+  "interpretation": {
+    "established": "The original recursive local hashing helper leaves one collectible reference cycle per fingerprint call; the equivalent module-level helper does not leave those cycles on this fixture.",
+    "not_established": "This CPU fixture does not identify the cause or duration of the recurring T4 batch-512 HGAM spike. A GC overlap trace or controlled GPU diagnostic remains required.",
+    "reproduction_limit": "The exact count of 400 collected objects is observed on this recorded CPython runtime and may differ on other Python implementations or versions.",
+    "timing_claim": "No CPU speedup or GPU latency claim is inferred; this probe tests object lifecycle only."
+  },
+  "module_level_control": {
+    "all_100_fingerprints_identical_to_original_probe": true,
+    "both_module_level_helpers_have_no_closure": true,
+    "calls": 100,
+    "cyclic_gc_enabled_during_calls": false,
+    "explicit_full_collection_unreachable_objects": 0,
+    "function_source": "def module_level_update(digest, value):\n    if isinstance(value, torch.Tensor):\n        if value.device.type != \"cpu\":\n            raise ValueError(\"Expected a CPU sampler output\")\n        digest.update(str((value.dtype, tuple(value.shape))).encode())\n        digest.update(value.contiguous().numpy().tobytes())\n    elif isinstance(value, dict):\n        for key in sorted(value, key=str):\n            module_level_update(digest, key)\n            module_level_update(digest, value[key])\n    elif isinstance(value, (list, tuple)):\n        digest.update(str((type(value).__name__, len(value))).encode())\n        for item in value:\n            module_level_update(digest, item)\n    else:\n        digest.update(repr(value).encode())\n    digest.update(b\"\\0\")\n\n\ndef module_level_fingerprint(sample):\n    digest = hashlib.sha256()\n    for field in (\"node\", \"row\", \"col\", \"edge\", \"batch\", \"num_sampled_nodes\", \"num_sampled_edges\"):\n        module_level_update(digest, field)\n        module_level_update(digest, getattr(sample, field))\n    module_level_update(digest, sample.metadata)\n    return digest.hexdigest()\n",
+    "function_source_sha256": "3b74944d25acf218ef56f12936f798a37d037e2a206e898195df6d7cc3d2e7fd",
+    "new_recursive_updater_functions": 0,
+    "scope": "Ad hoc equivalent helper in this subprocess; repository source was not changed.",
+    "sha256": "8cbfe00338736ad7fe647ce797c0e37088ac50fb7a4c7836ed00676a78f90dec"
+  },
+  "observed_at_utc": "2026-10-24T11:42:11.075293+00:00",
+  "original_fingerprint_probe": {
+    "all_100_fingerprints_identical": true,
+    "all_new_functions_have_self_reference_in_closure": true,
+    "baseline_recursive_updater_functions": 0,
+    "calls": 100,
+    "closure_freevars": [
+      [
+        "digest",
+        "update"
+      ]
+    ],
+    "cyclic_gc_enabled_during_calls": false,
+    "explicit_full_collection_unreachable_objects": 400,
+    "gc_counts_after_calls": [
+      511,
+      0,
+      0
+    ],
+    "gc_counts_before_calls": [
+      5,
+      0,
+      0
+    ],
+    "new_recursive_updater_functions": 100,
+    "recursive_updater_functions_after_collection": 0,
+    "sha256": "8cbfe00338736ad7fe647ce797c0e37088ac50fb7a4c7836ed00676a78f90dec",
+    "weak_references_alive_after_explicit_collection": 0,
+    "weak_references_alive_before_explicit_collection": 100
+  },
+  "real_dataset_used": false,
+  "restoration": {
+    "callback_count": 0,
+    "debug": 0,
+    "debug_state_preserved": true,
+    "enabled": true,
+    "enabled_state_preserved": true,
+    "original_callbacks_identity_and_order_preserved": true,
+    "process_scope": "Isolated probe subprocess; no parent process GC state was modified.",
+    "thresholds": [
+      700,
+      10,
+      10
+    ],
+    "thresholds_preserved": true
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "packages": {
+      "numpy": "2.5.4",
+      "pytorch-frame": "0.3.0",
+      "relbench": "3.0.2",
+      "torch": "2.14.1",
+      "torch-geometric": "2.8.1"
+    },
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]"
+  },
+  "schema_version": 1,
+  "scope": "CPU-only fake sampler fingerprint closure lifecycle probe in an isolated subprocess",
+  "source": {
+    "file": "src/trgnn/pipeline_profile.py",
+    "file_sha256": "5727fbd5b30002332d44574e7498db5d5d8a90334c9cb12d53a13e937b0f3d2b",
+    "function": "sampler_fingerprint",
+    "function_source": "def sampler_fingerprint(sample) -> str:\n    \"\"\"Hash local occurrences, ownership, edges, hop counts, and seed metadata.\n\n    Global node IDs alone cannot establish equality of temporal sampled batches.\n    This is computed outside every timing region on the CPU sampler output.\n    \"\"\"\n    digest = hashlib.sha256()\n\n    def update(value):\n        if isinstance(value, torch.Tensor):\n            if value.device.type != \"cpu\":\n                raise ValueError(\"Expected a CPU sampler output\")\n            digest.update(str((value.dtype, tuple(value.shape))).encode())\n            digest.update(value.contiguous().numpy().tobytes())\n        elif isinstance(value, dict):\n            for key in sorted(value, key=str):\n                update(key)\n                update(value[key])\n        elif isinstance(value, (list, tuple)):\n            digest.update(str((type(value).__name__, len(value))).encode())\n            for item in value:\n                update(item)\n        else:\n            digest.update(repr(value).encode())\n        digest.update(b\"\\0\")\n\n    for field in (\"node\", \"row\", \"col\", \"edge\", \"batch\", \"num_sampled_nodes\", \"num_sampled_edges\"):\n        update(field)\n        update(getattr(sample, field))\n    update(sample.metadata)\n    return digest.hexdigest()\n",
+    "function_source_sha256": "5f7b985c0492e1dd400f9ac02fefd82900a6b6dba56b6bafa183628fd2e02c70",
+    "git_commit": "98ece6107ad9068243eb1956684690ce4f1b8707"
+  },
+  "status": "passed",
+  "t4_spike_causality_established": false
+}

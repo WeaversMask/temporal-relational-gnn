@@ -267,3 +267,18 @@ assumptions visible. Two sessions still cover one checkpoint,
 training seed, schema, validation date and constant/time feature policy. The
 same [fixed protocol](TRAINED_INFERENCE.md) remains available for deliberate
 reproduction; there is no planned automatic third run or configuration expansion.
+
+## Follow-up diagnostic: prepared, GPU confirmation pending
+
+A CPU-only lifecycle probe confirmed that the original sampler fingerprint
+helper leaves self-referential closure cycles: 100 calls left 100 functions,
+and full collection removed 400 unreachable objects on the recorded CPython
+3.12 runtime. This establishes a helper lifecycle issue, not the cause of the
+historical T4 pauses. The original GPU sessions used Python 3.13 and did not
+record collection events.
+
+[Notebook 07](SPIKE_DIAGNOSTIC.md) records exact original timer boundaries,
+collection callbacks and host spans, with controlled collection and cycle-free
+hashing conditions. It preserves the original benchmark code and data, verifies
+archived sampled inputs, and saves separate diagnostic traces. A T4 run is
+needed to determine whether collection accounts for a reproduced pause.
