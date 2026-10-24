@@ -1,50 +1,57 @@
-# Next run: notebook 08, natural-GC trained inference
+# Next run: independently repeat notebook 08
 
-The revised [notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
-is prepared to measure the same trained model with a cycle-free fingerprint
-check and explicit cleanup accounting. Its hosted result is still pending.
-Read the [run instructions](GC_AWARE_INFERENCE.md).
+The first natural-GC measurement passed **240 tests on T4** and all **336 query
+batches** in run `20261024T215147Z-bd9574`. Blocks reduced online latency versus
+HGAM by **8.38% at batch 32** (primary, within-run interval **7.75–8.90%**),
+**8.12% at 128** and **8.21% at 512**. The original weights, predictions and
+sampled inputs matched. Read the
+[verified findings](../reports/GC_AWARE_INFERENCE_STATUS.md).
 
-Use a fresh **T4** runtime, leave `RESUME = False`, enter current budget readings
-and upload the **same original notebook 05 `training.pt`** used for notebooks
-06 and 07. Run all cells. It measures all 8,192 queries at sizes **32, 128 and
-512**, with the same five warmups, 20 paired repeats, seeds and tolerances.
-After success or failure, record the ending balance, export the complete ZIP
-and disconnect/delete the runtime.
+## Repeat the same frozen measurement
 
-## What changed and what the run must establish
+Use the same [notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
+in a **fresh T4 runtime**, with **`RESUME = False`** and no reused measurement
+sidecars. No new notebook, model training or settings change is needed.
 
-Notebook 07 directly observed 228–240 ms full Python collections inside four
-slow online passes across different execution modes and sizes. The old
-batch-512/HGAM position was ordinary in that instrumented run. The evidence
-supports collection cadence as an explanation of the earlier spikes without
-proving those unrecorded historical events retrospectively. See the
-[diagnostic findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md).
+1. Disconnect other managed runtimes, enable the existing `GITHUB_TOKEN` secret,
+   and enter current compute-unit balance/rate readings.
+2. Upload the **same original notebook 05 `training.pt`** used for notebooks
+   06–08. Keep the frozen configuration and run all cells.
+3. Let source checks, full saved-validation replay and all three batch sizes
+   complete. Record the ending balance, export the complete ZIP and disconnect.
+4. Verify that new export before describing the version-2 result as independently
+   reproduced. Keep each session's estimates and intervals separate.
 
-The correction removes the CPU-proven avoidable hash cycle. Automatic collection
-stays enabled; its pauses remain in each actual timing. Minimal callbacks record
-cleanup, and the executor records exact boundaries without host-stage wrappers.
-No collection is forced outside the timer and no observations are dropped.
-GC durations overlap online/program time and must not be added or subtracted
-again. Program wall time, including benchmark audits and stage replays, is
-reported separately rather than called serving throughput.
+See [the complete run instructions](GC_AWARE_INFERENCE.md).
 
-The original checkpoint-bound implementation and earlier reports remain intact.
-A new measurement contract binds the revised code and GC settings. Source
-inputs, fingerprints, sampling order and weights must match the original archived
-cohort. After this first revised run, verify the result before independently
-repeating it; the old protocol's approximately 9% benefit is not a measured
-result of this new protocol.
+## What this repeat resolves
+
+The observed benefit remains positive when natural cleanup pauses are retained.
+The first revised run still had three full collections inside online passes,
+including two received by blocks. A fourth full collection occurred outside the
+case-observer windows according to program counters; its separate duration is
+unknown, while its cost remains in program wall time. Removing the avoidable
+hash cycle does not eliminate all cleanup or explain every smaller slowdown.
+
+The old size-512 HGAM spike position took 28.221 ms in this run. No size-512
+pass exceeded 100 ms, and its reduction was 8.21%. That is consistent with
+changed collection cadence; it does not retrospectively identify the untraced
+old pauses. Keep the old notebook 06 results and notebook 07 diagnostic separate.
+
+A second fresh version-2 session will show whether the current benefit repeats
+under the same measurement protocol. Retain every observation and keep cleanup
+cost inside its actual timing boundary. Program wall includes audits and stage
+replays and must not be called serving throughput. No larger benefit is promised.
 
 ## Resources and scientific scope
 
-The last verified balance was **195.36 units**, leaving **145.36 above reserve**;
-use the current reading. The prior diagnostic consumed an isolated 0.58 units.
-Runtime duration can be similar to notebook 06 and varies with setup and natural
-cleanup. Avoid idle sessions and keep all exported evidence.
+The last verified balance was **194.63 units**, leaving **144.63 above reserve**;
+use the current reading. The first notebook 08 interval consumed an isolated
+**0.44 units** at an observed **1.07 units/hour**. Earlier account gaps remain
+separate. Avoid idle sessions and keep all exported evidence.
 
-Removing one helper cycle does not establish elimination of all collections or
-slowdowns. The model still uses one checkpoint, schema, validation date and
-constant/time features under unresolved exported-snapshot assumptions. Its
-source predictive metrics remain below the activity baseline's. This remains
-an execution comparison, with no new training or test-split evaluation.
+The model still uses one checkpoint, schema, validation date and constant/time
+features under unresolved exported-snapshot assumptions. Its predictive metrics
+remain below the activity baseline's. The repeat performs no training or test
+split evaluation. Decide on any additional workload only after this independent
+repeat is verified.

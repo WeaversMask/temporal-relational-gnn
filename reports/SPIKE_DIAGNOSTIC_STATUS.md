@@ -135,9 +135,10 @@ if a managed-GC comparison excludes cleanup from its timer, report that boundary
 and the cleanup/total cost separately. Preserve weights, sampling, primary
 batch size, tolerances and all raw observations.
 
-A fresh comparison is needed before calling a helper correction a performance
-fix or updating the efficiency claim. The separately prepared
+A revised comparison and independent repeat are needed before describing a
+stable efficiency result for the helper correction. The separate
 [notebook 08](../docs/GC_AWARE_INFERENCE.md) retains natural cleanup and lightweight
-GC observation under a new protocol; its hosted result is pending. The full
-collection mechanism is directly observed, while the exact historical event and
+GC observation under a new protocol. Its
+[first measured result](GC_AWARE_INFERENCE_STATUS.md) is now verified; independent
+reproduction remains pending. The full collection mechanism is directly observed, while the exact historical event and
 the two non-GC early pauses remain appropriately qualified.

@@ -1,0 +1,58 @@
+{
+  "status": "frozen_gc_aware_inference_protocol_pending_hosted_validation",
+  "dataset": "rel-stack",
+  "task": "user-badge",
+  "parent_training_run": "20261024T073010Z-1f9800",
+  "training_report": "reports/colab/20261024T073010Z-1f9800/training-run.json",
+  "training_report_sha256": "988ffe6bb0c55c2f6fecd769e6f3089b493f266ce40a68915005b659cc458988",
+  "checkpoint_sha256": "92d02f7d2007c0ab560629e9c4e0d48886a1d149930e68e494a861b85659e1d6",
+  "primary_batch_size": 32,
+  "batch_sizes": [
+    32,
+    128,
+    512
+  ],
+  "val_queries": 8192,
+  "repeats": 20,
+  "warmup": 5,
+  "seed": 42,
+  "bootstrap_samples": 2000,
+  "execution_modes": [
+    "reference",
+    "hgam",
+    "blocks"
+  ],
+  "model_weights": "fixed_parent_checkpoint_no_training",
+  "feature_inputs": [
+    "constant",
+    "query_time_minus_record_time"
+  ],
+  "correctness_atol": 1e-05,
+  "correctness_rtol": 0.0001,
+  "compute_units_reserve": 50,
+  "online_boundary": "resident_graph_sampling_through_prediction",
+  "primary_comparison": "paired_blocks_versus_hgam_online_latency_at_batch_size_32",
+  "test_split": "untouched",
+  "assumptions": [
+    "Hosted snapshot with record-time filtering; historical relationship changes, deletions and merges remain unresolved.",
+    "The fixed 8192-query parent validation cohort is not the full-validation workload.",
+    "Preparation, download, graph construction, validation replay and correctness checks are excluded from online timings.",
+    "The warmup count is recorded; raw online timings and synchronized stage replay timings are separate.",
+    "CUDA correctness and performance require an NVIDIA GPU; CPU checks do not establish them.",
+    "Removing the avoidable fingerprint cycle does not establish that all long collections disappear.",
+    "All natural pauses remain in the estimator; no GC subtraction, filtering or forced between-pass collection is used.",
+    "GC durations overlap online and collection wall times; they are not additional costs to add again.",
+    "A new independent session is needed before describing any V2 efficiency result as reproduced."
+  ],
+  "protocol_version": 2,
+  "source_profile": "reports/colab/20261024T102607Z-6593a4/trained-profile.json",
+  "source_profile_sha256": "0db16833c33b6d723779cd8cb39ef62f0abf2a0f63290a6bcf95875cd693c9c3",
+  "source_benchmark_contract_sha256": "6a98ea10137f6a7371f4e2bc514a7c86819c2953839b2f78622c5dfdb681d856",
+  "gc_policy": "natural_automatic",
+  "fingerprint_implementation": "cycle_free_module_level_visitor_with_original_serialization",
+  "gc_observer": "minimal collection callbacks and exact executor timer windows; observer overhead present",
+  "cleanup_accounting": "retain all natural GC inside online timings; report GC durations separately without subtraction or double counting",
+  "collection_wall_scope": "experiment collection loop including warmups, online passes, audits, stage replays and reporting; not a serving throughput denominator",
+  "comparison_to_historical_results": "new protocol; historical percentages remain unchanged and separate",
+  "fingerprint_scope": "cycle-free occurrence hashing during complete saved-validation replay and measured paired cases"
+}

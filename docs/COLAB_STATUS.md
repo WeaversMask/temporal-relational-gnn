@@ -1,17 +1,20 @@
-# Colab feasibility: verified 2026-10-24
+# Colab feasibility and inference: verified 2026-10-25
 
-Notebook 07's instrumented timing-pause diagnostic completed on T4 with
-**200 hosted tests passed** and all **332 cases**. Four new slow online passes
-contained generation-2 collections accounting for most added duration. The
-historical spikes remain untraced, so this supports a consistent explanation
-without retroactively proving their cause. The original notebook 06 primary
-8.91% and 8.77% reductions remain old-protocol observations; diagnostic controls
-are not corrected benchmarks. Notebook 08 is now prepared with cycle-free
-auditing, natural automatic collection and explicit cleanup accounting;
-its hosted validation and measurements remain pending. See the
-[current diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md),
+Notebook 08's first revised trained-inference run completed at clean source
+`56d82fb`, with **240 hosted T4 tests passed** and all **336 query batches**.
+The original checkpoint, saved predictions and sampled inputs matched. Blocks
+reduced summed online latency versus HGAM by **8.38% at batch 32** (primary,
+within-run 95% interval **7.75–8.90%**), **8.12% at 128** and **8.21% at 512**.
+Independent repetition of this version-2 measurement remains pending.
+
+Natural cleanup stays enabled and its actual online cost remains in every
+observation. Three observed full collections landed inside online passes;
+program counters record one more outside case windows, without a separately
+measured duration. The old size-512 spike position was ordinary in this run.
+See the [new measured result](../reports/GC_AWARE_INFERENCE_STATUS.md),
+[completed diagnostic](../reports/SPIKE_DIAGNOSTIC_STATUS.md),
 [original two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) and
-[current steps](NEXT_RUN.md). Historical input availability and the stronger
+[current steps](NEXT_RUN.md). Historical input assumptions and the stronger
 activity baseline remain part of the scope.
 
 ## Initial dependency and synthetic checks: 2026-10-23
@@ -300,14 +303,56 @@ removing it, and supplies no free performance improvement. All instrumented
 timings remain separate from the old 8.77–8.91% primary observations.
 
 The [diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md) records evidence
-and limits. The revised [notebook 08 protocol](GC_AWARE_INFERENCE.md) is prepared
-for a fresh T4 run. It removes the avoidable fingerprint cycle during saved
-validation replay and measurement, keeps natural cleanup inside actual timings,
-and records observed collection overlap and whole-program wall time separately.
-No new hosted result is claimed; an independent repeat follows review of the
-first revised measurement.
+and limits. This diagnostic led to the revised
+[notebook 08 protocol](GC_AWARE_INFERENCE.md), with cycle-free replay/auditing,
+natural cleanup retained in actual timings, and separate collection-overlap and
+whole-program wall accounting. Its first hosted measurement is recorded below.
 
 Budget exports recorded **195.94 to 195.36 units**, an isolated **0.58-unit**
 interval at an observed **1.07 units/hour**, leaving **145.36 above reserve**.
 The [budget summary](../reports/budget/20261024-notebook07-observations.json)
 keeps the earlier account gap separate and preserves original observations.
+
+
+## Revised natural-GC trained inference: first run completed 2026-10-24 UTC
+
+[Notebook 08](GC_AWARE_INFERENCE.md) passed in run `20261024T215147Z-bd9574`
+at clean source `56d82fb6d783a680e0cb122afd94c15ffc106368`, with **240 tests
+passed on T4**. All 336 query batches completed 20 paired repeats in one fresh
+session with no reused sidecars. All 8,192 saved validation predictions and
+256 source sampler fingerprints replayed; every measured case matched the
+original query indices, sampled inputs, seeds, mode orders and occurrence audits.
+The original notebook 05 checkpoint and model state stayed unchanged.
+
+| Query batch | Blocks reduction vs HGAM | Within-run 95% interval | Blocks queries/s |
+| --- | ---: | ---: | ---: |
+| **32, primary** | **8.38%** | **7.75–8.90%** | 1,319 |
+| 128 | 8.12% | 7.25–8.94% | 5,205 |
+| 512 | 8.21% | 6.41–9.93% | 19,299 |
+
+Case callbacks observed 7,395 collections, including three full collections
+inside online passes. Two affected blocks at size 32 and one affected the
+reference at 128; all costs remain in the estimator. Program counters show
+four full collections, so one occurred outside observed case windows. Its
+separate duration is unmeasured, while program wall retains the cost.
+The old size-512/HGAM position was 28.221 ms, and no size-512 pass exceeded
+100 ms. This does not establish elimination of all future pauses.
+
+The collection-program wall was 1,461.210 seconds, including warmups, audits,
+stage replays, reporting and monitor teardown, separately from online throughput.
+Maximum cross-mode logit error was `9.5367431640625e-7` and maximum loss error
+was `5.960464477539063e-8`, within the original tolerances. Device-wide one-second
+samples recorded 161–171 MiB memory. These measurements retain observer overhead
+and describe different boundaries from the old notebook 06 observations.
+
+The [verified report](../reports/GC_AWARE_INFERENCE_STATUS.md),
+[independent audit](../reports/analysis/20261024T215147Z-bd9574-audit.json) and
+[archive provenance](../reports/colab/20261024T215147Z-bd9574/PROVENANCE.json)
+preserve this first version-2 result. Repeat the same notebook in a fresh T4
+session with `RESUME = False` before describing it as independently reproduced.
+No new training or broader-scope claim is implied.
+
+The isolated export recorded **195.07 to 194.63 units** at an observed
+**1.07 units/hour**, consuming **0.44 units** and leaving **144.63 above reserve**.
+The earlier 195.36-to-195.07 account interval stays separate and unattributed.
+See the [budget observations](../reports/budget/20261024-notebook08-observations.json).

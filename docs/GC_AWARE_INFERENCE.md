@@ -1,9 +1,17 @@
 # Revised trained inference measurement with natural cleanup
 
 [Notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
-prepares a new measurement protocol after the completed
-[collection diagnostic](../reports/SPIKE_DIAGNOSTIC_STATUS.md). No hosted result
-has been measured for this protocol yet.
+completed its first revised measurement in run `20261024T215147Z-bd9574` at
+source `56d82fb`, after the completed
+[collection diagnostic](../reports/SPIKE_DIAGNOSTIC_STATUS.md). All **240 T4 tests**
+and **336 query batches** passed. The primary online latency reduction versus
+HGAM was **8.38%** (within-run interval **7.75–8.90%**); secondary sizes 128/512
+showed **8.12% / 8.21%**. See the
+[measured findings](../reports/GC_AWARE_INFERENCE_STATUS.md).
+
+Next is an independent fresh T4 repeat of this same notebook and frozen
+configuration. No new notebook or training is needed. The instructions below
+apply to that repeat; do not reuse old measurement sidecars.
 
 The revision removes the avoidable recursive closure in the sampler fingerprint
 check. It keeps automatic garbage collection enabled and retains every actual
@@ -21,14 +29,14 @@ lint and formatting checks also passed. Notebook 08 runs the full suite on T4,
 including a new CUDA check of this executor. Local checks do not establish GPU
 correctness or a performance result.
 
-## Run in a fresh Colab T4 session
+## Independently repeat in a fresh Colab T4 session
 
 1. Open notebook 08, save a copy, select **T4 GPU**, disconnect other managed
    runtimes and enable the existing read-only `GITHUB_TOKEN` secret.
 2. Enter the current `COMPUTE_UNITS_REMAINING` balance and displayed
    `COMPUTE_UNITS_PER_HOUR` rate in the first control cell. The last verified
-   balance was 195.36; use a new reading. Keep `RESUME = False` for this first
-   independent measurement. The 50-unit reserve still applies.
+   balance was 194.63; use a new reading. Keep `RESUME = False` for this
+   independent repeat. The 50-unit reserve still applies.
 3. Run cells in order. At the upload prompt choose the **same original
    notebook 05 `training.pt` used for notebooks 06 and 07**. Its expected hash is
    `92d02f7d2007c0ab560629e9c4e0d48886a1d149930e68e494a861b85659e1d6`.
@@ -116,10 +124,10 @@ If resumed cases span sessions, that aggregate is explicitly marked and is not
 an independent single-session reproduction. Within-size confidence intervals
 are suppressed when that size combines measurement sessions.
 
-Keep the new result separate from the earlier 8.77–8.91% observations. The
-first corrected run needs review, followed by a clean independent repeat before
-its percentage can be described as reproduced. Neither a larger benefit nor the
-absence of all future pauses is promised.
+Keep the first version-2 result separate from the earlier 8.77–8.91%
+observations. Its independent repeat remains pending. Full collections still
+occurred in the first revised run, and all their online costs were retained.
+Neither a larger benefit nor the absence of future pauses is promised.
 
 Scope remains one checkpoint/training seed, schema, validation date and restricted
 constant/time feature policy. The activity baseline remains the stronger source

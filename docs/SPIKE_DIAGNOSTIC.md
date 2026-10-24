@@ -9,10 +9,11 @@ matched. The original benchmark source and measurements remain unchanged.
 These are instrumented diagnostic results, not replacement performance results.
 See the [measured findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md).
 
-The revised [notebook 08 protocol](GC_AWARE_INFERENCE.md) is now prepared with
-cycle-free auditing and natural cleanup retained in online timings. Its hosted
-result is pending. The instructions below remain available for deliberate
-diagnostic reproduction.
+The revised [notebook 08 protocol](GC_AWARE_INFERENCE.md) has now run with
+cycle-free auditing and natural cleanup retained in online timings. Its
+[first measured result](../reports/GC_AWARE_INFERENCE_STATUS.md) passed; an
+independent repeat remains pending. The instructions below remain available for
+deliberate diagnostic reproduction.
 
 ## What we have established
 
@@ -70,7 +71,7 @@ are separate.
 1. Open notebook 07 in a fresh **T4 GPU** runtime. Disconnect other managed
    runtimes and enable the existing read-only `GITHUB_TOKEN` secret.
 2. Enter the current `COMPUTE_UNITS_REMAINING` balance and displayed
-   `COMPUTE_UNITS_PER_HOUR` rate. The latest verified balance is 195.36 units;
+   `COMPUTE_UNITS_PER_HOUR` rate. The latest verified balance is 194.63 units;
    use the new reading. Keep the 50-unit reserve.
 3. Run cells in order and upload the same notebook 05 **`training.pt`** when
    prompted. The notebook checks its hash and the original reports before use.

@@ -4,29 +4,29 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
-**Current stage:** notebook 07 completed the timing-pause diagnostic on T4:
-**200 tests passed** and all **332 cases** completed with the original weights,
-contracts and sampled-input fingerprints. Four new slow online passes
-(251.483–266.993 ms) contained full Python garbage collections lasting
-227.667–239.758 ms. The old batch-512 position was normal in this traced run.
-This strongly supports garbage collection as an explanation consistent with
-the historical spikes; the original untraced events cannot be proved retroactively.
-Two other early slow passes had no collection, so collection does not explain
-every pause.
+**Current stage:** notebook 08 completed its first revised trained-inference
+measurement on T4: **240 tests passed**, all **336 query batches** completed,
+and the original checkpoint, sampled inputs and predictions matched. Blocks
+reduced summed online latency versus HGAM by **8.38% at batch 32** (primary,
+within-run 95% interval **7.75–8.90%**), **8.12% at 128** and **8.21% at 512**.
+Independent reproduction of this version-2 result is the next step.
 
-The original notebook 06 primary reductions of **8.91% and 8.77%** remain
-observations under the old protocol, both below the 10% target. Diagnostic
-controls do not supply corrected speedup estimates: both short automatic
-controls had no full collections, and forced collection moved **88.656 seconds**
-of cleanup outside executor timers. The new
-[notebook 08](docs/GC_AWARE_INFERENCE.md) is prepared with cycle-free auditing,
-natural automatic cleanup retained in online timings, and separate accounting.
-Its hosted result is pending. See the
-[current diagnostic findings](reports/SPIKE_DIAGNOSTIC_STATUS.md),
+Cycle-free auditing preserves the original sampled fingerprints. Natural garbage
+collection remains enabled and every pause remains in the estimator. Three
+observed full collections occurred inside online passes, including two received
+by blocks. Program counters record one additional full collection outside the
+observed case windows; its duration is unmeasured separately. The historical
+size-512 HGAM spike position was ordinary in this run, which does not establish
+that all future pauses have disappeared.
+
+See the [new measured findings](reports/GC_AWARE_INFERENCE_STATUS.md),
+[notebook 08 protocol](docs/GC_AWARE_INFERENCE.md),
+[completed diagnostic](reports/SPIKE_DIAGNOSTIC_STATUS.md),
 [original two-run report](reports/TRAINED_INFERENCE_REPRODUCTION.md),
 [training results](reports/TRAINING_RUN_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
-[current next steps](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
+[current next steps](docs/NEXT_RUN.md). The earlier 8.91% and 8.77% observations
+remain separate old-protocol results. Raw exports are in `reports/colab/`.
 The source activity baseline remains the stronger predictor; historical snapshot
 assumptions, constant/time features and the single-checkpoint/schema/date scope
 remain explicit. Existing notebooks remain available for deliberate reproduction.
@@ -87,9 +87,15 @@ contracts. Its callbacks and host spans perturb allocation and timing, so its
 measurements diagnose pauses rather than replace notebook 06 speed results.
 See the [completed diagnostic and reproduction instructions](docs/SPIKE_DIAGNOSTIC.md).
 
+[Notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
+completed the first natural-GC measurement with cycle-free auditing and explicit
+cleanup accounting. Repeat the same notebook in a fresh T4 session with
+`RESUME = False` and the same original notebook 05 checkpoint; no new training
+is needed. See [the measured result](reports/GC_AWARE_INFERENCE_STATUS.md).
+
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04
-through 07 include their checkpoints in the download without mounting Drive. Colab VM
+through 08 include their checkpoints in the download without mounting Drive. Colab VM
 contents are disposable. Use one active runtime, record start/end balances, and
 keep the 50-unit reserve. GPU access, RAM, and session lifetime are variable, so
 use short, resumable runs. Disconnect GPUs once the export is saved.
