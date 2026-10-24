@@ -1,0 +1,46 @@
+{
+  "status": "frozen_first_training_pilot_not_final_experiment",
+  "dataset": "rel-stack",
+  "task": "user-badge",
+  "steps": 100,
+  "batch_size": 32,
+  "train_queries": 3200,
+  "val_queries": 512,
+  "channels": 64,
+  "num_layers": 2,
+  "fanouts": [
+    16,
+    8
+  ],
+  "learning_rate": 0.001,
+  "seed": 42,
+  "checkpoint_every": 10,
+  "training_execution_mode": "reference",
+  "feature_inputs": [
+    "constant",
+    "query_time_minus_record_time"
+  ],
+  "include_task_label_tables": false,
+  "official_splits": {
+    "fit": "train",
+    "pilot_evaluation_subset": "val",
+    "test": "untouched"
+  },
+  "activity_baseline": {
+    "features": "historically visible activity counts at each query time",
+    "estimator": "logistic_regression",
+    "fit_split": "train",
+    "evaluation_split": "same_512_query_validation_subset"
+  },
+  "correctness_atol": 1e-05,
+  "correctness_rtol": 0.0001,
+  "compute_units_reserve": 50,
+  "assumptions": [
+    "Hosted snapshot with record-time filtering; historical relationship changes, deletions and merges remain unresolved.",
+    "No raw mutable/text attribute or task target is a node feature; richer historical features are not approved.",
+    "Constant encoder statistics are independent of validation; learned preprocessing and baseline fitting use training only.",
+    "The 512-query subset is a pilot check, not the final full-validation metric.",
+    "The first hosted training run and trained-checkpoint parity remain unvalidated until actual execution."
+  ],
+  "notes": "Measure 100 total reference-training updates before choosing a larger budget. Do not expand this pilot or claim finished quality or trained inference speedup."
+}

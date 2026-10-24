@@ -24,14 +24,16 @@ def load_specs(root: Path) -> tuple[dict, dict]:
     return database, task
 
 
-def download_inputs(root: Path, pins: dict) -> None:
+def download_inputs(root: Path, pins: dict, splits: tuple[str, ...] = ("val",)) -> None:
     from huggingface_hub import snapshot_download
 
     dataset = pins["dataset"]
+    if not splits or any(split not in {"train", "val"} for split in splits):
+        raise ValueError("Only explicitly requested train/val labels may be downloaded")
     if root.name != dataset["database"]:
         raise ValueError(f"Data directory must end with {dataset['database']!r}")
     prefix = dataset["database"]
-    print("Downloading the pinned database and validation task files. No training yet.", flush=True)
+    print(f"Downloading pinned database and task files for splits {splits}.", flush=True)
     snapshot_download(
         repo_id=dataset["repository"],
         repo_type="dataset",
@@ -40,7 +42,7 @@ def download_inputs(root: Path, pins: dict) -> None:
             f"{prefix}/manifest.yaml",
             f"{prefix}/db/*.parquet",
             f"{prefix}/tasks/user-badge/manifest.yaml",
-            f"{prefix}/tasks/user-badge/val.parquet",
+            *(f"{prefix}/tasks/user-badge/{split}.parquet" for split in dict.fromkeys(splits)),
         ],
         local_dir=str(root.parent),
     )

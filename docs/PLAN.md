@@ -32,7 +32,10 @@ The model remains untrained with constants plus relative time; all queries
 share one timestamp and no repeated global IDs occurred in the 30 trials.
 The metadata audit passed with `training_ready: false`. Historical feature and
 relationship evidence and the representative frozen workload remain open.
-Review [`docs/NEXT_RUN.md`](NEXT_RUN.md) before deciding further experiments.
+Notebook 04 prepares a bounded first training pilot; its hosted-data execution
+is pending. It keeps the constant/time policy and unresolved snapshot assumptions
+explicit. Review [`docs/NEXT_RUN.md`](NEXT_RUN.md) and the
+[pilot instructions](TRAINING_PILOT.md) before running it.
 
 Decide using representative evidence whether to continue block optimization.
 The 10% end-to-end latency reduction is a practical hypothesis, not a promised
@@ -46,10 +49,23 @@ augmentation initially. Confirm eligible users exist at each query time. Fit
 preprocessing on training-period data; use official temporal splits. Keep keys
 for connectivity and preserve all relationships.
 
-Start from the provisional configuration in `configs/experiment.json`. Measure
-100 steps before choosing the training budget. Train one credible checkpoint
-and compare predictive quality with a historical-activity tabular baseline.
-Freeze features, graph semantics, model, primary workload, and tolerances.
+Run the first 100-step pilot from `configs/training_pilot.json` before choosing
+a larger training budget. Its fixed settings are 32 queries per batch, 3,200
+training queries, 512 held-out validation queries, 64 channels, fanouts `[16, 8]`,
+learning rate 0.001 and seed 42. Train only the reference schedule, save resumable
+state every 10 updates, compare the train-fitted activity baseline, and verify
+inference parity across all three schedules with the trained checkpoint. The
+test split remains untouched. This pilot and its subset metrics are not the
+final trained experiment or a readiness claim for richer historical features.
+
+- [ ] Complete the hosted 100-step pilot and preserve losses, timings and checkpoint.
+- [ ] Record isolated start/end unit balances for the pilot.
+- [ ] Review held-out subset metrics, baseline quality and trained-checkpoint parity.
+- [ ] Select the credible training budget and representative frozen workload.
+
+Use the pilot evidence to revise the still-provisional `configs/experiment.json`.
+Then train one credible checkpoint and compare predictive quality on the official
+splits. Freeze features, graph semantics, model, primary workload and tolerances.
 
 ## Days 5-9: integrate and establish real-model equivalence
 
@@ -66,9 +82,10 @@ gathering, transfer, encoders, and block construction. Record hardware, thread
 counts, exact dependencies, warmup, raw repetitions, and neighborhood sizes.
 Use official predictive metrics plus average precision where appropriate.
 
-Persist each completed configuration's results and save resumable training state
-to Drive. Finish a clean reproduction, a concise report, and an explanation of
-successes, regressions, and limitations. Never label synthetic timings as real.
+Persist each completed configuration's results and save exported resumable
+training checkpoints outside the VM. Finish a clean reproduction, a concise
+report, and an explanation of successes, regressions and limitations. Never label
+synthetic timings as real.
 
 ## Optional days 15-21
 

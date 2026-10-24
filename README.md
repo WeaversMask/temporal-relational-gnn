@@ -7,8 +7,10 @@ three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 **Current stage:** notebook 03 passed on a Colab T4 with 36 passing tests,
 a passed feature-policy metadata audit, and paired resident-graph online
 pipeline measurements. The model remains untrained with constant features plus
-relative time. Historical feature/relationship availability, a representative
-frozen workload, training, and final trained evaluation remain pending. See the
+relative time. Notebook 04 now prepares the first 100-step reference-training
+pilot, a train-fitted activity baseline and trained-checkpoint inference parity;
+its hosted GPU run remains pending. Historical availability, the representative
+final workload and finished trained evaluation remain open. See the
 [pipeline profile results](reports/PIPELINE_PROFILE_STATUS.md),
 [real-batch results](reports/REAL_BATCH_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
@@ -41,15 +43,20 @@ The real database download is substantially larger than the manifest-only check.
 
 Notebooks 02 and 03 have now passed; their exported evidence is archived in this
 repository. [Notebook 03: feature audit and pipeline profile](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/03_audit_profile.ipynb)
-is available for deliberate reproduction. Review the
-[completed run and remaining decisions](docs/NEXT_RUN.md) before choosing
-historical features, a representative workload, or a training budget.
+is available for deliberate reproduction. The next prepared run is
+[notebook 04: first training pilot](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/04_training_pilot.ipynb).
+Read its [frozen 100-step pilot instructions](docs/TRAINING_PILOT.md) and
+[next-run notes](docs/NEXT_RUN.md). It keeps constant/time features, uses official
+training rows and a 512-query validation subset, leaves the test split untouched,
+and exports a resumable checkpoint. Its subset metrics will not be final quality
+results, and the pilot does not benchmark trained inference speedup.
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
-VM's local disk. Keep durable checkpoints, caches, configurations, and raw logs
-in Drive. Colab VM contents are disposable. GPU access, RAM, and session lifetime
-are variable, so use short, resumable runs. Do not leave allocated GPUs idle
-while coding or waiting for agents.
+VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebook 04
+includes its checkpoint in the download and does not mount Drive. Colab VM
+contents are disposable. Use one active runtime, record start/end balances, and
+keep the 50-unit reserve. GPU access, RAM, and session lifetime are variable, so
+use short, resumable runs. Disconnect GPUs once the export is saved.
 
 ## Local development
 
