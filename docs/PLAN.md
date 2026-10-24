@@ -69,7 +69,8 @@ or a readiness claim for richer historical features.
 - [x] Prepare the next bounded training budget: 64,000 queries, 2,000 updates and 8,192 validation queries; see `configs/training_run.json`.
 - [x] Complete the larger hosted training run and review its baseline comparison.
 - [x] Preserve and select the notebook 05 checkpoint for the trained execution comparison.
-- [ ] Implement and validate the proposed paired trained inference workload.
+- [x] Implement the paired trained inference workload and frozen notebook 06 protocol.
+- [ ] Run the trained profiler on T4 and review paired latency, throughput and memory.
 
 The pilot informed the next training configuration in
 [`configs/training_run.json`](../configs/training_run.json); its
@@ -79,9 +80,9 @@ contract. Its 2,000 updates consumed all 64,000 training queries once and took
 GNN reached ROC-AUC 0.83194 / AP 0.15439, below the activity baseline's
 0.85721 / 0.27248. These use different cohorts from the pilot. The weights are
 preserved for an execution comparison, with the quality gap reported honestly.
-The proposed inference workload in `configs/experiment.json` and
-[next-run requirements](NEXT_RUN.md) still needs implementation and hosted
-measurement. Its batch scaling keeps the trained model unchanged.
+The inference protocol in `configs/trained_inference.json` and
+[notebook 06 instructions](TRAINED_INFERENCE.md) is implemented. Hosted
+measurement remains pending. Its batch scaling keeps the trained model unchanged.
 
 ## Days 5-9: integrate and establish real-model equivalence
 

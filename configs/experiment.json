@@ -1,5 +1,6 @@
 {
-  "status": "trained_checkpoint_selected_inference_workload_proposed",
+  "status": "trained_inference_prepared_hosted_measurement_pending",
+  "inference_protocol": "configs/trained_inference.json",
   "dataset": "rel-stack",
   "task": "user-badge",
   "channels": 64,
@@ -25,5 +26,5 @@
   "correctness_rtol": 0.0001,
   "compute_units_budget": 200,
   "compute_units_reserve": 50,
-  "notes": "Notebook 05 passed 2000 reference updates over 64000 training queries and 81 T4 tests. Select its saved constant/time checkpoint for paired execution comparison; the activity baseline scored better on the shared 8192-query validation cohort. Trained inference timing and batch scaling remain unmeasured. Historical snapshot assumptions remain unresolved; see docs/NEXT_RUN.md for the proposed workload."
+  "notes": "Notebook 05 passed 2000 reference updates over 64000 training queries and 81 T4 tests. Notebook 06 prepares paired trained inference on that constant/time checkpoint, with complete saved-validation replay and batch sizes 32/128/512. The activity baseline scored better on the shared 8192-query validation cohort. Hosted trained inference timing and batch scaling remain unmeasured. Historical snapshot assumptions remain unresolved."
 }

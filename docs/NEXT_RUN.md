@@ -1,4 +1,4 @@
-# Next step: paired inference with the trained checkpoint
+# Next run: paired inference with the trained checkpoint
 
 Notebook 05 passed in hosted run `20261024T073010Z-1f9800`: **81 T4 tests,
 2,000 reference updates and 64,000 distinct training queries processed once**.
@@ -22,8 +22,12 @@ The model remains 64 channels, two layers, fanouts `[16, 8]`, FP32, constants
 and relative record time. Keep the original training contract as provenance;
 record inference batching separately.
 
-The proposed measurement uses the following bounded workload. Implementation
-and hosted execution are pending; there is no prepared notebook 06 yet.
+The prepared measurement uses
+[notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
+and [`configs/trained_inference.json`](../configs/trained_inference.json).
+Read the [run and recovery instructions](TRAINED_INFERENCE.md). Hosted execution
+is pending. Upload your notebook 05 `training.pt` when prompted; no training
+is performed. The fixed workload is:
 
 1. Reconstruct the pinned graph, literal constant statistics and selected
    cohorts from the checkpoint contract. Verify source inputs, policy,
@@ -46,10 +50,11 @@ and hosted execution are pending; there is no prepared notebook 06 yet.
    telemetry where available, and host RSS. Keep synchronized stage replays
    separate from complete online pipeline timing.
 
-The current `pipeline_profile` CLI initializes random weights. A trained-profile
-entry point must reconstruct this checkpoint before its output can be called
-trained inference performance. Training resume is separate from changing
-inference batch size.
+The new `trained_profile` CLI reconstructs this checkpoint and verifies all
+saved validation results before timing. Raw batch sidecars support verified
+resume, preserving previous reports and session provenance. The older
+`pipeline_profile` CLI remains an untrained diagnostic. Training resume is
+separate from changing inference batch size.
 
 ## Resources and scope
 

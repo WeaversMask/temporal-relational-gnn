@@ -18,9 +18,11 @@ Historical availability and final predictive evaluation remain open. See the
 [real-batch results](reports/REAL_BATCH_STATUS.md),
 [verified Colab status](docs/COLAB_STATUS.md), and
 [next-run instructions](docs/NEXT_RUN.md). Raw exports are in `reports/colab/`.
-The next step is a trained-checkpoint profiler with paired execution modes and
-a secondary batch-size comparison. Its implementation remains pending; see
-[the next-run requirements](docs/NEXT_RUN.md).
+The next prepared run is
+[notebook 06: paired trained inference](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb).
+It replays saved predictions, then compares modes at batch sizes 32, 128 and
+512. Read the [run instructions](docs/TRAINED_INFERENCE.md). Hosted timings
+remain pending.
 
 ## Start in Colab
 
@@ -64,9 +66,16 @@ from fresh weights. The exported checkpoint and full history are preserved.
 See [the results](reports/TRAINING_RUN_STATUS.md) and
 [reproduction instructions](docs/TRAINING_RUN.md).
 
+[Notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
+uses that saved checkpoint for inference only. Upload notebook 05's
+`checkpoints/training.pt` when prompted. The benchmark verifies source/data
+compatibility and all saved validation predictions before timing. It persists
+raw paired batch results, resumable progress, summaries and GPU telemetry;
+see the [measurement protocol](docs/TRAINED_INFERENCE.md).
+
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04
-and 05 include their checkpoints in the download without mounting Drive. Colab VM
+through 06 include their checkpoints in the download without mounting Drive. Colab VM
 contents are disposable. Use one active runtime, record start/end balances, and
 keep the 50-unit reserve. GPU access, RAM, and session lifetime are variable, so
 use short, resumable runs. Disconnect GPUs once the export is saved.

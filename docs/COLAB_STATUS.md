@@ -178,3 +178,12 @@ unattributed. The latest balance leaves 148.59 units above the reserve.
 See the [full training report](../reports/TRAINING_RUN_STATUS.md),
 [budget summary](../reports/budget/20261024-notebook05-observations.json), and
 [next trained-inference requirements](NEXT_RUN.md).
+
+## Prepared trained inference comparison
+
+[Notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
+is prepared with the notebook 05 checkpoint, complete source-validation replay,
+and paired reference/HGAM/block timing at query batch sizes 32, 128 and 512.
+It saves raw measurement sidecars for verified resume and records GPU telemetry
+when available. No hosted trained inference timings have been measured yet.
+See the [fixed measurement protocol](TRAINED_INFERENCE.md).
