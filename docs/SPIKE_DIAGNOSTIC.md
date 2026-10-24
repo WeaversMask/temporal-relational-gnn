@@ -9,9 +9,10 @@ matched. The original benchmark source and measurements remain unchanged.
 These are instrumented diagnostic results, not replacement performance results.
 See the [measured findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md).
 
-The next step is to review and correct the measurement protocol, including
-amortized cleanup, before another benchmark. No new GPU benchmark is prepared.
-The instructions below remain available for deliberate diagnostic reproduction.
+The revised [notebook 08 protocol](GC_AWARE_INFERENCE.md) is now prepared with
+cycle-free auditing and natural cleanup retained in online timings. Its hosted
+result is pending. The instructions below remain available for deliberate
+diagnostic reproduction.
 
 ## What we have established
 

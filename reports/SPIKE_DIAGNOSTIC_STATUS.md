@@ -135,8 +135,9 @@ if a managed-GC comparison excludes cleanup from its timer, report that boundary
 and the cleanup/total cost separately. Preserve weights, sampling, primary
 batch size, tolerances and all raw observations.
 
-A fresh uninstrumented comparison is needed before calling a helper correction
-a performance fix or updating the efficiency claim. No new GPU experiment is
-prepared or launched as part of this results archive. The full collection
-mechanism is now directly observed; the exact historical event and the two
-non-GC early pauses remain appropriately qualified.
+A fresh comparison is needed before calling a helper correction a performance
+fix or updating the efficiency claim. The separately prepared
+[notebook 08](../docs/GC_AWARE_INFERENCE.md) retains natural cleanup and lightweight
+GC observation under a new protocol; its hosted result is pending. The full
+collection mechanism is directly observed, while the exact historical event and
+the two non-GC early pauses remain appropriately qualified.

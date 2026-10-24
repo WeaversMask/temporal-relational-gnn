@@ -6,8 +6,9 @@ contained generation-2 collections accounting for most added duration. The
 historical spikes remain untraced, so this supports a consistent explanation
 without retroactively proving their cause. The original notebook 06 primary
 8.91% and 8.77% reductions remain old-protocol observations; diagnostic controls
-are not corrected benchmarks. The next step is measurement-protocol review,
-including amortized cleanup, before another GPU benchmark. See the
+are not corrected benchmarks. Notebook 08 is now prepared with cycle-free
+auditing, natural automatic collection and explicit cleanup accounting;
+its hosted validation and measurements remain pending. See the
 [current diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md),
 [original two-run report](../reports/TRAINED_INFERENCE_REPRODUCTION.md) and
 [current steps](NEXT_RUN.md). Historical input availability and the stronger
@@ -299,8 +300,12 @@ removing it, and supplies no free performance improvement. All instrumented
 timings remain separate from the old 8.77–8.91% primary observations.
 
 The [diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md) records evidence
-and limits. Next is to review and correct the measurement protocol, including
-amortized cleanup, before another benchmark. No new GPU benchmark is prepared.
+and limits. The revised [notebook 08 protocol](GC_AWARE_INFERENCE.md) is prepared
+for a fresh T4 run. It removes the avoidable fingerprint cycle during saved
+validation replay and measurement, keeps natural cleanup inside actual timings,
+and records observed collection overlap and whole-program wall time separately.
+No new hosted result is claimed; an independent repeat follows review of the
+first revised measurement.
 
 Budget exports recorded **195.94 to 195.36 units**, an isolated **0.58-unit**
 interval at an observed **1.07 units/hour**, leaving **145.36 above reserve**.

@@ -1,5 +1,5 @@
 {
-  "status": "reproduced_scope_limited",
+  "status": "gc_aware_protocol_prepared_hosted_validation_pending",
   "inference_protocol": "configs/trained_inference.json",
   "trained_inference_result": {
     "report": "reports/TRAINED_INFERENCE_REPRODUCTION.md",
@@ -59,7 +59,7 @@
   "correctness_rtol": 0.0001,
   "compute_units_budget": 200,
   "compute_units_reserve": 50,
-  "notes": "Notebook 06 completed and independently reproduced 336 query batches with 20 paired repetitions each and 171 T4 tests passed in each session, under the same frozen contract on different physical T4 GPUs. The unchanged notebook 05 constant/time checkpoint passed source replay, occurrence audits and fixed numerical tolerances. Primary batch-32 graph-loaded online reductions versus HGAM were 8.91% and 8.77%, below the 10% practical target; message-passing replay improvement was roughly 17%. Secondary batch-128 reductions were 8.02% and 8.64%; batch-512 reductions were 10.46% and 11.82%, retaining an extreme HGAM trial recurring at the same batch/repeat position with unresolved cause. All trials remain in headline results and per-run intervals are separate. The bounded execution comparison and its report are complete, without model/configuration expansion to pursue the target. The activity baseline remains stronger on the shared 8192-query validation cohort. Historical snapshot assumptions remain unresolved. Notebook 07 directly observed four 228-240 ms full Python collections inside slow online passes across modes and sizes. Instrumented controls do not supply corrected speedup estimates: forced collection relocated 88.656 seconds outside timers, and the short acyclic control does not establish elimination of long-run pauses. Original measurements are retained pending an explicitly corrected measurement protocol.",
+  "notes": "Notebook 06 completed and independently reproduced 336 query batches with 20 paired repetitions each and 171 T4 tests passed in each session, under the same frozen contract on different physical T4 GPUs. The unchanged notebook 05 constant/time checkpoint passed source replay, occurrence audits and fixed numerical tolerances. Primary batch-32 graph-loaded online reductions versus HGAM were 8.91% and 8.77%, below the 10% practical target; message-passing replay improvement was roughly 17%. Secondary batch-128 reductions were 8.02% and 8.64%; batch-512 reductions were 10.46% and 11.82%, retaining an extreme HGAM trial recurring at the same batch/repeat position with unresolved cause. All trials remain in headline results and per-run intervals are separate. The bounded execution comparison and its report are complete, without model/configuration expansion to pursue the target. The activity baseline remains stronger on the shared 8192-query validation cohort. Historical snapshot assumptions remain unresolved. Notebook 07 directly observed four 228-240 ms full Python collections inside slow online passes across modes and sizes. Instrumented controls do not supply corrected speedup estimates: forced collection relocated 88.656 seconds outside timers, and the short acyclic control does not establish elimination of long-run pauses. Original measurements are retained pending an explicitly corrected measurement protocol. Notebook 08 now prepares a new natural-GC measurement protocol with cycle-free replay and input auditing. No revised hosted efficiency result has been measured.",
   "timing_diagnostic": {
     "run_id": "20261024T121852Z-4747d5",
     "report": "reports/SPIKE_DIAGNOSTIC_STATUS.md",
@@ -73,6 +73,16 @@
     "historical_spike_attribution": "Strongly consistent with GC cadence, but historical passes have no collection trace",
     "acyclic_helper_eliminates_long_run_spikes_established": false,
     "forced_collection_cost_seconds": 88.655619662,
-    "next_step": "Correct the measurement protocol with explicit cleanup cost accounting before another benchmark"
+    "next_step": "Run prepared notebook 08 natural-GC protocol with cycle-free replay and measurement auditing"
+  },
+  "revised_inference_protocol": {
+    "version": 2,
+    "configuration": "configs/gc_aware_inference.json",
+    "notebook": "notebooks/08_gc_aware_inference.ipynb",
+    "instructions": "docs/GC_AWARE_INFERENCE.md",
+    "status": "prepared_no_hosted_measurements_yet",
+    "gc_policy": "natural_automatic_keep_every_timing",
+    "fingerprint_scope": "cycle-free byte-identical replay and measurement auditing",
+    "observer": "minimal GC callbacks and exact timer metadata; overhead present"
   }
 }

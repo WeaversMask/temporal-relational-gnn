@@ -18,9 +18,10 @@ The original notebook 06 primary reductions of **8.91% and 8.77%** remain
 observations under the old protocol, both below the 10% target. Diagnostic
 controls do not supply corrected speedup estimates: both short automatic
 controls had no full collections, and forced collection moved **88.656 seconds**
-of cleanup outside executor timers. The next step is to review and correct the
-measurement protocol, including amortized cleanup, before another benchmark.
-No new GPU run is prepared. See the
+of cleanup outside executor timers. The new
+[notebook 08](docs/GC_AWARE_INFERENCE.md) is prepared with cycle-free auditing,
+natural automatic cleanup retained in online timings, and separate accounting.
+Its hosted result is pending. See the
 [current diagnostic findings](reports/SPIKE_DIAGNOSTIC_STATUS.md),
 [original two-run report](reports/TRAINED_INFERENCE_REPRODUCTION.md),
 [training results](reports/TRAINING_RUN_STATUS.md),

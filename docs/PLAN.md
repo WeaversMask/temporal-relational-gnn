@@ -89,7 +89,8 @@ or a readiness claim for richer historical features.
 - [x] Finish the bounded execution report with the primary result, recurring extreme-trial sensitivity and limits explicit.
 - [x] Prepare notebook 07 and a CPU lifecycle probe for the recursive fingerprint helper.
 - [x] Complete notebook 07 on T4: 200 hosted tests and 332 diagnostic cases passed; four traced full collections account for most added duration in new slow passes.
-- [ ] Review and correct the measurement protocol before another benchmark, preserving old results and accounting for amortized cleanup rather than shifting costs outside timing.
+- [x] Prepare the version-2 natural-GC protocol and notebook 08, preserving old results, using cycle-free replay/measurement auditing, and recording cleanup without moving or subtracting its cost.
+- [ ] Run notebook 08 on T4, verify all paired source inputs and cleanup accounting, then independently reproduce the revised result before a broader claim.
 
 The pilot informed the next training configuration in
 [`configs/training_run.json`](../configs/training_run.json); its
@@ -151,9 +152,10 @@ absence of a spike does not establish that cycle-free hashing fixed it. Forced
 collection took 88.656 seconds outside executor timers: cleanup moved, rather
 than disappeared. Preserve the old 8.77–8.91% protocol observations and keep
 instrumented traces separate. See the
-[diagnostic findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md). Review a GC-aware
-protocol with amortized cleanup before preparing another performance run;
-there is no new GPU benchmark prepared yet.
+[diagnostic findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md). The revised
+[notebook 08 protocol](GC_AWARE_INFERENCE.md) is prepared with cycle-free auditing,
+natural collection and separate cleanup/program-wall accounting. Its first
+hosted measurement and subsequent independent repeat remain pending.
 
 ## Optional days 15-21
 

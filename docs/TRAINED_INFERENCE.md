@@ -1,8 +1,9 @@
 # Paired inference with the trained model
 
-For the current investigation of the recurring size-512 pause, use the separate
-[notebook 07 diagnostic](SPIKE_DIAGNOSTIC.md). This page retains the original
-notebook 06 performance protocol for deliberate reproduction.
+For the current revised measurement, use
+[notebook 08](GC_AWARE_INFERENCE.md). The completed
+[notebook 07 diagnostic](SPIKE_DIAGNOSTIC.md) established the collection mechanism.
+This page retains the original notebook 06 protocol for deliberate reproduction.
 
 [Notebook 06](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/06_trained_inference.ipynb)
 completed its bounded trained-model comparison and independent reproduction:

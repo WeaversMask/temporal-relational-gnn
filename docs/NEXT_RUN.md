@@ -1,52 +1,50 @@
-# Current finding: Python collection can dominate a timed pass
+# Next run: notebook 08, natural-GC trained inference
 
-Notebook 07 completed all **332 cases**, with **200 tests passed on T4**.
-Four online passes took 251–267 ms, with 228–240 ms of full Python garbage
-collection inside their exact timers. They occurred in different modes and
-batch sizes during sampling or gathering. The original batch-512/HGAM position
-was ordinary (28.770 ms) in this instrumented run.
+The revised [notebook 08](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/08_gc_aware_inference.ipynb)
+is prepared to measure the same trained model with a cycle-free fingerprint
+check and explicit cleanup accounting. Its hosted result is still pending.
+Read the [run instructions](GC_AWARE_INFERENCE.md).
 
-Read the [verified diagnostic report](../reports/SPIKE_DIAGNOSTIC_STATUS.md).
-It supports collection cadence as the likely explanation of the earlier spikes,
-while preserving the limit that those historical passes had no GC trace. Two
-early slow passes in this run had no GC overlap and remain unexplained.
+Use a fresh **T4** runtime, leave `RESUME = False`, enter current budget readings
+and upload the **same original notebook 05 `training.pt`** used for notebooks
+06 and 07. Run all cells. It measures all 8,192 queries at sizes **32, 128 and
+512**, with the same five warmups, 20 paired repeats, seeds and tolerances.
+After success or failure, record the ending balance, export the complete ZIP
+and disconnect/delete the runtime.
 
-## What to change before another performance run
+## What changed and what the run must establish
 
-The original recursive fingerprint helper has a CPU-proven avoidable reference
-cycle. An equivalent cycle-free implementation passed the actual T4 input and
-prediction checks, but its short control does not establish that all long
-collections disappear. It still collected many other objects.
+Notebook 07 directly observed 228–240 ms full Python collections inside four
+slow online passes across different execution modes and sizes. The old
+batch-512/HGAM position was ordinary in that instrumented run. The evidence
+supports collection cadence as an explanation of the earlier spikes without
+proving those unrecorded historical events retrospectively. See the
+[diagnostic findings](../reports/SPIKE_DIAGNOSTIC_STATUS.md).
 
-The next engineering step is to remove that avoidable cycle under an explicitly
-versioned measurement protocol, keeping the checkpoint, sampled occurrences,
-primary batch size and tolerances fixed. The checkpoint binds original source
-hashes, so do not silently edit the old training/profiling source or bypass its
-checks. A new profiling implementation can preserve the legacy reconstruction
-contract and record the changed audit implementation separately.
+The correction removes the CPU-proven avoidable hash cycle. Automatic collection
+stays enabled; its pauses remain in each actual timing. Minimal callbacks record
+cleanup, and the executor records exact boundaries without host-stage wrappers.
+No collection is forced outside the timer and no observations are dropped.
+GC durations overlap online/program time and must not be added or subtracted
+again. Program wall time, including benchmark audits and stage replays, is
+reported separately rather than called serving throughput.
 
-Predeclare how collection is treated. Natural automatic-GC online results should
-retain its actual costs. Any controlled comparison that moves cleanup outside
-the timer must label that boundary and report cleanup and total time as well.
-The diagnostic's forced control spent **88.656 seconds** collecting outside its
-inference timer; that is relocated work, not free acceleration.
+The original checkpoint-bound implementation and earlier reports remain intact.
+A new measurement contract binds the revised code and GC settings. Source
+inputs, fingerprints, sampling order and weights must match the original archived
+cohort. After this first revised run, verify the result before independently
+repeating it; the old protocol's approximately 9% benefit is not a measured
+result of this new protocol.
 
-After that change is concrete and CPU-verified, prepare a fresh uninstrumented
-comparison. Do not reuse the instrumented notebook 07 latencies as corrected
-speedups, subtract GC from the old trials, or replace the original primary
-comparison with the tail-sensitive batch-512 aggregate. The original primary
-8.77–8.91% remains a measured observation of the old protocol, pending this
-additional measurement-method check.
+## Resources and scientific scope
 
-## Resources and preserved evidence
+The last verified balance was **195.36 units**, leaving **145.36 above reserve**;
+use the current reading. The prior diagnostic consumed an isolated 0.58 units.
+Runtime duration can be similar to notebook 06 and varies with setup and natural
+cleanup. Avoid idle sessions and keep all exported evidence.
 
-The latest run recorded **195.94 to 195.36 units**, with isolation confirmed,
-for **0.58 units consumed** at an observed 1.07 units/hour. The ending balance
-leaves **145.36 above reserve**. Earlier account intervals remain separate.
-All original diagnostic case bytes are retained in a compressed archive, with
-a [complete provenance manifest](../reports/colab/20261024T121852Z-4747d5/PROVENANCE.json).
-The trained checkpoint remains outside Git.
-
-No additional GPU run is ready or required simply to recheck these traces.
-Keep notebook 07 for deliberate diagnostic reproduction; its
-[instructions](SPIKE_DIAGNOSTIC.md) document the exact conditions and limits.
+Removing one helper cycle does not establish elimination of all collections or
+slowdowns. The model still uses one checkpoint, schema, validation date and
+constant/time features under unresolved exported-snapshot assumptions. Its
+source predictive metrics remain below the activity baseline's. This remains
+an execution comparison, with no new training or test-split evaluation.
