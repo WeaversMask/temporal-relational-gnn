@@ -4,6 +4,12 @@ A focused investigation of destination-restricted block execution for temporal,
 heterogeneous GraphSAGE. Compare the same weights and sampled occurrences under
 three schedules: full reference execution, PyG HGAM, and bipartite blocks.
 
+**AI assistance:** Much of the code and documentation in this repository was
+generated with OpenAI Codex. AI assistance also contributed to experiment planning
+and analysis. Reported findings are tied to the archived measurements, validation
+checks, and documented limitations. Established methods and third-party sources
+are credited in [Attribution and scope](#attribution-and-scope).
+
 **Current stage:** notebook 08's revised trained-inference result has been
 independently reproduced on a different T4. Both sessions passed **240 hosted
 tests** and all **336 query batches**, with the same checkpoint, sampled inputs,
