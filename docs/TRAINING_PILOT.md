@@ -62,8 +62,8 @@ not approve richer historical raw attributes or resolve those limitations.
 1. Save a copy of notebook 04. In Colab's managed sessions, disconnect other
    runtimes first. Use one active runtime, then select T4 and connect. For CPU
    development, select a CPU runtime and set `DEVICE = "cpu"`.
-2. Enable this notebook's access to the existing read-only `GITHUB_TOKEN`. Enter
-   the observed unit/hour rate and starting balance. Use `None` only when the
+2. Leave `USE_GITHUB_TOKEN = False` for public cloning; no secret is required.
+   Enter the observed unit/hour rate and starting balance. Use `None` only when the
    resource panel does not provide an observation. Set
    `ISOLATED_RUNTIME_CONFIRMED = True` only after checking other runtimes are
    disconnected. This marks whether the balance change covers only this session.

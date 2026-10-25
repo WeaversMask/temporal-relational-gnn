@@ -35,13 +35,14 @@ schema/date scope remain explicit.
 ## Start in Colab
 
 [Open the feasibility notebook](https://colab.research.google.com/github/WeaversMask/temporal-relational-gnn/blob/main/notebooks/01_feasibility.ipynb).
-The repository is private: use your authorized GitHub account to open the
-notebook. If Colab cannot open it directly, download the notebook from GitHub
-and upload it to Colab. The notebook explains its separate runtime clone step.
+The notebooks clone this repository anonymously once it is public; no GitHub
+token is needed. If Colab cannot open a notebook directly, download it from
+GitHub and upload it to Colab. Each notebook includes its own setup cells.
 
-1. Add a read-only, repository-scoped GitHub token to **Colab Secrets** as
-   `GITHUB_TOKEN`, and allow this notebook to access it. Clone authentication is
-   temporary; the token is not embedded in a clone URL or written to the repo.
+1. Leave `USE_GITHUB_TOKEN = False` in the clone cell for the public repository.
+   For a private copy only, set it to `True`, add a read-only repository-scoped
+   `GITHUB_TOKEN` in Colab Secrets, and grant that notebook access. Authentication
+   uses a temporary helper; tokens are never included in URLs or saved outputs.
 2. Start with a CPU runtime. Run setup, the correctness suite, environment
    capture, a tiny synthetic benchmark, and the public manifest inspection.
 3. Persist runs to Google Drive using the notebook's `RUN_DIR`.
@@ -93,6 +94,12 @@ completed two independent natural-GC measurements with cycle-free auditing and
 explicit cleanup accounting. For deliberate reproduction, use a fresh T4 session,
 `RESUME = False` and the same original notebook 05 checkpoint. No new training
 is needed. See [the two-run result](reports/GC_AWARE_INFERENCE_REPRODUCTION.md).
+
+The original trained checkpoint is not distributed in Git. Exact replay of the
+published trained measurements requires that hash-matching checkpoint; a newly
+trained model is a separate experiment and is rejected by the fixed replay
+contract. CPU tests and synthetic checks run without it. See
+[reproduction and evidence boundaries](docs/PUBLIC_RELEASE.md).
 
 Code stays in Git; large data stays out of Git. Run active data processing on the
 VM's local disk. Save checkpoint/report ZIP exports outside the VM; notebooks 04
@@ -233,6 +240,13 @@ remain separate.
 
 The contribution being investigated is adaptation, correctness coverage, and
 controlled evaluation in a temporal relational pipeline. One schema does not
-establish cross-schema transfer or a foundation model. Upstream licenses apply
-to their respective software and datasets. This private project has no public
-license grant at this stage.
+establish cross-schema transfer or a foundation model.
+
+Original project contributions are licensed under [Apache-2.0](LICENSE), with
+the project attribution in [NOTICE](NOTICE). Third-party software and copied
+dataset records retain their applicable terms; see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the unmodified texts in
+[licenses/](licenses/). Archived reports include copied task labels and row IDs
+as well as project-computed results. The project's Apache license does not
+replace the dataset terms. The [public-release notes](docs/PUBLIC_RELEASE.md)
+describe the retained evidence and disclosed metadata.

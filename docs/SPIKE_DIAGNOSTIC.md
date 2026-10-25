@@ -70,7 +70,7 @@ are separate.
 ## Reproduce the completed diagnostic
 
 1. Open notebook 07 in a fresh **T4 GPU** runtime. Disconnect other managed
-   runtimes and enable the existing read-only `GITHUB_TOKEN` secret.
+   runtimes and leave `USE_GITHUB_TOKEN = False` for public cloning.
 2. Enter the current `COMPUTE_UNITS_REMAINING` balance and displayed
    `COMPUTE_UNITS_PER_HOUR` rate. The latest verified balance is 194.15 units;
    use the new reading. Keep the 50-unit reserve.

@@ -36,7 +36,7 @@ execution improvements do not establish predictive superiority.
 ## Reproduce in a clean Colab session
 
 1. Save a copy of notebook 06, select **T4 GPU**, disconnect other managed
-   runtimes, and enable the existing read-only `GITHUB_TOKEN` secret.
+   runtimes, and leave `USE_GITHUB_TOKEN = False` for public cloning.
 2. Enter current budget observations in the first control cell when available:
    `COMPUTE_UNITS_REMAINING` is the **remaining balance** (197.46 at the end
    of the reproduction); `COMPUTE_UNITS_PER_HOUR` is the **hourly consumption

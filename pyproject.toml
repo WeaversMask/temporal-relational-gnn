@@ -6,6 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "temporal-relational-gnn"
 version = "0.1.0"
 description = "Correctness and inference experiments for temporal relational GraphSAGE"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md", "licenses/*"]
 requires-python = ">=3.11"
 dependencies = ["torch>=2.11,<2.15", "torch-geometric==2.8.1"]
 
@@ -15,6 +17,9 @@ relbench = ["relbench==3.0.2", "pytorch-frame==0.3.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+trgnn = ["*.license"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

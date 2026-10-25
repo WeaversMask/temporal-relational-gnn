@@ -32,7 +32,7 @@ correctness or a performance result.
 ## Deliberately reproduce in a fresh Colab T4 session
 
 1. Open notebook 08, save a copy, select **T4 GPU**, disconnect other managed
-   runtimes and enable the existing read-only `GITHUB_TOKEN` secret.
+   runtimes. Public cloning needs no token; leave `USE_GITHUB_TOKEN = False`.
 2. Enter the current `COMPUTE_UNITS_REMAINING` balance and displayed
    `COMPUTE_UNITS_PER_HOUR` rate in the first control cell. The last verified
    balance was 194.15; use a new reading. Keep `RESUME = False` for this

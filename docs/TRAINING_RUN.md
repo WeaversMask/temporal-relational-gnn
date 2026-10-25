@@ -49,7 +49,7 @@ can require replaying updates after the last saved checkpoint.
 ## Reproducing the completed run
 
 1. Open notebook 05 and save a copy. Disconnect other managed runtimes, select
-   **T4 GPU**, and enable the existing read-only `GITHUB_TOKEN` secret.
+   **T4 GPU**, and leave `USE_GITHUB_TOKEN = False` for public cloning.
 2. In the first control cell, enter the current remaining units and displayed
    unit/hour rate when available. Set the isolation flag after checking other
    runtimes. Missing observations stay `None`; the previous 198.63 balance is

@@ -1,0 +1,24 @@
+SPDX-FileCopyrightText: 2026 Martin Rodriguez
+SPDX-License-Identifier: Apache-2.0
+
+Associated file: execution.py
+
+RelBench provenance and project modification notice
+-------------------------------------------------
+The RelationalGraphSAGE harness and reference-layer layout in execution.py
+adapt the configuration and execution structure of RelBench's HeteroGraphSAGE:
+https://github.com/stanford-star/relbench/blob/91c1f6420a03feb61c279aaeb194d7268435f278/relbench/modeling/nn.py
+RelBench contributors' work is licensed under Apache-2.0; the complete
+upstream license text is retained in licenses/RelBench-APACHE-2.0.txt at the
+repository root. No separate NOTICE file occurs in that inspected upstream tree.
+
+Modified for this project: a standalone harness, explicit reference/HGAM/block
+execution modes, sampled-prefix validation, preservation of temporal per-query
+occurrences and empty relationships, and destination-restricted bipartite inputs
+to the same existing operators. HGAM is imported from PyTorch Geometric;
+GraphSAGE, HGAM and block execution are established methods.
+
+This adjacent notice accompanies execution.py so its measured source bytes
+and historical checkpoint contracts remain unchanged. Keep this notice with
+copies of the associated file, and retain the root LICENSE, NOTICE and
+THIRD_PARTY_NOTICES.md when distributing this project.
